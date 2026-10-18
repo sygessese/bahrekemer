@@ -119,7 +119,7 @@ def jsonld(slug, url):
         "@graph": [
             {"@type": "WebSite", "name": "ባሕረ ቀመር", "alternateName": "Bahrekemer", "url": url,
              "inLanguage": ["am", "en"]},
-            {"@type": "Person", "name": SITE["author"], "alternateName": "Bahrekemer", "url": url,
+            {"@type": "Person", "name": SITE["author"], "alternateName": "ይትባረክ ገሠሠ መራ", "url": url,
              "jobTitle": "Historian, author and artist",
              "email": "mailto:yigeme.yg7@gmail.com", "telephone": "+251913547463",
              "address": {"@type": "PostalAddress", "postOfficeBoxNumber": "25458/1000",

@@ -1,0 +1,137 @@
+{
+  "url": "https://bahrekemer.com",
+  "name": {
+    "am": "ባሕረ ቀመር",
+    "en": "Bahrekemer"
+  },
+  "tagline": {
+    "am": "ሃገራዊ ቅርስ",
+    "en": "Ethiopian Art, Literature & Culture"
+  },
+  "author": "Yitbarek Gessese Merra",
+  "since": 2016,
+  "og_image": "assets/img/og.png",
+  "nav": [
+    "megbiya",
+    "numbers",
+    "key",
+    "qene",
+    "poetry",
+    "books",
+    "paintings",
+    "contact"
+  ],
+  "sections": [
+    "megbiya",
+    "numbers",
+    "key",
+    "qene",
+    "poetry",
+    "books",
+    "paintings"
+  ],
+  "pages": {
+    "index": {
+      "title": {
+        "am": "ባሕረ ቀመር — ሃገራዊ ቅርስ",
+        "en": "Bahrekemer — Ethiopian Art, Literature & Culture"
+      },
+      "description": {
+        "am": "የኢትዮጵያ ኦርቶዶክስ ትውፊት፣ ቅኔ፣ ግዕዝ፣ ሥዕልና የቁጥር ሥርዓቶች — የደራሲና ሠዓሊ ይትባረክ መራ ሥራዎች።",
+        "en": "Ethiopian Orthodox tradition, Qene, Geez, painting and the sacred numerical systems of Ethiopia — the works of historian, author and artist Yitbarek Gessese Merra."
+      }
+    },
+    "megbiya": {
+      "label": {
+        "am": "መግቢያ",
+        "en": "Introduction"
+      },
+      "description": {
+        "am": "በዚህ ድረ ገጽ ለቀረቡት ሥራዎች መግቢያና መሠረታዊ ዳራ።",
+        "en": "Introduction and foundational context for the works presented on this site."
+      },
+      "heading": {
+        "am": "መግቢያና ቀጣይ ማሳሠቢያ",
+        "en": "Introduction, and a Note on What Follows"
+      },
+      "lede": {
+        "am": "ንቃተ ሕሊና ቀስ በቀስ ከማሠብ ይፈጠራል፡ ይመነጫል፡ ይመሠረታል።",
+        "en": "Consciousness is born of thinking, little by little: it springs from thought, and is founded upon it."
+      }
+    },
+    "books": {
+      "label": {
+        "am": "መጻሕፍት",
+        "en": "Books"
+      },
+      "description": {
+        "am": "በኢትዮጵያ ኦርቶዶክስ ሃይማኖት፣ በግዕዝ፣ በአማርኛ፣ በታሪክና በባህል ላይ የታተሙ ሥራዎች።",
+        "en": "Published works on Ethiopian Orthodox religion, Geez, Amharic, history, and culture."
+      }
+    },
+    "paintings": {
+      "label": {
+        "am": "ሥዕሎች",
+        "en": "Paintings"
+      },
+      "description": {
+        "am": "በኢትዮጵያ ትውፊት የተሣሉ ኦሪጂናልና ቅጂ ሥዕሎች።",
+        "en": "Fine arts paintings — originals and reproductions in the Ethiopian tradition."
+      }
+    },
+    "qene": {
+      "label": {
+        "am": "ቅኔ",
+        "en": "Qene"
+      },
+      "description": {
+        "am": "በጥንታዊው የግዕዝና የአማርኛ ትውፊት የተቀኙ ቅኔዎች።",
+        "en": "Ethiopian sacred poetry in the classical Geez and Amharic traditions."
+      }
+    },
+    "numbers": {
+      "label": {
+        "am": "ቁጥሮች",
+        "en": "Numbers"
+      },
+      "description": {
+        "am": "የኢትዮጵያ ቅዱሳት የቁጥር ሥርዓቶች — ትርጉማቸውና መንፈሳዊ ፋይዳቸው።",
+        "en": "The sacred numerical systems of Ethiopia — their meaning and spiritual significance."
+      }
+    },
+    "poetry": {
+      "label": {
+        "am": "ወቅታዊ ግጥም",
+        "en": "Poetry"
+      },
+      "description": {
+        "am": "ወቅቱን የሚያንጸባርቁ ግጥሞች።",
+        "en": "Poems of the times — reflections on life and current events."
+      },
+      "heading": {
+        "am": "ወቅታዊ ግጥም",
+        "en": "Poems of the Times"
+      }
+    },
+    "key": {
+      "label": {
+        "am": "ቁልፍ",
+        "en": "Key"
+      },
+      "description": {
+        "am": "የባሕረ ቀመርን ቁጥር ለማንበብ መፍቻ — ሕጎቹ፣ መጻሕፍቱና የጥናቱ ታሪክ።",
+        "en": "A key to reading the Bahre Kemer numbers — the rules behind them, the books, and how the study came about."
+      }
+    },
+    "contact": {
+      "label": {
+        "am": "ያግኙን",
+        "en": "Contact"
+      },
+      "description": {
+        "am": "ደራሲውን ያግኙ።",
+        "en": "Get in touch with the author."
+      }
+    }
+  }
+}

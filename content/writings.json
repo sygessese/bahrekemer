@@ -1,0 +1,67 @@
+[
+  {
+    "slug": "consciousness-faith",
+    "kind": "essay",
+    "title": {
+      "am": "ንቃተ ሕሊና ለእምነት መሠረት ነው",
+      "en": "Consciousness Is the Foundation of Faith"
+    }
+  },
+  {
+    "slug": "fruit-of-peace",
+    "kind": "poem",
+    "title": {
+      "am": "ወቅቱን ለማስታወስ — የሰላም ፍሬ",
+      "en": "In Remembrance of the Season — The Fruit of Peace"
+    }
+  },
+  {
+    "slug": "lamp-in-darkness",
+    "kind": "essay",
+    "title": {
+      "am": "ንቃተ ሕሊና የጨለማ መብራት ነው",
+      "en": "Consciousness Is a Lamp in the Darkness"
+    }
+  },
+  {
+    "slug": "leads-to-philosophy",
+    "kind": "essay",
+    "title": {
+      "am": "ንቃተ ሕሊና ከፍልስፍና ያደርሳል",
+      "en": "Consciousness Leads to Philosophy"
+    }
+  },
+  {
+    "slug": "idealist-philosophy",
+    "kind": "essay",
+    "title": {
+      "am": "አይዲያሊስታዊ ፍልስፍና",
+      "en": "Idealist Philosophy"
+    }
+  },
+  {
+    "slug": "soul-breath-spirit",
+    "kind": "essay",
+    "title": {
+      "am": "ነፍስ፡ እስትንፋስ፡ መንፈስ",
+      "en": "Soul, Breath, Spirit"
+    }
+  },
+  {
+    "slug": "examining-religion",
+    "kind": "essay",
+    "title": {
+      "am": "ሃይማኖትን መመርመር",
+      "en": "Examining Religion"
+    }
+  },
+  {
+    "slug": "zera-yacob",
+    "kind": "essay",
+    "title": {
+      "am": "ፍላስፋው ዘርዓ ያዕቆብ",
+      "en": "The Philosopher Zera Yacob"
+    },
+    "continuing": true
+  }
+]

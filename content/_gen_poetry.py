@@ -60,7 +60,7 @@ for pid, am, en, lines in POEMS:
     arts.append(f'''<article class="poem" id="{pid}">
   <h2>{T(am, en)}</h2>
   <div class="verse-pair">
-    <div class="verse always" lang="am">{verse(lines, 0)}</div>
+    <div class="verse" lang="am">{verse(lines, 0)}</div>
     <div class="verse" lang="en">{verse(lines, 1)}</div>
   </div>
 </article>''')

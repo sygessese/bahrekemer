@@ -132,6 +132,23 @@
         "am": "ደራሲውን ያግኙ።",
         "en": "Get in touch with the author."
       }
+    },
+    "writings": {
+      "label": {
+        "am": "ጽሑፎች",
+        "en": "Writings"
+      },
+      "description": {
+        "am": "የደራሲው ድርሰቶችና ግጥሞች — አዳዲሶቹ ቀድመው።",
+        "en": "Essays and poems by the author, newest first."
+      }
     }
-  }
+  },
+  "reader_pages": [
+    "megbiya",
+    "numbers",
+    "key",
+    "qene",
+    "poetry"
+  ]
 }

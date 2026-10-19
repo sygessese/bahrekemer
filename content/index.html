@@ -1,240 +1,91 @@
-<section class="hero">
-  <div class="wrap">
-    <p class="hero-kicker"><span lang="am">ታሪክ · ሃይማኖት · ቅኔ · ሥዕል</span><span lang="en">History · Faith · Qene · Painting</span></p>
-    <h1>ባሕረ ቀመር</h1>
-    <p class="hero-sub"><span lang="am">ሃገራዊ ቅርስ</span><span lang="en">A National Heritage</span></p>
-    <div class="ornament" aria-hidden="true"><span></span></div>
-    <p class="hero-tag"><span lang="am">በነፃ ባህሉን ያውቅ ዘንድ ዌብሳይቱን በኢትዮጵያዊነቱ ለሚያምን ያስተላልፉ።</span><span lang="en">Share this site freely with all who believe in their Ethiopian heritage, so that they may know their culture.</span></p>
+<!-- Home page template. build.py fills in:
+       <!--LEAD-->, <!--SIDE-->, <!--MORE-->  from content/writings.json (newest first)
+       <!--CONTENTS-->                        from site.json
+       <!--PORTRAIT-->                        assets/img/author.jpg, once it exists
+     Everything else below is edited here. -->
+
+<section class="front wrap" aria-label="ፊት ገጽ · Front page">
+  <div class="front-lead">
+    <!--LEAD-->
+  </div>
+  <div class="front-side">
+    <!--SIDE-->
+  </div>
+  <aside class="front-aside" aria-labelledby="bk-h">
+    <p class="kicker"><span lang="am">ቁጥሮች</span><span lang="en">Numbers</span></p>
+    <p class="big-num" aria-hidden="true">፻፼</p>
+    <p class="label"><span lang="am">አንድ ሚሊየን</span><span lang="en">One million</span></p>
+    <h2 id="bk-h" class="aside-title blk"><span lang="am">ከ፩፻፼ በላይ</span><span lang="en">Beyond a million</span></h2>
+    <p lang="am" class="lx aside-text">በባሕረ ቀመር ከ፩፻፼ ቤት በላይ የቀረበው ጥናት፡ የራሴ ግኝት እንደ ሆነ መታወቅ አለበት፡፡</p>
+    <p lang="en" class="lx aside-text">Earlier scholars never agreed on how Ge’ez counts past a million. The Bahre Kemer system resolves it — registered with the Ethiopian Intellectual Property Office in 2007 E.C.</p>
+    <ul class="aside-links">
+      <li><a href="numbers/"><span lang="am">ቁጥሮቹ</span><span lang="en">The numbers</span></a></li>
+      <li><a href="key/"><span lang="am">ቁልፍ</span><span lang="en">The key to reading them</span></a></li>
+    </ul>
+  </aside>
+</section>
+
+<section class="band" aria-labelledby="band-h">
+  <div class="wrap band-inner">
+    <p class="kicker" id="band-h"><span lang="am">ከመግቢያው</span><span lang="en">From the Introduction</span></p>
+    <blockquote class="band-quote">
+      <p class="band-am">ንቃተ ሕሊና ቀስ በቀስ ከማሠብ ይፈጠራል፡ ይመነጫል፡ ይመሠረታል።</p>
+      <p lang="en" class="lx band-en">“Consciousness is born of thinking, little by little: it springs from thought, and is founded upon it.”</p>
+    </blockquote>
+    <a class="more-link light" href="megbiya/"><span lang="am">መግቢያውን ያንብቡ →</span><span lang="en">Read the Introduction →</span></a>
   </div>
 </section>
 
-<section class="section" id="writings">
-  <div class="wrap">
-    <header class="section-head">
-      <p class="eyebrow"><span lang="am">ከማህደሩ</span><span lang="en">From the Archive</span></p>
-      <h2><span lang="am">ቅርብ ጽሑፎች</span><span lang="en">Recent Writings</span></h2>
-      <p><span lang="am">የሚቀርቡ ጽሑፎች ዝርዝር ቀስ በቀስ ይጨምራሉ። የአዘጋጁ ኦሪጂናልና ቅጂ ሥዕሎችና መጻሕፍትም በየተወሰነ ጊዜ ይቀርባሉ።</span><span lang="en">This collection of writings will grow over time. The author’s original paintings, reproductions and books will also be added periodically.</span></p>
-      <div class="ornament" aria-hidden="true"><span></span></div>
-    </header>
+<section class="block wrap" aria-labelledby="contents-h">
+  <h2 class="rule-head" id="contents-h"><span lang="am">ማውጫ</span><span lang="en">Contents</span></h2>
+  <!--CONTENTS-->
+</section>
 
-    <div class="writings">
-      <!-- To add a writing: copy one <details> block. "open" shows it expanded by default.
-           Essays: <div class="entry essay">. Sub-headings inside an entry: <h3>. Poems: .verse-pair. -->
-
-      <details open>
-        <summary><span lang="am">ንቃተ ሕሊና ለእምነት መሠረት ነው</span><span lang="en">Consciousness Is the Foundation of Faith</span></summary>
-        <div class="entry essay">
-          <div lang="am">
-            <p>ያለ ዕድሜያቸዉ የመንጌል መምህራን ተብለዉ የተሠየሙት ወጣት ኢትዮጵያዊያን አቦ ፈጠረኝን ስለ ሚያስተምሩ ንቃተ ሕልና ካለ አቦ ፈጠሩኝ ከማለት ያድናልና ነው፡፡ ጥናት ቢደረግ ኢትዮጵያዊያን ምእመናን ታቦተ ሕጉን ትተዉ ለሙዳየ ምጽዋት የሚሰግዱና አቦ ፈጠሩኝ የሚሉ ከ90% በላይ ሊሆኑ ይችላሉ፡፡</p>
-            <p>ምሁራኑም ደግሞ ከአባ ጳውሎስ ወዲህ ታቦተ ሕጉን ለኋሊት ጋርደዉ በማኅሌት ለአለቃ የሚሰግዱትና ካህናቱም በቅዳሴ ጊዜ በመቅደስ አለቃን የሚያንቆላጵሱት መቶ በመቶ ናቸዉ፡፡ መቅደሱም የአለቃዉና የመነኮሳት ሳሎን ይመስላል እንጂ የእግዚአብሔር ዙፋን መሆኑ የተረሳ ይመስላል፡፡</p>
-          </div>
-          <div lang="en">
-            <p>Young Ethiopians appointed as teachers of the Gospel before their time teach the faithful to say “Abo created me” — and it is consciousness that would save a person from saying “Abo created me.” Were a study to be made, the Ethiopian faithful who turn from the Tabot to bow before the alms box, saying “Abo created me,” could well number more than ninety percent.</p>
-            <p>As for the learned, since the time of Abba Paulos every one of them — one hundred percent — screens the Tabot behind him to bow before the administrator during the Mahlet, while the priests, during the Liturgy, fawn over the administrator within the sanctuary itself. The sanctuary has come to resemble a parlour for the administrator and the monks; that it is the throne of God seems to have been forgotten.</p>
-          </div>
-          <p class="cite"><span lang="am">ስለ ሃገር እውነት ይነገር 2008 ዓ. ም.</span><span lang="en">From <cite>Let the Truth Be Told About the Nation</cite>, 2008 E.C. (2015/16)</span></p>
-        </div>
-      </details>
-
-      <details>
-        <summary><span lang="am">ወቅቱን ለማስታወስ — የሰላም ፍሬ</span><span lang="en">In Remembrance of the Season — The Fruit of Peace</span></summary>
-        <div class="entry">
-          <div class="verse-pair">
-            <div class="verse always" lang="am">የነቢያቱ ቃላት ምርጥ ዘር በዓለም
-በድንግሉ መሬት ማኅፀነ ማርያም
-በወቅቱ ተዘርቶ ቡቃያውም ለምለም
-አበባና ፍሬ መንፈስ ቅዱስ ሰላም
-አባት ልጅ ሆኖ መልእክቱን ሲፈጽም
-መሽቶበት ከመንገድ አደረ ከግርግም
-ትንፋሽ ተጋብዞ ያህያና የላም
-መላእክት ሲወጡ ሲወርዱ ከኤዶም
-ምስክር ነበሩ ስለ ማይደገም
-ከኀዲና አማኝ አይተዉ ሲተረጐም
-የነቢያት ቡቃያ የሚያምረው በጣም
-በጨለማ ብርሃን በኢየሩሳሌም
-ሁሉም መሰከሩ መልሶ እንዳይጨልም</div>
-            <div class="verse" lang="en">The words of the prophets, the choicest seed in the world,
-sown in virgin soil, the womb of Mary;
-sown in its season, its shoot grew green,
-its flower and its fruit the Holy Spirit, peace.
-When the Father, become a child, fulfilled His word,
-night overtook Him on the road; He lodged in a manger,
-warmed by the breath of the donkey and the cow.
-Angels ascending and descending from Eden
-were witnesses to what will never come again,
-watching it interpreted by unbeliever and believer alike.
-The prophets’ shoot, so very beautiful —
-a light in the darkness, in Jerusalem —
-all bore witness, that it might never grow dark again.</div>
-          </div>
-          <p class="cite"><span lang="am">ስለ ሃገር እውነት ይነገር 2008 ዓ. ም. ከተባለ መጽሐፍ የተወሰደ መዝሙራዊ ግጥም ነው</span><span lang="en">A hymn-poem from the book <cite>Let the Truth Be Told About the Nation</cite>, 2008 E.C. (2015/16)</span></p>
-        </div>
-      </details>
-
-      <details>
-        <summary><span lang="am">ንቃተ ሕሊና የጨለማ መብራት ነው</span><span lang="en">Consciousness Is a Lamp in the Darkness</span></summary>
-        <div class="entry essay">
-          <div lang="am">
-            <p>ቀስ በቀስ ስለ ሚዳብር ንቃተ ሕሊናን ማዳበር ይገባል፡፡ ንቃተ ሕሊና ከተዘጋ ጨለማ ውስጥ መጓዝ የሚያስችል የብርሃን ቊልፍ ነው፡፡ አንድ የነቃ ሰው በበዝባዦች አይበዘበዝም፡፡ እንዲህ እንደ ሆነ የሚያውቁትም የተወሰኑ ሰዎች ናቸዉ፡፡ ንቃተ ሕሊና የአይዲያሊስትም የማቴሪሊስትም መሣርያ ነው፡፡ አንድ ሰው የዳበረ ንቃተ ሕሊና ከሌለው ለማመንም ለመካድም ብቁ ሊሆን አይችልም፡፡ የኢትዮጵያ ህዝብ ሠርቶ ለመብላት እስከ ሚያቅተው ንቃተ ሕሊናውን በባዕዳን ትምህርት ተነጥቆ የኖረ ህዝብ ነው፡፡ አንድ ሰው ንቃተ ሕሊና ካለው መሥራት እንዳለበት ያምናል፡፡ ከሠራም የሚበላውንና የሚኖርበትን አያጣም፡፡</p>
-          </div>
-          <div lang="en">
-            <p>Because it develops only gradually, consciousness must be cultivated. Consciousness is the key of light that makes it possible to travel through a closed darkness. An awakened person cannot be exploited by exploiters — and only a few people know this to be so. Consciousness is the instrument of the idealist and the materialist alike. A person without a developed consciousness is fit neither to believe nor to deny. The Ethiopian people are a people whose consciousness has been taken from them by foreign education, to the point that they can no longer work to feed themselves. A person who has consciousness believes that he must work; and if he works, he will not lack food to eat or a place to live.</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary><span lang="am">ንቃተ ሕሊና ከፍልስፍና ያደርሳል</span><span lang="en">Consciousness Leads to Philosophy</span></summary>
-        <div class="entry essay">
-          <div lang="am">
-            <p>ንቃተ ሕሊና ከፍልስፍና ያደርሳል፡፡ ንቃተ ሕሊና ከሌለ ፍልስፍና ሊኖርም ሊታሠብም አይችልም፡፡ ሰም ተቀርፆ ወርቅ ሲፈስበት ቅርፁን እንደ ሚያሳምር ሁሉ ንቃተ ሕሊናም የፍልስፍና፡ የሙከራ፡ የዲሞክራሲ፡ የነፃነትና የፈጠራ ሁሉ ቊልፍ ነው፡፡ በዓለማችን ሆኖ አያውቅም እንጂ ሁሉም ሰው የነቃ ቢሆን ኖሮ ሀብታምና ድኀ፡ ገዢና ተገዢ፡ ጌታና አሽከር፡ አለቃና ዘበኛ ጠባቂና ተጠባቂ፡ ቀጪና ተቀጪ፡ አሣሪና ታሣሪ፡ አይኖርም ነበር፡ ሁሉሙ እኩል ይሆኑ ነበር፡፡ ስለ ሆነም የነቃ ጌታ ያልነቃ አሽከር፡ የነቃ ሀብታም ያልነቃ ድኀ፡ የነቃ ገዢ ያልነቃ ተገዢ፡ እየሆኑ ይኖራሉ፡፡</p>
-            <p>በዘመናችን ንቃተ ሕሊና የሚያስተዳድራቸዉ ወይም የሚቆጣጠራቸዉ ሁለት ትላልቅ ግቢዎች አሉ፡፡ እነሱም አይዲያሊስትነትና ማቴሪያሊስትነት ተብለዉ ይታወቃሉ፡፡ በእነዚህ ሁለት ግቢዎች ውስጥ የሚኖሩም በጣም ጥቂቶቹ ናቸዉ፡፡ ከዚያ ውስጥ መግባት የማይችል በእነሱ ድምፅ እየበረገገ በዙሪያው የሚኖር ግን አእላፈ አእላፋት (ቢሊንስ) ናቸዉ፡፡</p>
-          </div>
-          <div lang="en">
-            <p>Consciousness leads to philosophy. Without consciousness, philosophy can neither exist nor even be conceived. Just as a carved wax mould gives its fine form to the gold poured into it, so consciousness is the key to philosophy, to experiment, to democracy, to freedom and to all invention. It has never come to pass in our world, but were everyone awakened there would be no rich and poor, ruler and ruled, master and servant, chief and watchman, guardian and guarded, punisher and punished, jailer and jailed — all would be equal. And so it is that the awakened master and the unawakened servant, the awakened rich and the unawakened poor, the awakened ruler and the unawakened ruled live on as they do.</p>
-            <p>In our age there are two great compounds governed, or controlled, by consciousness. They are known as idealism and materialism. Those who dwell within these two compounds are very few. Those who cannot enter, but live around them, startled by their voices, number myriads upon myriads — billions.</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary><span lang="am">አይዲያሊስታዊ ፍልስፍና</span><span lang="en">Idealist Philosophy</span></summary>
-        <div class="entry essay">
-          <div lang="am">
-            <p>የአይዲያሊስትና ማቴሪያሊስት አሰተሳሰብ ልዩነት፡ አይዲያሊስት የፈጣሪን ህልውናን ኃያልነትንና ሃሌ ሉያነትን አምኖ ስለ እምነትና ተፈጥሮ የሚመራመር አካል ነው፡፡ ማቴሪያሊስት፡ ማቴሪያሊስት የፈጣሪ ህልውናንና አለመኖርን ብሎ አጫፍሮ ለማጥናት የሚሞክር አካል ነው፡፡</p>
-            <p>የፍልስፍና መሠረታዊ ኂደት የምናየውን ዓለም እውነታውን በጥልቀት መመርመርና መመልከት ነው፡፡ እምነታዊ ፍልስፍና እንደ ሌላ ተፈትሮ ሁሉ እንደየሰዉ አስተሳሰብና የአእምሮ ስፋት በተለያየ አቅጣጫ ይመረመራል ይፈለሰፋል፡፡ በቅድሚያ የሃይማኖት መሠረት የሆኑትን የአምላክ ህልውናና ፈጣሪነት፡ የመልአክና ሰይጣን ክስተት የነፍስን ሕያውነትና ጠፊነት እውነታን ለማግኘት በረቀቀ አእምሮአዊ ምሥጢር ለመመርመር ይጥራል፡፡ መመርመር ስንል በድፍረት የሰዎች አእምሮ ሊሸከመው በማይችል ቦታ ሆነን ነው፡፡ በዚህ መሠረት እውነትና ማንኛውም የእምነት ፍልስፍናዎች የዓላማቸዉ ወይም የግባቸዉ አድራሻ አንድ ሆኖ ሳለ አቅጣጫቸዉ ግን የተለያየ ነው፡፡ የአዳራሻቸዉ መግቢያ በር የማያከራክር አንድ በር ሆኖ እያለ መውጣትና መግባት የማያስችል የሌለ በርና መስኮቶች አሉበት ብለዉ ያወራሉ፡፡ ምክንያቱም ንቃተ ሕሊናቸዉ በተለያየ ቀለም የተነከረ ጨርቅ የታፈነ እንጂ ለአዳራሹ የሚመጥን ንቃተ ሕሊናን ሊያዳብሩ የቻሉ አይደሉምና ነው፡፡</p>
-            <p>የእምነት ንቃተ ሕሊናና ፍልስፍና መሠረት የሆኑ አስተሳሰቦች በተለያየ ቃላትና ዓረፍተ ነገር ይገለፃሉ፡፡ ሌላዎች ወይም ማቴሪያሊስቶች ስለ ፈጣሪ ህልውናና አለመኖር ብለዉ ይገልጹታል፡፡ እኔ ግን አይዲያሊስት ፍልስፍና ስለ ምከተል ስለ ፈጣሪ ህልውናና ፈጣሪነት ብየ እገልጸው አለሁ፡፡ በዚሁ ቃል አመሠራረት በሁሉም እምነቶች ኃያልነቱን በተለየ ቃልና በተለየ ምሥጢር ይገለጻል፡፡ በዓለማችን ውስጥ እምነት ተብለዉ የተፈረጁት ብዙ እምነቶች ሁሉ ፈጣሪ አንድ እንደ ሆነ ያምናሉ፡፡ ግን ፍልስፍናቸዉ የተለያየ ጥቅማዊና ሉዓላዊ ድብቅ ይዘት ስለ አለዉ ተስማምተዉ የአንድ እምነት ተከታይ ሊሆኑ አይችሉም፡፡ የሁሉም ሃይማኖት አለቆች አሰኝተዉ የሚፈረጁት ባለ ልብስ ምልክቶችም ለፈጣሪ ምስክርነታቸዉ ሳይሆን በልብስና በቁሳቁስ ነው ጎልተዉ የሚታወቁት፡፡</p>
-            <p>ለምሳሌ ፖፑ፡ ፓትርያርኩ ሐጁ..እና የመሳሰሉት የእምነት ቁንጮዎች ሁሉ የሚለብሱትን የተለያየ ቀለም የተነከረ ጨርቅና ከራሳቸዉ የሚያደርጉትን እንግዳ፡ ከአንገታቸዉ የሚያደርጉትን ማርዳ ትተዉ የታራ ወታደር ወይም የንጹሁ ገበሬ ልብስን ለብሰዉ ወደ አደባባይ ቢወጡ አንድም ሰው ቅንጣት ያህል ክብር አይሰጣቸዉም ነበር፡፡ ይሁን እንጂ ጨርቅ ስለ ቀረ ክህነታቸዉና ንጽሕናቸዉ በፍጹም ቅንጣት ታህል ለውጥ አያመለክትም፡ በውስጣዊ ይዘታቸዉ ንጹሐን ከነበሩ እንደ ነበሩት ንጹሐን ናቸው፡፡ ስለዚህ ኅብረተ ሰቡ ለክህነቱ ለእምነቱ ንጽሕና ሳይሆን ለልብስና ለቁሳቁስ ሲያጎበድድ የሚኖር ነው ለማለት ያስችላል፡፡ ምክንያቱም የእምነቱ መምሀራን መሸፈኛውን እንጂ የሚሸፈነውን ምሥጢር፡ ኀይልና ክብር ገልጠዉ ፈጣሪንና ፍጡርን ለይተዉ ማስተማር ልምድ የላቸዉምና ነው፡፡</p>
-          </div>
-          <div lang="en">
-            <p>The difference between idealist and materialist thought: the idealist is one who, believing in the existence, the might and the glory of the Creator, inquires into faith and nature. The materialist is one who attempts to study the existence and the non-existence of the Creator by weighing the one against the other.</p>
-            <p>The fundamental process of philosophy is to examine and contemplate deeply the reality of the world we see. The philosophy of faith, like every other part of nature, is examined and explored from different directions according to each person’s thinking and breadth of mind. It strives first to examine, through the subtle mysteries of the mind, the truth of the foundations of religion: the existence of God and His work as Creator, the reality of angels and of Satan, and whether the soul is living or perishable. And by “examining” we mean daring to stand where the human mind cannot bear to go. On this basis, truth and every philosophy of faith share a single address for their aim, their goal — yet their directions differ. Though the entrance to their hall is, beyond dispute, a single door, they speak of other doors and windows that do not exist, through which no one can go in or out. This is because their consciousness is smothered in cloth dyed many colours; they have not been able to develop a consciousness worthy of the hall.</p>
-            <p>The ideas at the foundation of the consciousness and philosophy of faith are expressed in different words and sentences. Others — the materialists — speak of “the existence and non-existence of the Creator.” But because I follow idealist philosophy, I speak of “the existence of the Creator and His work as Creator.” On this same foundation, His might is expressed in every faith in different words and through different mysteries. The many faiths in our world that are classed as religions all believe that the Creator is one. Yet because their philosophies carry differing hidden interests of profit and of sovereignty, they cannot agree to become followers of a single faith. And the robed figures designated as heads of every religion are known not for their witness to the Creator, but conspicuously for their vestments and their trappings.</p>
-            <p>If, for example, the Pope, the Patriarch, the Hajji and all such heads of faith were to set aside the cloth dyed in many colours that they wear, the strange ornaments upon their heads and the pendants at their necks, and go out into the public square dressed as a common soldier or a plain farmer, no one would give them a grain of respect. Yet the absence of the cloth would not alter their priesthood or their purity by a single grain: if they were pure within, they remain as pure as they were. One may therefore say that society lives bowing not to the priesthood or to the purity of faith, but to clothing and trappings — for the teachers of the faith are accustomed to teaching the covering, not to unveiling the mystery, power and glory it covers, and so distinguishing the Creator from the created.</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary><span lang="am">ነፍስ፡ እስትንፋስ፡ መንፈስ</span><span lang="en">Soul, Breath, Spirit</span></summary>
-        <div class="entry essay">
-          <div lang="am">
-            <p>እነዚህ ሦስቱ ነፍስ፡ እስትንፋስና መንፈስ በየአንዳንዱ ሰው ውስጥ የተዋሐሃዱና የተለያዩ ሆነው ይገኛሉ፡፡ ከዚህ ላይ በቅድሚያ ስለ ፍጥረትና ሕልፈት ትንሽ ገለጻ ያስፈልጋል፡፡</p>
-            <p>በዘፍጥረት እንደ ተመለከተው፡ እግዚአብሔር ሰውም ይሁን ሌላ ተንቀሳቃሽ ፍጥረት በየወገኑና በየተወሰነለት ዕለት በመጀመርያው ሲፈጠር እንዲዋለድ እንዲባዛ አዘዘ፡፡ በዚሁ ሥርዓትም ብዝኁ ወተባዝኁ ወምልእዋ ለምድር (በዝታችሁ ተባዝታችሁ ምድርን ሙሏት) ባለው መሠረት እየተባዛ ይኖራል እንጂ በየእናቱ ሆድ በየሰከንዱ እየተፈጠረ አይኖርም፡፡ ለዚሁ ማስረጃ፡ በውሃ ንፍር የዓለምን ፍጥረት ሁሉ ሲደመስስ የኖኅን ቤተሰብ ተቃራኒ ፆታ በጥንድ ዐራት፡ ሌላ ሕይወት ያለውና ተንቀሳቃሽ የዓለም ፍጥረትን ሁሉ ተቃራኒ ፆታ ጥንድ ጥንድ አስቀርቶ ለጥፋታቸዉ ለክኅደታቸዉ ዋጋ የዓለም ፍጥረትን ሁሉ በንፍር ውሃ አጠፋ፡፡ ግን ብዝኁ ወተባዝኁ ያለውን የፈጣሪ ትዕዛዝ የሻረና ሌላ ሰው ሠራሽ ሕግን የተከተለ ሁሉ ወዮለት!</p>
-            <p>እንግዲሀ ሞትም እንደዚሁ ነው፡፡ እግዚአብሕር በአካለ ሥጋ ያለውን ሰው አይገድልም፡፡ እነ ሙሴና የመሳሰሉት ወዳጆቹ ዕረፍታቸዉ ሲቃረብ ትሞታለህ አለው ይላል እንጂ እገድልህ አለሁ አለው የሚል ንባብ አይገኝም፡፡ እግዚአብሔር ሰውንም ይሁን እንስሳት በየሰከንዱ አይፈጥርም አይገድልም አይቀስፍም፡፡ በመጀመርያ የመወለድንና የመሞትን ሥርዓት ሠርቶአል በዚሁ እስከ ዓለም ፍጻሜም ይቀጥላል፡፡ እንዲህ ስለ ተባለ መልካም ሥራ፡ ሕይወትና ሞት የለም ማለት አይደለም፡፡ የሥራውን ኂደት ነው ለመመርመር የተሞከረው እንጂ፡፡ ሕያዊነትና መልካም ሥራ የሚያገለግለው ለወድያኛው ዓለም ነውና፡፡</p>
-            <h3>ነፍስ</h3>
-            <p>እነዚህ ሦስቱ ነፍስ፡ እስትንፋስና መንፈስ በየአንዳንዱ ሰው ውስጥ የተዋሐዱና የተለያዩ ሆነው ይገኛሉ ብለናል፡፡ ነፍስ የምትባል አምላካችን በጭቃ የሰውን ምስል ካዘጋጀ በኋላ በአፍንጫው ሕያዊነትን ወይም ሕይወትን እፍ አለበት የተባለች ነች፡፡</p>
-            <h3>እስትንፋስ</h3>
-            <p>ነፍስ ሁዋላ ነው የምትረቀው እንጂ ከሥጋ ጋር ሳለች ትተኛለች ትነቃለች ትታመማለች ትራባለች ትጠማለች፡፡ መክንያቱም ነፍስ ከወጣች ሥጋ አይርበውም አይጠማውም አይተኛም አይነቃምና ነው፡፡ ነፍስ እንደ መላእክት የረቀቀች የምትታይ እንጂ የማትጨበጥ ናት፡፡ የምትታየውም አሁን አይደለም፡፡ ከሌላኛው ዓለም እንጂ ከዚህም አትታም፡፡ ስለዚህ የነፍስ ህልውና ወይም ክስተት የምትሆናት የምትገልጣት አስትንፋስ ነች፡፡ እስትንፋስ የነፍስ እንቅስቃሴና ውጤት ነች፡፡ ነፍስ ከሌለችም እስትንፋስ ልትኖር አትችልም፡፡ እስትንፋስ የነፈስ ጥላ ነች፡፡ ዛፍ ወይም ሌላ ነገር ከሌለ ጥላ እንደ ሌለ ሁሉ አስትንፋስም ነፍስ ከሌለች ልትኖር ልትገለጽ አትችልም ወይም መኖርዋ አይታወቅም፡፡ ለምሳሌ ሰው በጠና ሲታመም አለ የለም ወይም ሞቶአል ለማለት በእስትንፋስ ይለካል ይረጋገጣል፡፡ መላእክት የእግዚአብሔር እንቅስቃሴ ክስተት የህልውናው መገለጫ እንደ ሆኑ ሁሉ እስትንፋስም የነፍስ መገለጫ ነች፡፡</p>
-            <h3>መንፈስ</h3>
-            <p>መንፈስ ሁለት ግብር ያለው ነው፡፡ መንፍስ እንደ ጥቁርና ነጭ፡ እንደ ጨለማና ብርሃን የማይለያይ ገጽታ ያለው ነው፡፡ መንፈስ የሐሣብ መግለጫ ነው፡፡ መንፈስ አይተኛም አይነቃም፡፡ በክርስቶስ ስብእና ሦስትነትን ለማመጣጠን ሦስት አካል ተባለ እንጂ መንፈስ መለኮታዊነት እንጂ አካለዊነቱ ጉልህ ሆኖ የሚታይ አይደለም፡፡ ለዮሐንስ የመንፈስ ቅዱስ መታያ የሆነው ርግብ ነው፡፡ ርግብ መስሎ ሲወርድ አየሁት ነው ያለ፡፡ ወደ ሐዋርያትም በአምሳለ የእሳት ነበልባል ወረደ እንጂ በአካል የሚለውን የሦስትነቱን መግለጫ አካል ለመመልከት አልቻሉም፡፡ አሁንም ሦስት አካል የሚለውን ለመጻረር አይደለም፡፡ ሦስት አካል የሚለው የአእምሮ አካል ነው እንጂ የሚዳሰስ የሚጨበጥ አይደለም፡፡ ለዚያ መግለጫም ነው እንዲዳሰስ ሥዕል የተፈጠረው፡፡ እና መንፈስ መሣርያ ነው፡፡ ገጽታውም በየአናዳንዱ ሰው በፍላጎት የሚዳብር ነው፡፡ እሱም መንፈስ ቀዱስና መንፈስ ርኩስ በማለት ይለያል፡፡ ይህ ምሥጢር ላላመነ ላልተቀበለ ቢነግሩትም ሊገለጽለት አይችልም፡፡ ከሆነም በደፈናው ሌላ ኃይል ሥልጣን ያለው እንደ ሌለ አምኖ መዳን ይቻላል፡፡</p>
-            <h3>መንፈስ ቅዱስ</h3>
-            <p>ቅዱስና ርኩስ የመንፈስ ቅጽሎች ናቸዉ፡፡ እነሱም በሥራ ይለያያሉ፡፡ መሠረታዊ ይዘቱ መንፈስ ነው፡፡ መንፈስ ቅዱስም ይሁን መንፈስ ርኩስ በሕፃንነት አብሮ አይወለድም ከአካለ ሥጋና አእምሮ ጋራ ቀስ በቀስ የሚያድግ ወይም የሚዳብር ሲሆን አንዳንድ ጊዜ እንደ ሚሰፈር ነገር ተሰፍሮ ይገባል፡፡ አስፈላጊ በሆነ ጊዜ ቅጽበትም ይሰጣል ወይም ይመጣል፡፡ ለምሳሌ ቅዱስ ገብርኤል ቅድስት ድንግልን መንፈስ ቅዱስ ይመጽእ ላዕሌኪ (መንፈስ ቅዱስ ባንቺ ላይ ይመጣል) አላት፡፡ በዚያች ቅጽበት መጣ፡፡ ክርስቶስም ለሐዋርያት መንፈስ ቅዱስን እልክላችሁ አለሁ ነው ያለው፡፡ በኢየሩሳሌም በተዘጋ ቤትም መጣ፡፡ የሚታወቅም አንድ ሰው ማሰብና ማስተዋል ከጀመረ በኋላ የሚዳብር ነው፡፡ እሱም በጥሩ እምነትና ሥራ የሚዳብር ነው፡፡</p>
-            <p>ቅዱስ መንፈስ የሚርቀውም እንደ ሰዉ ሥራ ነው፡፡ አንድ ሰው ጥሩ ከሠራህለትና ካላስቀየምከው እየቀረበህ እየወደደህ ይመጣል፡፡ መንፈስ ቅዱስም እንደዚህ ነው፡፡ ምናልባት የመንፈስ ቅዱስና ርኩስ በሕፃንነት ያልጎላ ምሥረታ ቢያደርግም የሚዳብረው በሰውየው ሥራና አስተሳሰብ ነው፡፡ ለምሳሌ ሐዋርያት በሽምግልናቸው ነው መንፈስ ቅዱስን የተቀበሉ፡፡ የዓለም ህዝብ እንደ ሚረዳውና መጽሐፍ ቅዱስ እንደ ሚያስረዳው እምነታቸዉ የጠነከረ ሥራቸዉ በፍቅር የሠመረ እንደ ነበር ይታወቃል፡፡ ሰለዚህ መንፈስ ቅዱስ ወረደላቸዉ፡፡ ከዚያ በፊት ፍጹማን አልነበሩም፡፡ ከዚያ በኋላ ግን በመንፈስ ቅዱስ ኃይል ታዘዉ ተሾመዉ ፍጹማን ሆነዉ ተገኙ፡፡</p>
-            <p>በትምህርቱ አቀራረብ መሠረት ስለ አንድነት ሦስትነት ሲነገር በቆየው በተለመደው የአብርሃም እንግዶችን፡ የደብረ ታቦር ተአምራትን የጥምቀት ክሥተትንና የዮሐንስ ምስክርነትን የመሳሰለውን አንተርእሶ ሦስት አካላት ይባላል እንጂ በአካለ ሥጋ ሰው የተመለከተው የዳሰሰው እግዚአብሔር ወልድ ካልሆነ በቀር እግዚአብሔር አብን እግዚአብሔር መንፈስ ቅዱስን የዳሰሰ የተመለከተ ሰው ኖሮ አያውቅም፡፡ በሕሊና ይታሰባሉ ቢባል መልካም ነበር፡፡ ይሁን እንጂ መምህራኑ ሳይቀሩ በልማድ በባህል በጄሌዎች ከኀዲ መናፍቅ እንዳይባሉ በመፍራት ሦስት አካላት ይዳሰሳሉ ይታያሉ በማለት ሳይዳስሱ ሳይመለከቱ እየማሉ እየተገዘቱ ያስተምራሉ ይመሰክራሉ፡፡ ቢሆንም እሰከ ዚያ ድረስ ባህላዊ ትምህርቱን እቀበላለሁ፡፡ ከዛሬ ጀምሮ ግን በእግዚአብሔር ረዳትነት እውነቱን ለማግኘት እመረምራለሁ፡፡</p>
-            <h3>መንፈስ ርኩስ</h3>
-            <p>መንፈስ ርኩስም በሥራ የሚገለጥ ነው፡፡ የመንፈስ ቅዱስም ሆነ የመንፈስ ርኩስ ባለ ቤት መሆን የጧት ዕድል ፈንታ አይደለም፡፡ በራስ ሥራና ፍላጎት የሚዳብሩ ናቸዉ፡፡ ለሐዋርያት መንፈስ ቀዱስ የተላከላቸዉ በመልካም የእምነት ሥራ ተሰልፈዉ ስለ ነበሩ ነው፡፡ ሰው ገዳይ ውሸታም አጭበርባሪ ለመኖር እምነቱን የለወጠ ወይም በስርቆት የተሰለፈ ሁሉ የመንፈስ ርኩስ ቤተ ሰብ ነው፡፡</p>
-            <h3>ነፋስ</h3>
-            <p>ነፋስ የሚለው ቃል ከእስትንፋስ ጋር ትንሽ ተቀራራቢነት ያለው ይመስላል፡፡ ግን ምንም ግኑኝነት የለውም፡፡ ነፋስ ምድራዊ ነው፡ እስትንፋስ ሰማያዊት ናት፡፡ መንፈስ ጋኑ መንፈስ ቅዱስ ሆኖ ከብዙ የተለያየ ሥራና ቦታ ይገለጻል፡፡ ዮሐንስ ርግብ መስሎ መንፈስን አየሁት አለ፡፡ ክርስቶስም ሥጋና ደም ሳይሆን መንፈስ ገለጸልህ ብሎአል፡፡ ዘወትር ነፍስ ታመሰግናለች፡ መንፈስ ቅዱስ ይመሰገናል፡፡ ስለዚህ ጸሎተ 3ቱ ደቂቅም ይባርክዎ ኵሉ ነፍስ ይላል፡፡ ምሥጢሩ ሁሉ ሰው ተነሣ እንደ ማለት ነው፡፡ እንደዚሁም ይባርክዎ መንፈስ ወነፍሰ ጻድቃን ይላል፡፡ ሥጋና ደም ከወላጆች እንደ ምንቀበል ሁሉ መንፈስን ያቺ ቀድሞ ለአዳም እፍ ከተባለች ቅንጣትንም እንካፈላለን፡፡ ተፈጥሮዋ እንደዚህ ሆኖ የምናዳብራትና የምናቀጭጫት ግን እኛ ራሳችን ነን፡፡ ስለ መንፈስ ቅዱስ አንድነት ሦስትነት ግን የምሥጢረ ሥላሴና የመጽሐፍ መምህራንን ጠይቆ መረዳት ይገባል፡፡</p>
-          </div>
-          <div lang="en">
-            <p>These three — the soul (<i>nefs</i>), the breath (<i>istinfas</i>) and the spirit (<i>menfes</i>) — are found in each person both united and distinct. Here, first, a brief account of creation and of passing away is needed.</p>
-            <p>As Genesis records, when God first created man and every other living, moving creature — each after its kind, each on its appointed day — He commanded them to beget and to multiply. By this order, according to the word ብዝኁ ወተባዝኁ ወምልእዋ ለምድር (“Be fruitful and multiply, and fill the earth”), life goes on multiplying; it is not created anew every second in each mother’s womb. As evidence of this: when He wiped out the world’s creatures in the waters of the Flood, He spared Noah’s family — four, in pairs of man and woman — and of every other living, moving creature a pair, male and female, and destroyed all the rest of creation in the Flood as the price of their wickedness and faithlessness. But woe to anyone who annuls the Creator’s command, “Be fruitful and multiply,” and follows some other, man-made law!</p>
-            <p>So it is with death as well. God does not kill a person living in the flesh. When the rest of Moses and others among His friends drew near, Scripture says that He told them, “You will die”; no passage is found in which He says, “I will kill you.” God does not create, kill or strike down people or animals second by second. In the beginning He established the order of birth and of death, and by it things will continue until the end of the world. This is not to say that good works, life and death count for nothing; it is an attempt to examine how His work proceeds. For eternal life and good works serve the world to come.</p>
-            <h3>Soul</h3>
-            <p>We have said that these three — soul, breath and spirit — are found in each person both united and distinct. What is called the soul is that of which it is said: after our God shaped the image of man from clay, He breathed into his nostrils life — the quality of being alive.</p>
-            <h3>Breath</h3>
-            <p>The soul becomes subtle only afterward; while it dwells with the body it sleeps and wakes, falls ill, hungers and thirsts — for once the soul has departed, the body neither hungers nor thirsts, neither sleeps nor wakes. The soul, like the angels, is subtle: it may be seen, but not grasped. Nor is it seen now; it is seen in the other world, not in this one. It is therefore the breath that manifests and reveals the soul’s existence. Breath is the movement and the fruit of the soul; without the soul there can be no breath. Breath is the shadow of the soul. Just as there is no shadow without a tree or some other thing, so breath cannot exist or be manifest without the soul — nor can its presence be known. When a person is gravely ill, for instance, whether he is still with us or has died is measured and confirmed by his breath. Just as the angels are the manifestation of God’s movement and the expression of His existence, so breath is the expression of the soul.</p>
-            <h3>Spirit</h3>
-            <p>The spirit has two natures. Like black and white, like darkness and light, its aspects cannot be parted. The spirit is the expression of thought. The spirit neither sleeps nor wakes. It was to bring the Trinity into accord with the humanity of Christ that “three Persons” (<i>akal</i>, literally “bodies”) was said; but the spirit is divinity, and its bodily form is not something plainly seen. To John, the Holy Spirit appeared as a dove: “I saw it descending like a dove,” he said. Upon the Apostles it descended in the likeness of tongues of fire; they could not behold the “body” by which the Trinity is described. Even so, this is not to contradict the doctrine of three Persons: “three Persons” denotes a body of the mind, not something that can be touched or held — and it is to express this that the icon was made, so that it might be touched. The spirit, then, is an instrument, and its character develops in each person according to his will. It is distinguished as the holy spirit and the unclean spirit. This mystery cannot be revealed to one who has not believed or received it, even if he is told; yet such a person may still be saved simply by believing that there is no other power that holds authority.</p>
-            <h3>The Holy Spirit</h3>
-            <p>“Holy” and “unclean” are adjectives of the spirit; they are distinguished by works, and their essential substance is spirit. Neither the holy spirit nor the unclean spirit is born with us in infancy; each grows and develops gradually with the body and the mind, though at times it enters as if poured in by measure. When there is need, it is given — or comes — in an instant. Saint Gabriel, for example, said to the Holy Virgin, መንፈስ ቅዱስ ይመጽእ ላዕሌኪ — “The Holy Spirit will come upon you” — and in that instant it came. Christ, too, said to the Apostles, “I will send you the Holy Spirit,” and it came in Jerusalem, to a closed house. As is known, it develops after a person begins to think and to understand, and it is developed through sound faith and good works.</p>
-            <p>The Holy Spirit also withdraws according to a person’s works. If you do good to someone and do not wound him, he draws ever closer to you and grows to love you; so it is with the Holy Spirit. Though the holy and the unclean spirit may lay a faint foundation in infancy, what develops either one is the person’s own works and thought. The Apostles, for example, received the Holy Spirit in their mature years. As the world understands and as the Bible attests, their faith was strong and their works flourished in love; therefore the Holy Spirit descended upon them. Before that they were not perfect; afterward, commissioned and appointed by the power of the Holy Spirit, they were found perfect.</p>
-            <p>In the customary way that the Unity and Trinity have long been taught, “three Persons” is spoken of by citing such things as the guests of Abraham, the miracle of Mount Tabor, the revelation at the Baptism and the testimony of John. Yet apart from God the Son, whom people saw and touched in the flesh, no one has ever touched or beheld God the Father or God the Holy Spirit. It would have been well to say that they are conceived in the mind. Yet even the teachers — out of habit and custom, and for fear of being branded apostates and heretics by the unlearned — teach and testify, swearing oaths and binding themselves under anathema, that the three Persons can be touched and seen, though they themselves have neither touched nor seen them. Even so, until then I accept the traditional teaching. But from this day on, with God’s help, I will search to find the truth.</p>
-            <h3>The Unclean Spirit</h3>
-            <p>The unclean spirit, too, is revealed through works. To become the dwelling of the Holy Spirit or of the unclean spirit is not a lot cast at the dawn of life; both are developed through one’s own works and will. The Holy Spirit was sent to the Apostles because they had enlisted in the good works of faith. The murderer, the liar, the swindler, whoever has changed his faith to get by, or has enlisted in theft — all are of the household of the unclean spirit.</p>
-            <h3>Wind</h3>
-            <p>The word <i>nefas</i> (wind) seems close to <i>istinfas</i> (breath), but the two have no connection: wind is earthly, breath is heavenly. The spirit, as the Holy Spirit, is made manifest in many different works and places. John said, “I saw the Spirit like a dove.” And Christ said, “Flesh and blood did not reveal this to you, but the Spirit.” The soul gives praise continually; the Holy Spirit is praised. Thus the Prayer of the Three Youths says ይባርክዎ ኵሉ ነፍስ — “Let every soul bless Him” — whose meaning is as if to say, “Arise, all people.” Likewise it says ይባርክዎ መንፈስ ወነፍሰ ጻድቃን — “Let the spirits and souls of the righteous bless Him.” Just as we receive flesh and blood from our parents, so we share in the spirit — in that particle first breathed into Adam. Such is its nature; but it is we ourselves who nurture it or let it wither. As for the Unity and Trinity of the Holy Spirit, one should ask and learn from the teachers of the Mystery of the Trinity and of the Scriptures.</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary><span lang="am">ሃይማኖትን መመርመር</span><span lang="en">Examining Religion</span></summary>
-        <div class="entry essay">
-          <div lang="am">
-            <p>ሃይማኖትን መመርመር ሲባል ምናልባት በሌላዎች ሊሆን ይችላል፡፡ እስከ አሁን ባለሁበት ደረጃና እንድርድር ግን ሰዎች የሚሉትንና የሚቆረቁርትን ድርጅት እንጂ የፈጣሪ ህልውናን ርቀትን መመርመር ማለት አይደለም፡፡ እንስራ የሠራችውን ሴት መመርመር እንደማይችል ሁሉ እኔም በዚሁ ደረጃ ነኝና፡፡</p>
-            <p>ሃይማኖትን በማጥናት ኂደት ከፍልስፍና በተጨማሪ ሌላዎች ሳይንሳዊና ባህላዊ ዘርፎች ይካተታሉ፡፡ ንቃተ ሕሊናን ለብሰዉ ፍልስፍናን የሚመሠርቱና የሚያዳብሩ ንጥረ ሰው የሆኑ ሰዎች እንደ ሶሺያል ሳይንስ (የማኅበራዊ እውነታ) የመሳሰሉ ዕለታዊና ነባራዊ ከሰው ሕይወት ጋር የተቆራኙ ሁኔታዎችን በማዳመር ሃይማኖታዊ ይዘትን ለማጥናት ይጥራሉ፡፡ ይሁን እንጂ የደረሱበትን ደረጃ ከማስቀመጥ ባለፈ ሃይማኖትን ተንትኖ እስከ መጨረሻ ማወቅና ማሳወቅ የቻለ አይኖርም ተብሎ ይታመናል፡፡ ምክንያቱም ሃይማኖት ስንል ከመለኮታዊ ባሕር ይዘት የመነጨ ማዕበል ስለ ሆነ ይህነንን ማዕበልና መለኮታዊ የምሥጢር ርቀትን ለማወቅ የተፈጥሮ ዕድገት ደረጃው እንደ መለኮት ወይም ከዚያ በላይ መሆን ያስፈልጋልና ነው፡፡ አንድ ፍጡር፡ ፈጣሪ ስለ ፈጠራቸዉ መናገር መመርመር ይችል ይሆናል እንጂ ስለ ፈጣሪ ህልውና ለማተት ሊመካ አይገባም፡፡ የዓለም ፍጥረትን አስታውሶ ስለ ራሱ አመጣጥና ሕይወት ቢመለከት መልካም ደረጃ ሊያሰኝ ይችላል፡፡</p>
-            <p>ይሁን እንጂ በእምነቱ አከባቢ ያለ ሰው ከሰው ተለይቶ የተለየ ፍጡርና ከሁሉም በላይ አዋቂና ከሁሉም በላይ ወደ አምላክ ቀራቢ መስሎ ቢታይም ትልቅ ትንሽ ወፍራም የከሳ የወፈረ ሳይባሉ ከብቶች ፍየሎች በጎች እንደየወገናቸዉ የራስ የወገን እህልን ረገጣችሁ በላችሁ ሳይባሉ በአንድ ላይ ተነድተዉ ማታ ወደየበረታቸዉ እንደ ሚገቡት ሁሉ የሰው ተፈጥሮም አወላለዱ የዕድገቱ አዝጋሚነት፡ 9 ወር በእናቱ ሆድ የሚቆይበት ጊዜና ከእግር እስከ ራስ የብልቶች ወይም የአካላት ቍጥር ብዛት ተመጣጣኝነት ስንመለከት ለመንጋ ጠባቂዉ ሰውም አንድ ወገን ስለሆነ የቃላት አንጠረኞች የሆኑ ሰዎች የኃጢአት አዳራሾችን እንደ ሚገነቡት ሳይሆን ለመንጋ ጠባቂዉ ሁሉም ንብረት ናቸዉ፡፡</p>
-            <p>ለምሳሌ፡ በኢትዮጵያ ውስጥ ዲቁና፡ ቅስና፡ ቁምስና፡ ጵጵስና፡ ፕትርክና….እና የመሳሰሉት የበላይና የበታች ሆነዉ ተመድበዉ ያሉ ሁሉ መንፈስ ቅዱስ ክረስቶስ በተነሣ በሐምሣኛው ቀን በሐዋርያት ላይ መውረዱ ቢረጋገጥም ከላይ በተመለከቱት ሥያሜያት ላይ ክርስቶስ ያለው ነገር የለም፡፡ እንዲያውም ከፈሪሳዊንና ሰዱቃዊያን ካህናት ሥራና ልምድ ስምና አቋም ለመለየት ሐዋርያትየ አለ እንጂ ሌላ ስም አልቆራም ወይም ካህናትየ አላለም፡፡ ዋናው ነገር ፍልስፍናው በዓለማችን በጽሑፍ ብቻ የሰፈሩት አማልክትን ለማወዳደር ሳይሆን አንድ አምላክ አለ በሚለው ልዩ የትምህርት ይዘት፡ በመጀመርያ የእምነቱና የትምህርቱ ቅድሚያና መሪነት ያለውን በተመለከተው በማተኮር ነው፡፡</p>
-          </div>
-          <div lang="en">
-            <p>When one speaks of “examining religion,” perhaps it may be possible for others. At the level and standing I have reached so far, however, it means examining what people say and the institutions they have founded — not examining the depths of the Creator’s existence. For just as a clay jar cannot examine the woman who made it, so I stand at that level.</p>
-            <p>In the study of religion, other scientific and cultural disciplines are included besides philosophy. People of refined substance who, clothed in consciousness, found and develop philosophy strive to study the content of religion by bringing together the daily and existential conditions bound up with human life — such as the social sciences, the study of social reality. Yet it is believed that no one, beyond setting down the stage they have reached, has been able to analyse religion fully and to know it, and make it known, to the end. For religion is a wave arising from the substance of a divine sea; to know this wave, and the depth of the divine mystery, one’s natural stature would have to be equal to the Godhead, or greater. A creature may perhaps speak of, and examine, the things the Creator has made; but he should not boast of expounding the Creator’s existence. If, mindful of the creation of the world, he considers his own origin and life, that may be counted a worthy attainment.</p>
-            <p>Yet even if a person within the circle of the faith appears set apart from others — a different creature, more learned than all, nearer to God than all — consider how cattle, goats and sheep, each after their kind, are driven home together to their folds at evening, without being called big or small, fat or lean, and without being told, “You trampled and ate another’s grain.” So too with human nature: when we consider how we are born, the slowness of our growth, the nine months spent in the mother’s womb, and the matching number of limbs and members from foot to head, mankind is, to the Shepherd, a single kind. All are His possession — not as the wordsmiths, building their halls of sin, would have it.</p>
-            <p>In Ethiopia, for example, there are the diaconate, the priesthood, the archpriesthood, the episcopate, the patriarchate and the like, all ranked as higher and lower. Though it is confirmed that the Holy Spirit descended upon the Apostles on the fiftieth day after Christ rose, Christ said nothing about these titles. Indeed, to set them apart in name and standing from the work and customs of the Pharisee and Sadducee priests, He called them “my Apostles”; He coined no other name, nor did He say “my priests.” The main point is that this philosophy does not set out to compare the gods recorded only in the writings of our world; it focuses on the singular teaching that there is one God — on that which holds first place and leadership in the faith and its teaching.</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary><span lang="am">ፍላስፋው ዘርዓ ያዕቆብ</span><span lang="en">The Philosopher Zera Yacob</span></summary>
-        <div class="entry essay">
-          <div lang="am">
-            <p>ዘርዓ ያዕቆብ አክሱማዊ ወእንፍራዛዊ፤ ዘርዓ ያዕቆብ ከአክሱም ወደ ጎንደር ኄዶ በመጽሐፍት ትምህርት ቤት ብቻ 9 ዓመት የተማረ የመጽሐፍ መምህርና ተመራማሪ ነበር፡፡ ለእንኮዬ ለምናምን የሚለውን ትቶ ለእግዚአብሔር ብቻ መገዛቱን ሲያረጋግጥ እንዲህ ይላል፡፡ ፍልስፍናውን እንመልከት፡፡</p>
-            <blockquote>((እኔም ለሰዎች ክርስቲያን እመስላቸዉ ነበር፡፡ ነገር ግን በልቤ እርሱ እንደ አስታወቀኝ የሁሉ ፈጣሪና የሁሉ ጠባቂ በሆነ በእግዚአብሔር ካልሆነ በስተቀር በማንም አላምንም፡፡ አማኝ ሳልሆን አማኝ እመስላለሁ፡፡ በእግዚአብሔር ዘንድ ይህ ያስቀጣኝ ይሆን? ብየ አሰብኩ፡፡ ሰዎችን እንዲህ አታልላቸዉ አለሁ፡፡ ሰዎችን ማታለል ይገባልን? አልኩ፡፡ እውነቱን ብነግራቸዉ ለሰዎች ትልቅ ጥፋት ካልሆነ በስተቀር ሐሳቤን መግለጼ ጥቅም የለውም፡፡ ሊሰድቡኝና ሊያባርሩኝ ካልሆነ በስተቀር አይሰሙኝም፡፡ ስለዚህ እነርሱን መስየ ከሰው ጋር እኖራለሁ፡፡ አርሱ እንዳስታወቀኝ በእግዚአብሔር ዘንድ ኖርኩ፡፡))</blockquote>
-            <p>ዘርዓ ያዕቆብ እንዲህ ሲል ሰዎች የኦሪት ተከታይ ይመስላቸዉ ይሆናል፡፡ ግን አይደልም፡ ንቃተ ሕሊናዉ ነው እንዲህ ለማሠብና ለማለት ያበቃው እንጂ በ14ኛው ክ/ዘመን አከባቢ የነበረ የዘመነ ሐዲስ ምሁር ነበር፡፡ ምናልባት እኛ በዕድሜያችን እንደ አየነው አርበኛው ሺዬው አቡነ ጴጥሮስ ዘፊቼና ፓትርያርኩ ጎጃሜው አቡነ ቴዎፍሎስ ዘደብረ ኤልያስ እኛም እንደዚያ እንሆናለን ብለዉ በሚመኙት በመደብ ገዶቻቸዉ ተሹመዉ በፈጣሪ ዙፋን ተቀምጠው ሲመሰገኑ እንደ አየነው ዘርዓ ያዕቆብም በዘመኑ አሁን ያሉት እነ እንቶኔ እነ እንቶኔ በሚሾሙበት ዘመን የነበረ ሊሆን ይቻላና ሁሉም ይቅርብኝ ብሎ ወደ ፈጣሪው ተጠጋ ማለት ነው እንጂ ኦሪታዊ እንዳይደለ የነበረበት ዘመን ያረጋግጣል፡፡</p>
-            <p>በዚያን ጊዜ የነበረው ትልቁ ዕዳ እንደ አሁን መናገር ሐሣብን መግለጽ የፈለገውን ማምለክ አይቻልም ነበር፡፡ ተገዶ ሰዎችን የሚያመልኩበት ዘመን ነበረ፡፡ እንዲያም ስለ ነበረ ነው እነ ደቅ እስጢፋ ተጨፍጭፈዉ የተገደሉትና በግፍ በመገደላቸዉና ለምስክርነታቸዉም ማረጋገጫ በዚሁ ሌሊት ብርሃን ከሰማይ ወርዶ ታየላቸዉ፡፡</p>
-            <p>ስለ እምነት መሠረትነትን ስንመለከት፡ በመጀመርያ የእምነቱ አምዶች አርባዕቱ ወንጌል ማቴዎስ፡ ማርቆስ፡ ሉቃስ፡ ዮሐንስና ዘፍጥረትንም ጨምረን ምሶሶ ነቸዉ እላቸዉ አለሁ፡፡ የተቀረው እምነቱ ነፋስና ሌባ የመሳሰሉት እንዳይገቡበት የተገደገዱ ግድግዳዎች ናቸዉ፡፡ እንደ ዚሁም በዓለማዊ አስተዳደር ለአንድ ሃገር የመጀመርያው ቍንጮ የሃገሪትዋን መዋቅር ጠባቂ ሕገ መንገሥት ይባላል፡፡ ሕገ መንግሥቱን ለመንከባከብና ለማደርጀት ከሕገ መንግሥቱ መንፈስ ሳይወጡ አዋጅ፡ ውስጠ ደንብ፡ መተዳደርያ….…..እና የመሳሰሉት የሚጻፉ ሲሆኑ፡ በዚእሁ ጊዜ ሕገ መንግሥቱ ይቆጣጠራቸዋል እንጂ እነሱ ሕገ መንግሥቱን ሊቆጣጠሩት አይችሉም፡፡ ስለዚህ ከላይ የተጠቀሱት ትምህርቶችም በዚህ መልክ የተከሰቱ መሆናቸዉን ሐተታው ያረጋግጣል፡፡</p>
-            <p class="continued">……ይቀጥላል፡፡</p>
-          </div>
-          <div lang="en">
-            <p>Zera Yacob of Axum and of Enfraz. Zera Yacob went from Axum to Gondar and studied for nine years in the school of books alone, becoming a teacher and scholar of the Scriptures. Setting aside devotion to this one and that one, and affirming that he submitted to God alone, he writes as follows. Let us consider his philosophy.</p>
-            <blockquote>“To people I appeared to be a Christian. But in my heart I believed in no one but God, the Creator and Keeper of all, as He had made known to me. Not being a believer [as they are], I appear to be one. I thought: will this bring punishment upon me before God? Thus I deceive people. Is it right to deceive people? I asked. Were I to tell them the truth, revealing my thoughts would serve no purpose; it would be only a great offence to them. They would not listen to me, except to curse me and drive me away. And so, appearing as they do, I live among people. As He made known to me, I have lived before God.”</blockquote>
-            <p>Hearing Zera Yacob say this, people may take him for a follower of the Orit, the Old Law. But he was not: it was his consciousness that brought him to think and to speak this way. He was a scholar of the age of the New Testament who lived around the fourteenth century. Just as in our own lifetime we have seen men appointed by their own faction — men who long to be like the patriot Abune Petros of Fiche, from Shewa, and the Patriarch Abune Tewophilos of Debre Elias, from Gojjam — seated on the throne of the Creator and receiving praise, so Zera Yacob may have lived in an age when so-and-so and so-and-so were being appointed, as they are now. And so, saying “I want none of it,” he drew close to his Creator. The age in which he lived confirms that he was no follower of the Old Law.</p>
-            <p>The great burden of that time was that one could not, as now, speak, express one’s thoughts, or worship as one wished; it was an age in which people were compelled to worship men. It was for this reason that the Stephanites (Deqiqe Estifa) were massacred; and in confirmation of their unjust killing and of their witness, that very night a light came down from heaven and was seen over them.</p>
-            <p>As for the foundations of faith: I call the four Gospels — Matthew, Mark, Luke and John — together with Genesis, the pillars of the faith. The rest of the faith consists of walls built around it so that wind, thieves and the like cannot get in. Likewise, in secular government, the highest authority of a country — the guardian of its structure — is called the constitution. To safeguard and give order to the constitution, proclamations, bylaws, regulations and the like are written without departing from its spirit; and the constitution governs them — they cannot govern the constitution. The <i>Hatata</i> thus confirms that the teachings mentioned above came about in this way.</p>
-            <p class="continued">To be continued…</p>
-          </div>
-          <p class="cite"><span lang="am">ስለ ሃገር እውነት ይነገር 2008 ዓ. ም.</span><span lang="en">From <cite>Let the Truth Be Told About the Nation</cite>, 2008 E.C. (2015/16)</span></p>
-        </div>
-      </details>
-    </div>
+<section class="block wrap" aria-labelledby="more-h">
+  <div class="sec-head">
+    <h2 id="more-h"><span lang="am">ተጨማሪ ጽሑፎች</span><span lang="en">More writings</span></h2>
+    <a href="writings/"><span lang="am">ሁሉም ጽሑፎች →</span><span lang="en">All writings →</span></a>
+  </div>
+  <div class="more-grid">
+    <!--MORE-->
   </div>
 </section>
 
-<section class="section section-alt" id="sections">
-  <div class="wrap">
-    <header class="section-head">
-      <p class="eyebrow"><span lang="am">ያስሱ</span><span lang="en">Explore</span></p>
-      <h2><span lang="am">የዕውቀት ክፍሎች</span><span lang="en">Sections of Knowledge</span></h2>
-      <div class="ornament" aria-hidden="true"><span></span></div>
-    </header>
-  <!--SECTIONS-->
-  </div>
-</section>
-
-<section class="section" id="author">
-  <div class="wrap">
-    <div class="about">
-      <div class="portrait">
-        <!-- Replace with: <img src="assets/img/author.jpg" alt="Yitbarek Gessese Merra" width="600" height="750"> -->
-        <div class="ph"><svg class="cross" viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor"><rect x="28" y="8" width="8" height="48"/><rect x="8" y="28" width="48" height="8"/><circle cx="32" cy="6" r="5"/><circle cx="32" cy="58" r="5"/><circle cx="6" cy="32" r="5"/><circle cx="58" cy="32" r="5"/></g></svg></div>
+<section class="profile" aria-labelledby="profile-h">
+  <div class="wrap profile-inner">
+    <!--PORTRAIT-->
+    <div class="profile-text">
+      <div class="profile-head">
+      <p class="kicker"><span lang="am">ስለ ደራሲው</span><span lang="en">Profile</span></p>
+      <h2 id="profile-h" class="profile-name blk"><span lang="am">መምህር ይትባረክ ገሠሠ መራ</span><span lang="en">Yitbarek Gessese Merra</span></h2>
+      <p class="roles"><span lang="am">የታሪክ ምሁር ፡ ሠዓሊ ፡ ዲያቆን ፡ ደራሲ</span><span lang="en">Historian · Painter · Deacon · Author</span></p>
       </div>
-      <div>
-        <p class="eyebrow"><span lang="am">ስለ ደራሲው</span><span lang="en">About the Author</span></p>
-        <h2><span lang="am">ለኢትዮጵያ ቅርስ የተሰጠ ሕይወት</span><span lang="en">A Life in Service of Ethiopian Heritage</span></h2>
-        <p class="author-name"><span lang="am">ይትባረክ ገሠሠ መራ</span><span lang="en">Yitbarek Gessese Merra</span></p>
-        <div lang="am">
+      <div class="profile-body">
+      <div class="profile-bio">
+        <div lang="am" class="lx">
           <p>ይትባረክ ገሠሠ መራ ኢትዮጵያዊ የታሪክ ምሁር፣ በሥነ ጥበብ ሥዕል የሠለጠነ ሠዓሊ፣ በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን የቅዳሴና የሊቃውንት ትውፊት የታነጸ የአብነት ዲያቆን፣ እንዲሁም በሃይማኖት፣ በባህል፣ በታሪክ፣ በግዕዝ ቋንቋና በኢትዮጵያ ቅዱሳት የቁጥር ሥርዓቶች ላይ ከአሥራ ሁለት በላይ መጻሕፍትን የጻፈ ደራሲ ነው።</p>
           <p>ሥራዎቹ ጥንቱን ከዘመኑ ያገናኛሉ — የኢትዮጵያ ኦርቶዶክስ ትውፊትን ጥልቀት ጠብቀው በዓለም ዙሪያ ላሉ አንባቢዎች ተደራሽ ያደርጉታል።</p>
         </div>
-        <div lang="en">
-          <p>Yitbarek Gessese Merra is an Ethiopian historian, a painter trained in the fine arts, and a traditional deacon steeped in the liturgical and scholarly traditions of the Ethiopian Orthodox Church. He is the author of more than a dozen books spanning religion, culture, history, the Geez language, and the sacred numerical systems of Ethiopia.</p>
+        <div lang="en" class="lx">
+          <p>Yitbarek Gessese Merra is an Ethiopian historian, a painter trained in the fine arts, and a traditional deacon steeped in the liturgical and scholarly traditions of the Ethiopian Orthodox Church. He is the author of more than a dozen books spanning religion, culture, history, the Ge’ez language, and the sacred numerical systems of Ethiopia.</p>
           <p>His work bridges the ancient and the contemporary — preserving the depth of Ethiopian Orthodox tradition while making it accessible to readers across the world.</p>
         </div>
-        <p><a class="text-link" href="books/"><span lang="am">የታተሙ መጻሕፍትን ይመልከቱ →</span><span lang="en">Browse Published Books →</span></a></p>
+      </div>
+      <a class="more-link" href="books/"><span lang="am">የታተሙ መጻሕፍትን ይመልከቱ →</span><span lang="en">Browse the published books →</span></a>
       </div>
     </div>
   </div>
+</section>
+
+<section class="block wrap" aria-labelledby="books-h">
+  <div class="sec-head">
+    <h2 id="books-h"><span lang="am">መጻሕፍት</span><span lang="en">Books</span></h2>
+    <a href="books/"><span lang="am">ሁሉም መጻሕፍት →</span><span lang="en">All books →</span></a>
+  </div>
+  <ul class="book-strip">
+    <li><a href="books/"><span class="mini-cover">ሰዋስወ ቀመር</span><span class="bs-title blk"><span lang="am">ሰዋስወ ቀመር</span><span lang="en">The Grammar of Kemer</span></span><span class="bs-meta">2001 <span lang="am">ዓ.ም.</span><span lang="en">E.C.</span></span></a></li>
+    <li><a href="books/"><span class="mini-cover">ባሕረ ቀመር</span><span class="bs-title blk"><span lang="am">ባሕረ ቀመር</span><span lang="en">The Sea of Kemer</span></span><span class="bs-meta">2003 <span lang="am">ዓ.ም.</span><span lang="en">E.C.</span></span></a></li>
+    <li><a href="books/"><span class="mini-cover">ባሕረ ቀመር ሁለተኛ</span><span class="bs-title blk"><span lang="am">ባሕረ ቀመር ሁለተኛ</span><span lang="en">Bahre Kemer, Volume Two</span></span><span class="bs-meta">2004 <span lang="am">ዓ.ም.</span><span lang="en">E.C.</span></span></a></li>
+    <li><a href="books/"><span class="mini-cover">ስለ ሃገር እውነት ይነገር</span><span class="bs-title blk"><span lang="am">ስለ ሃገር እውነት ይነገር</span><span lang="en">Let the Truth Be Told About the Nation</span></span><span class="bs-meta">2008 <span lang="am">ዓ.ም.</span><span lang="en">E.C.</span></span></a></li>
+  </ul>
 </section>

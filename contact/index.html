@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="am" data-lang="am" data-title-am="ያግኙን · ባሕረ ቀመር" data-title-en="Contact · Bahrekemer">
+<html lang="am" data-lang="am" data-read="am" data-title-am="ያግኙን · ባሕረ ቀመር" data-title-en="Contact · Bahrekemer">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>(function(){var l="am";try{l=new URLSearchParams(location.search).get("lang")||localStorage.getItem("lang")||"am"}catch(e){}if(l!=="en")l="am";var d=document.documentElement;d.className+=" js";d.setAttribute("data-lang",l);d.lang=l;if(l==="en")document.title=d.getAttribute("data-title-en")})();</script>
+<script>(function(){var d=document.documentElement,l="am",r,b;try{var q=new URLSearchParams(location.search);l=q.get("lang")||localStorage.getItem("lang")||"am";r=localStorage.getItem("read");b=localStorage.getItem("big")}catch(e){}if(l!=="en")l="am";if(["am","both","en"].indexOf(r)<0)r=l==="en"?"both":"am";d.className+=" js"+(b==="1"?" big":"");d.setAttribute("data-lang",l);d.setAttribute("data-read",r);d.lang=l;if(l==="en")document.title=d.getAttribute("data-title-en")})();</script>
 <title>ያግኙን · ባሕረ ቀመር</title>
 <meta name="description" content="ደራሲውን ያግኙ። Get in touch with the author.">
 <link rel="canonical" href="https://bahrekemer.com/contact/">
@@ -17,33 +17,39 @@
 <meta property="og:url" content="https://bahrekemer.com/contact/">
 <meta property="og:locale" content="am_ET">
 <meta property="og:locale:alternate" content="en_US">
-<meta name="theme-color" content="#1c2f5a">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/noto-serif-ethiopic-ethiopic-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/noto-serif-ethiopic-ethiopic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body class="page-contact">
-<a class="skip" href="#main"><span lang="am">ወደ ዋናው ይዘት ይዝለሉ</span><span lang="en">Skip to content</span></a>
-<header class="site-header">
+<a class="skip" href="#main">ወደ ዋናው ይዘት ይዝለሉ · Skip to content</a>
+<div class="util">
+  <div class="wrap util-bar">
+    <p class="today" data-today></p>
+    <div class="util-ctl">
+      <button type="button" class="size-btn" data-size-toggle aria-pressed="false" aria-label="ፊደል አሳድግ · Larger text"><span class="s1" aria-hidden="true">ሀ</span><span class="s2" aria-hidden="true">ሀ</span></button>
+      <div class="lang-switch" role="group" aria-label="ቋንቋ · Language">
+        <button type="button" class="ls ls-am" data-set-lang="am">አማርኛ</button>
+        <button type="button" class="ls ls-en" data-set-lang="en">English</button>
+      </div>
+    </div>
+  </div>
+</div>
+<header class="topbar">
   <div class="wrap bar">
-    <a class="brand" href=".././"><span class="brand-am">ባሕረ ቀመር</span><span class="brand-en">BAHREKEMER</span></a>
-    <nav id="nav" class="nav" aria-label="Main"><a href="../megbiya/"><span lang="am">መግቢያ</span><span lang="en">Introduction</span></a><a href="../numbers/"><span lang="am">ቁጥሮች</span><span lang="en">Numbers</span></a><a href="../key/"><span lang="am">ቁልፍ</span><span lang="en">Key</span></a><a href="../qene/"><span lang="am">ቅኔ</span><span lang="en">Qene</span></a><a href="../poetry/"><span lang="am">ወቅታዊ ግጥም</span><span lang="en">Poetry</span></a><a href="../books/"><span lang="am">መጻሕፍት</span><span lang="en">Books</span></a><a href="../paintings/"><span lang="am">ሥዕሎች</span><span lang="en">Paintings</span></a><a href="../contact/" aria-current=page><span lang="am">ያግኙን</span><span lang="en">Contact</span></a></nav>
-    <button class="lang-btn" type="button" data-lang-toggle>
-      <span class="show-am" aria-label="Switch to English">EN</span><span class="show-en" aria-label="ወደ አማርኛ ይቀይሩ">አማ</span>
-    </button>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">
-      <span class="menu-icon" aria-hidden="true"></span><span lang="am" class="sr-only">ማውጫ</span><span lang="en" class="sr-only">Menu</span>
-    </button>
+    <a class="brand" href=".././">ባሕረ ቀመር</a>
+    <nav id="nav" class="nav" aria-label="Main"><a href="../megbiya/"><span class="n-am">መግቢያ</span><span class="n-en">Introduction</span></a><a href="../numbers/"><span class="n-am">ቁጥሮች</span><span class="n-en">Numbers</span></a><a href="../key/"><span class="n-am">ቁልፍ</span><span class="n-en">Key</span></a><a href="../qene/"><span class="n-am">ቅኔ</span><span class="n-en">Qene</span></a><a href="../poetry/"><span class="n-am">ወቅታዊ ግጥም</span><span class="n-en">Poetry</span></a><a href="../books/"><span class="n-am">መጻሕፍት</span><span class="n-en">Books</span></a><a href="../paintings/"><span class="n-am">ሥዕሎች</span><span class="n-en">Paintings</span></a><a href="../contact/" aria-current=page><span class="n-am">ያግኙን</span><span class="n-en">Contact</span></a></nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav"><span class="menu-icon" aria-hidden="true"></span><span class="menu-label">ክፍሎች <span class="menu-en">Sections</span></span></button>
   </div>
 </header>
 <main id="main">
 <header class="page-hero">
   <div class="wrap">
-    <p class="eyebrow"><span lang="am">ባሕረ ቀመር</span><span lang="en">Bahrekemer</span></p>
+    
     <h1><span lang="am">ያግኙን</span><span lang="en">Contact</span></h1>
-    <p class="lede"><span lang="am">ደራሲውን ያግኙ።</span><span lang="en">Get in touch with the author.</span></p>
-    <div class="ornament" aria-hidden="true"><span></span></div>
+    <p class="lede blk"><span lang="am">ደራሲውን ያግኙ።</span><span lang="en">Get in touch with the author.</span></p>
   </div>
 </header>
 <div class="page-body wrap">
@@ -73,14 +79,20 @@
 </div>
 </main>
 <footer class="site-footer">
-  <div class="wrap">
-    <svg class="cross" viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor"><rect x="28" y="8" width="8" height="48" rx="1"/><rect x="8" y="28" width="48" height="8" rx="1"/><circle cx="32" cy="6" r="5"/><circle cx="32" cy="58" r="5"/><circle cx="6" cy="32" r="5"/><circle cx="58" cy="32" r="5"/><circle cx="18" cy="18" r="3.2"/><circle cx="46" cy="18" r="3.2"/><circle cx="18" cy="46" r="3.2"/><circle cx="46" cy="46" r="3.2"/><rect x="26" y="26" width="12" height="12" transform="rotate(45 32 32)"/></g><rect x="29.5" y="29.5" width="5" height="5" transform="rotate(45 32 32)" fill="var(--navy)"/></svg>
-    <p class="foot-name">ባሕረ ቀመር</p>
-    <p class="foot-tag"><span lang="am">በነፃ ባህሉን ያውቅ ዘንድ ዌብሳይቱን በኢትዮጵያዊነቱ ለሚያምን ያስተላልፉ።</span><span lang="en">Share this site freely with all who cherish their Ethiopian heritage.</span></p>
-    <div class="ornament" aria-hidden="true"><span></span></div>
-    <nav class="foot-nav" aria-label="Footer"><a href="../megbiya/"><span lang="am">መግቢያ</span><span lang="en">Introduction</span></a><a href="../numbers/"><span lang="am">ቁጥሮች</span><span lang="en">Numbers</span></a><a href="../key/"><span lang="am">ቁልፍ</span><span lang="en">Key</span></a><a href="../qene/"><span lang="am">ቅኔ</span><span lang="en">Qene</span></a><a href="../poetry/"><span lang="am">ወቅታዊ ግጥም</span><span lang="en">Poetry</span></a><a href="../books/"><span lang="am">መጻሕፍት</span><span lang="en">Books</span></a><a href="../paintings/"><span lang="am">ሥዕሎች</span><span lang="en">Paintings</span></a><a href="../contact/"><span lang="am">ያግኙን</span><span lang="en">Contact</span></a></nav>
-    <p class="copy">© 2016–2026 Yitbarek Gessese Merra. <span lang="am">መብቱ በሕግ የተጠበቀ ነው።</span><span lang="en">All rights reserved.</span></p>
+  <div class="wrap foot-grid">
+    <div class="foot-id">
+      <p class="foot-name">ባሕረ ቀመር</p>
+      <p class="foot-tag blk"><span lang="am">በነፃ ባህሉን ያውቅ ዘንድ ዌብሳይቱን በኢትዮጵያዊነቱ ለሚያምን ያስተላልፉ።</span><span lang="en">Share this site freely with all who cherish their Ethiopian heritage.</span></p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer"><a href="../megbiya/"><span class="n-am">መግቢያ</span> <span class="n-en">Introduction</span></a><a href="../numbers/"><span class="n-am">ቁጥሮች</span> <span class="n-en">Numbers</span></a><a href="../key/"><span class="n-am">ቁልፍ</span> <span class="n-en">Key</span></a><a href="../qene/"><span class="n-am">ቅኔ</span> <span class="n-en">Qene</span></a><a href="../poetry/"><span class="n-am">ወቅታዊ ግጥም</span> <span class="n-en">Poetry</span></a><a href="../books/"><span class="n-am">መጻሕፍት</span> <span class="n-en">Books</span></a><a href="../paintings/"><span class="n-am">ሥዕሎች</span> <span class="n-en">Paintings</span></a><a href="../contact/"><span class="n-am">ያግኙን</span> <span class="n-en">Contact</span></a></nav>
+    <div class="foot-contact">
+      <p class="label"><span lang="am">ያግኙን</span><span lang="en">Contact</span></p>
+      <a href="mailto:yigeme.yg7@gmail.com">yigeme.yg7@gmail.com</a>
+      <span>+251 913 547 463</span>
+      <span><span lang="am">ፖ.ሣ.ቁ. 25458/1000 ፡ አዲስ አበባ</span><span lang="en">P.O. Box 25458/1000, Addis Ababa</span></span>
+    </div>
   </div>
+  <div class="wrap copy">© 2016–2026 Yitbarek Gessese Merra</div>
 </footer>
 <script src="../assets/js/main.js" defer></script>
 </body>

@@ -568,23 +568,56 @@ def book_page(i, b):
 
 
 # ---------------------------------------------------------------- page shell
-def jsonld(slug, url):
-    if slug != "index":
+def person(base):
+    return {"@type": "Person", "@id": f"{base}/#person", "name": SITE["author"],
+            "alternateName": [AUTHOR_AM, "Yitbarek Gessese", "Yitbarek Gesesse", "Yitbarek Merra", "ይትባረክ ገሠሠ",
+                              "Memhir Yitbarek Gessese Merra", "መምህር ይትባረክ ገሠሠ መራ"],
+            "url": f"{base}/",
+            "description": ("Ethiopian historian, painter, deacon and author of more than a dozen books on the "
+                            "Ethiopian Orthodox tradition, Ge’ez, qene, history and the Bahre Kemer number system."),
+            "jobTitle": "Historian, painter and author",
+            "alumniOf": {"@type": "CollegeOrUniversity", "name": "Addis Ababa University"},
+            "email": "mailto:yigeme.yg7@gmail.com", "telephone": "+251913547463",
+            "address": {"@type": "PostalAddress", "addressLocality": "Addis Ababa", "addressCountry": "ET"},
+            "knowsAbout": ["Ethiopian Orthodox Tewahedo tradition", "Qene", "Ge’ez", "Ethiopian painting",
+                           "Bahre Kemer", "Bahire Hasab", "Ethiopian history"]}
+
+
+def jsonld(slug, url, extra=None):
+    base = SITE["url"].rstrip("/")
+    graph = []
+    if slug == "index":
+        graph = [{"@type": "WebSite", "@id": f"{base}/#site", "name": "ባሕረ ቀመር",
+                  "alternateName": ["Bahre Kemer", "Bahrekemer", "Bahire Kemer"], "url": f"{base}/",
+                  "inLanguage": ["am", "en"], "author": {"@id": f"{base}/#person"}},
+                 person(base)]
+    if extra:
+        graph.append(extra)
+    if not graph:
         return ""
-    data = {
-        "@context": "https://schema.org",
-        "@graph": [
-            {"@type": "WebSite", "name": "ባሕረ ቀመር", "alternateName": "Bahrekemer", "url": url,
-             "inLanguage": ["am", "en"]},
-            {"@type": "Person", "name": SITE["author"], "alternateName": AUTHOR_AM, "url": url,
-             "jobTitle": "Historian, author and artist",
-             "email": "mailto:yigeme.yg7@gmail.com", "telephone": "+251913547463",
-             "address": {"@type": "PostalAddress", "addressLocality": "Addis Ababa", "addressCountry": "ET"},
-             "knowsAbout": ["Ethiopian Orthodox Tewahedo tradition", "Qene", "Geez", "Ethiopian painting",
-                            "Bahire Hasab", "Ethiopian history"]},
-        ],
-    }
-    return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>\n'
+    return f'<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)}</script>\n'
+
+
+def book_ld(b, url):
+    base = SITE["url"].rstrip("/")
+    d = {"@type": "Book", "name": b["title"]["am"], "alternateName": strip_tags(b["title"]["en"]), "url": url,
+         "inLanguage": "am", "author": person(base)}
+    if b["faces"]:
+        d["image"] = f'{base}/{book_img(b["faces"][0]["img"])[0]}'
+    if b.get("pages"):
+        d["numberOfPages"] = int(b["pages"])
+    if b.get("publisher"):
+        d["publisher"] = {"@type": "Organization", "name": b["publisher"]["en"]}
+    if b.get("price"):
+        d["offers"] = {"@type": "Offer", "price": b["price"], "priceCurrency": "ETB"}
+    return d
+
+
+def painting_ld(pt, url):
+    base = SITE["url"].rstrip("/")
+    return {"@type": "VisualArtwork", "name": pt["title"]["en"], "alternateName": pt["title"]["am"], "url": url,
+            "image": f'{base}/assets/img/paintings/{pt["slug"]}.jpg', "artMedium": "Oil on canvas",
+            "creator": person(base)}
 
 
 BOOT = ('(function(){var d=document.documentElement,l="am",r,b;try{var q=new URLSearchParams(location.search);'
@@ -599,7 +632,7 @@ def home_button(p):
             f'{t("ወደ መጀመሪያው ገጽ", "Back to the first page")}</a></p>')
 
 
-def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False, back_to=None, image=None):
+def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False, back_to=None, image=None, ld=None):
     pg = SITE["pages"].get(slug, SITE["pages"]["index"])
     base = SITE["url"].rstrip("/")
     if url_path is None:
@@ -632,6 +665,7 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False,
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="2qinzVbJGqyWP3mJ21NA8HnJ_RhQJbTOh6HNQHyRnwM">
 <script>{BOOT}</script>
 <title>{esc(ta)}</title>
 <meta name="description" content="{esc(desc)}">
@@ -645,7 +679,7 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False,
 {ogimg}<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="{p}assets/img/favicon.svg" type="image/svg+xml">
 {fonts}<link rel="stylesheet" href="{p}assets/css/style.css">
-{jsonld(slug, url)}</head>
+{jsonld(slug, url, ld)}</head>
 <body class="page-{slug}{" is-reader" if reader else ""}{" is-article" if is_article else ""}">
 {header(slug, p, back_to)}
 <main id="main">
@@ -697,20 +731,22 @@ def build():
     for i, pt in enumerate(PAINTINGS):
         out = f'paintings/{pt["slug"]}/index.html'
         write(out, render("paintings", painting_page(i, pt), p="../../",
-                          title=(f'{pt["title"]["am"]} · ሥዕሎች · ባሕረ ቀመር', f'{pt["title"]["en"]} · Paintings · Bahrekemer'),
+                          title=(f'{pt["title"]["am"]} — ሥዕል በ{AUTHOR_AM} · ባሕረ ቀመር', f'{pt["title"]["en"]} — painting by {SITE["author"]} · Bahrekemer'),
                           desc=f'{pt["title"]["am"]} — ሥዕል በ{AUTHOR_AM}። {pt["title"]["en"]} — a painting by {SITE["author"]}.',
                           url_path=f'/paintings/{pt["slug"]}/', back_to=("../", "ሥዕሎች", "Paintings"),
-                          image=f'assets/img/paintings/{pt["slug"]}.jpg'))
+                          image=f'assets/img/paintings/{pt["slug"]}.jpg',
+                          ld=painting_ld(pt, f'{SITE["url"].rstrip("/")}/paintings/{pt["slug"]}/')))
         written.append(out)
 
     for i, b in enumerate(BOOKS):
         out = f'books/{b["slug"]}/index.html'
         en = book_title_en_plain(b)
         write(out, render("books", book_page(i, b), p="../../",
-                          title=(f'{b["title"]["am"]} · መጻሕፍት · ባሕረ ቀመር', f'{en} · Books · Bahrekemer'),
+                          title=(f'{b["title"]["am"]} — {AUTHOR_AM} · ባሕረ ቀመር', f'{en} — {SITE["author"]} · Bahrekemer'),
                           desc=f'{b["title"]["am"]} — መጽሐፍ በ{AUTHOR_AM}። {en} — a book by {SITE["author"]}.',
                           url_path=f'/books/{b["slug"]}/', back_to=("../", "መጻሕፍት", "Books"),
-                          image=f'assets/img/books/{b["faces"][0]["img"]}.jpg' if b["faces"] else None))
+                          image=f'assets/img/books/{b["faces"][0]["img"]}.jpg' if b["faces"] else None,
+                          ld=book_ld(b, f'{SITE["url"].rstrip("/")}/books/{b["slug"]}/')))
         written.append(out)
 
     nf = f'''<section class="page-hero"><div class="wrap">

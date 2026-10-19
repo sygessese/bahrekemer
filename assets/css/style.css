@@ -396,12 +396,36 @@ html[data-lang="en"] .shelf-meta span[lang="am"], html[data-lang="am"] .shelf-me
 
 /* Paintings */
 .intro { text-align: center; margin: 0 auto 3rem; }
-.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: 2.5rem 2rem; }
-.gallery figure { margin: 0; }
-.gallery .frame img, .gallery .frame .ph { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; }
-.gallery .ph { display: grid; place-items: center; background: var(--wash); color: #b9b5ae; font-size: 2rem; font-weight: 300; }
-.gallery figcaption { margin-top: .75rem; font-family: var(--sans); font-size: .9375rem; line-height: 1.6; }
-.gallery figcaption small { display: block; color: var(--grey); font-size: .875rem; margin-top: .15rem; }
+.gallery { columns: 3 17rem; column-gap: 2.25rem; }
+.gallery figure { margin: 0 0 2.5rem; break-inside: avoid; }
+.gallery .frame { display: block; }
+.gallery .frame img { width: 100%; height: auto; box-shadow: 0 14px 28px -18px rgba(0,0,0,.45); }
+.gallery .ph { display: grid; place-items: center; aspect-ratio: 4 / 5; background: var(--wash); color: #b9b5ae; font-size: 2rem; font-weight: 300; }
+.gallery figcaption { margin-top: .85rem; font-size: 1.0625rem; font-weight: 600; line-height: 1.5; }
+.gallery figcaption span[lang="en"] { font-family: var(--display) !important; font-style: italic; font-weight: 400; }
+.gallery figcaption small { display: block; font-family: var(--sans); font-weight: 400; color: var(--grey); font-size: .875rem; margin-top: .2rem; }
+.gallery figcaption small span[lang="en"] { font-family: "Instrument Sans", system-ui, sans-serif !important; font-style: normal !important; }
+.gallery figcaption a { display: block; text-decoration: none; }
+.gallery figcaption a:hover > span[lang="am"] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .22em; }
+.gallery .frame img { transition: opacity .2s; }
+.gallery .frame:hover img { opacity: .92; }
+.enquire { text-align: center; margin: 1rem 0 0; }
+
+/* one painting, full size */
+.painting-page { padding-top: 1.5rem; padding-bottom: 1rem; }
+.pt-back { margin: 0 0 1.25rem; font-family: var(--sans); font-size: 1rem; font-weight: 600; }
+.pt-back a { text-decoration: none; }
+.pt-back a:hover { color: var(--accent); }
+.pt-back span[lang="en"] { font-family: "Instrument Sans", system-ui, sans-serif; }
+html[data-lang="en"] .pt-back span[lang="am"] { display: none; }
+.pt-back span[lang="en"]::before { content: none !important; }
+.pt-figure { margin: 0; text-align: center; }
+.pt-figure img { display: block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 9rem); box-shadow: 0 22px 40px -24px rgba(0,0,0,.5); }
+.pt-figure figcaption { max-width: var(--prose); margin: 1.75rem auto 0; }
+.pt-title { margin: 0; font-size: 1.75rem; font-weight: 700; line-height: 1.35; }
+.pt-meta { margin: .5rem 0 0; font-family: var(--sans); color: var(--grey); font-size: 1rem; }
+.pt-meta span[lang="en"] { font-family: "Instrument Sans", system-ui, sans-serif !important; font-style: normal !important; }
+.painting-page .prevnext { margin-top: 2.25rem; }
 
 /* Contact */
 .contact-card { max-width: var(--prose); margin: 0 auto; border-top: 3px double var(--ink); padding-top: 1.75rem; }
@@ -656,4 +680,16 @@ html[data-lang="en"] .foot-contact span[lang="am"] { display: none; }
   .foot-grid { padding: 1.5rem 0 .75rem; }
   .foot-tag { font-size: 1.0625rem; }
   .foot-nav { display: none; }   /* the home page list and the back-home button already cover this */
+
+  /* paintings */
+  .gallery { columns: 1; }
+  .gallery figcaption { font-size: 1.1875rem; }
+  .gallery figcaption small { font-size: 1rem; }
+  .pt-back { display: none; }                 /* the top bar already has the back button */
+  .painting-page { padding-top: 1rem; }
+  .pt-figure img { max-height: none; }
+  .pt-title { font-size: 1.6rem; }
+  .pt-title span[lang="en"], .gallery figcaption span[lang="en"] { font-family: var(--en) !important; font-style: normal !important; margin: 0; }
+  .pt-meta { font-size: 1.0625rem; }
+  .painting-page .enquire { margin-top: 1.5rem; }
 }

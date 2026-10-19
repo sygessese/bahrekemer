@@ -8,6 +8,8 @@ No dependencies. What you edit:
   content/index.html           the home page template (the <!--TOKENS--> are filled in here)
   content/writings.json        the list of writings, NEWEST FIRST — the home page fills itself from it
   content/writings/<slug>.html the text of each writing (Amharic in lang="am", English in lang="en")
+  content/paintings.json       the paintings, in gallery order; images in assets/img/paintings/
+                               (NAME.jpg large, NAME-sm.jpg for the gallery). Each gets its own page.
   site.json                    page titles, descriptions, nav order
 
 To publish a new poem or article: write content/writings/<new-slug>.html (copy an existing one),
@@ -19,6 +21,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = json.load(open(os.path.join(ROOT, "site.json"), encoding="utf-8"))
 WRITINGS = json.load(open(os.path.join(ROOT, "content", "writings.json"), encoding="utf-8"))
+PAINTINGS = json.load(open(os.path.join(ROOT, "content", "paintings.json"), encoding="utf-8"))
 GEEZ = ["", "፩", "፪", "፫", "፬", "፭", "፮", "፯", "፰", "፱", "፲"]
 KINDS = {"essay": ("ድርሰት", "Essay"), "poem": ("ግጥም", "Poem")}
 AUTHOR_AM = "ይትባረክ ገሠሠ መራ"
@@ -133,18 +136,18 @@ MENU_BTN = ('<button class="menu-btn" type="button" aria-expanded="false" aria-c
             '<span class="menu-label">ክፍሎች <span class="menu-en">Sections</span></span></button>')
 
 
-def phone_bar(current, p):
+def phone_bar(current, p, back_to=None):
+    to, am, en = back_to or (f"{p}./", "መጀመሪያ ገጽ", "Home")
     back = "" if current == "index" else (
-        f'<a class="pb-home" href="{p}./"><span aria-hidden="true">‹</span> '
-        f'{t("መጀመሪያ ገጽ", "Home")}</a>')
+        f'<a class="pb-home" href="{to}"><span aria-hidden="true">‹</span> {t(am, en)}</a>')
     brand = f'<a class="pb-brand" href="{p}./">ባሕረ ቀመር</a>'
     return (f'<div class="phone-bar">{back or brand}'
             '<button type="button" class="pb-lang pb-to-en" data-set-lang="en">English</button>'
             '<button type="button" class="pb-lang pb-to-am" data-set-lang="am">አማርኛ</button></div>')
 
 
-def header(current, p):
-    util = phone_bar(current, p) + f'''<a class="skip" href="#main">ወደ ዋናው ይዘት ይዝለሉ · Skip to content</a>
+def header(current, p, back_to=None):
+    util = phone_bar(current, p, back_to) + f'''<a class="skip" href="#main">ወደ ዋናው ይዘት ይዝለሉ · Skip to content</a>
 <div class="util">
   <div class="wrap util-bar">
     <p class="today" data-today></p>
@@ -360,6 +363,76 @@ def writings_index():
     return page_hero("writings") + f'\n<div class="page-body wrap">\n<ol class="writings-list">{items}</ol>\n</div>'
 
 
+# ---------------------------------------------------------------- paintings
+def jpeg_size(path):
+    """(width, height) of a JPEG, read from its header."""
+    with open(path, "rb") as f:
+        f.read(2)
+        while True:
+            m = f.read(2)
+            if len(m) < 2 or m[0] != 0xFF:
+                return None
+            n = int.from_bytes(f.read(2), "big")
+            if m[1] in (0xC0, 0xC1, 0xC2):
+                f.read(1)
+                h, w = int.from_bytes(f.read(2), "big"), int.from_bytes(f.read(2), "big")
+                return w, h
+            f.read(n - 2)
+
+
+def img_attrs(name):
+    size = jpeg_size(os.path.join(ROOT, "assets", "img", "paintings", name))
+    return f' width="{size[0]}" height="{size[1]}"' if size else ""
+
+
+def painting_meta(pt):
+    y = pt.get("year", "")
+    return t((y + " ፡ " if y else "") + "የዘይት ቀለም", (y + " · " if y else "") + "Oil on canvas")
+
+
+def gallery():
+    figs = "".join(f'''
+  <figure>
+    <a class="frame" href="{pt["slug"]}/"><img src="../assets/img/paintings/{pt["slug"]}-sm.jpg" alt="{esc(pt["alt"])}"{img_attrs(pt["slug"] + "-sm.jpg")} loading="lazy"></a>
+    <figcaption><a class="blk" href="{pt["slug"]}/">{t(pt["title"]["am"], pt["title"]["en"])}</a><small>{painting_meta(pt)}</small></figcaption>
+  </figure>''' for pt in PAINTINGS)
+    return f'<div class="gallery">{figs}\n</div>'
+
+
+def painting_page(i, pt):
+    p = "../../"
+    prev = PAINTINGS[i - 1] if i > 0 else None
+    nxt = PAINTINGS[i + 1] if i + 1 < len(PAINTINGS) else None
+
+    def nav_item(pt2, cls, am, en):
+        if not pt2:
+            return "<span></span>"
+        return (f'<a class="{cls}" href="../{pt2["slug"]}/"><span class="label">{t(am, en)}</span>'
+                f'<span class="pn-title blk">{t(pt2["title"]["am"], pt2["title"]["en"])}</span></a>')
+    next_btn = "" if not nxt else (
+        f'<a class="next-btn" href="../{nxt["slug"]}/"><span class="nb-label">{t("ቀጣዩ ሥዕል ›", "Next painting ›")}</span>'
+        f'<span class="nb-title blk">{t(nxt["title"]["am"], nxt["title"]["en"])}</span></a>')
+    return f'''<div class="painting-page wrap">
+<p class="pt-back"><a href="../">{t("‹ ሁሉም ሥዕሎች", "‹ All paintings")}</a></p>
+<figure class="pt-figure">
+  <img src="{p}assets/img/paintings/{pt["slug"]}.jpg" alt="{esc(pt["alt"])}"{img_attrs(pt["slug"] + ".jpg")}>
+  <figcaption>
+    <h1 class="pt-title">{t(pt["title"]["am"], pt["title"]["en"])}</h1>
+    <p class="pt-meta">{painting_meta(pt)}</p>
+  </figcaption>
+</figure>
+<nav class="prevnext" aria-label="ሥዕሎች · Paintings">
+  {nav_item(prev, "pn-prev", "← የቀደመው ሥዕል", "← Previous painting")}
+  {nav_item(nxt, "pn-next", "ቀጣዩ ሥዕል →", "Next painting →")}
+</nav>
+<p class="enquire"><a class="more-link" href="{p}contact/">{t("ስለዚህ ሥዕል ይጠይቁ →", "Enquire about this painting →")}</a></p>
+<div class="phone-end">
+  {next_btn}
+  <a class="big-btn" href="../">{t("ሁሉም ሥዕሎች", "All paintings")}</a>
+</div>
+</div>'''
+
+
 # ---------------------------------------------------------------- page shell
 def jsonld(slug, url):
     if slug != "index":
@@ -393,7 +466,7 @@ def home_button(p):
             f'{t("ወደ መጀመሪያው ገጽ", "Back to the first page")}</a></p>')
 
 
-def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False):
+def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False, back_to=None, image=None):
     pg = SITE["pages"].get(slug, SITE["pages"]["index"])
     base = SITE["url"].rstrip("/")
     if url_path is None:
@@ -408,8 +481,9 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False)
     if slug == "404":
         ta, te = "ገጹ አልተገኘም · ባሕረ ቀመር", "Page not found · Bahrekemer"
     desc = desc or f'{pg["description"]["am"]} {pg["description"]["en"]}'
-    og = f'{base}/{SITE["og_image"]}'
-    has_og = os.path.exists(os.path.join(ROOT, SITE["og_image"]))
+    og_path = image or SITE["og_image"]
+    og = f'{base}/{og_path}'
+    has_og = os.path.exists(os.path.join(ROOT, og_path))
     is_article = url_path.startswith("/writings/") and url_path != "/writings/"
     fonts = "".join(f'<link rel="preload" href="{p}assets/fonts/{f}" as="font" type="font/woff2" crossorigin>\n'
                     for f in ["noto-serif-ethiopic-ethiopic-700-normal.woff2", "noto-serif-ethiopic-ethiopic-400-normal.woff2"])
@@ -440,7 +514,7 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False)
 {fonts}<link rel="stylesheet" href="{p}assets/css/style.css">
 {jsonld(slug, url)}</head>
 <body class="page-{slug}{" is-reader" if reader else ""}{" is-article" if is_article else ""}">
-{header(slug, p)}
+{header(slug, p, back_to)}
 <main id="main">
 {body}
 {"" if slug in ("index", "404") else home_button(p)}
@@ -470,6 +544,7 @@ def build():
             src = os.path.join(ROOT, "content", f"{slug}.html")
             body = open(src, encoding="utf-8").read() if os.path.exists(src) else ""
             reader = READER + "\n" if slug in readers else ""
+            body = body.replace("<!--GALLERY-->", gallery())
             body = page_hero(slug) + f'\n<div class="page-body wrap">\n{reader}{body}\n</div>'
         out = "index.html" if slug == "index" else f"{slug}/index.html"
         write(out, render(slug, body, p="" if slug == "index" else "../", reader=slug in readers))
@@ -485,6 +560,15 @@ def build():
                           url_path=f'/writings/{w["slug"]}/'))
         written.append(out)
 
+    for i, pt in enumerate(PAINTINGS):
+        out = f'paintings/{pt["slug"]}/index.html'
+        write(out, render("paintings", painting_page(i, pt), p="../../",
+                          title=(f'{pt["title"]["am"]} · ሥዕሎች · ባሕረ ቀመር', f'{pt["title"]["en"]} · Paintings · Bahrekemer'),
+                          desc=f'{pt["title"]["am"]} — ሥዕል በ{AUTHOR_AM}። {pt["title"]["en"]} — a painting by {SITE["author"]}.',
+                          url_path=f'/paintings/{pt["slug"]}/', back_to=("../", "ሥዕሎች", "Paintings"),
+                          image=f'assets/img/paintings/{pt["slug"]}.jpg'))
+        written.append(out)
+
     nf = f'''<section class="page-hero"><div class="wrap">
   <p class="kicker">404</p>
   <h1>{t("ገጹ አልተገኘም", "Page not found")}</h1>
@@ -498,6 +582,7 @@ def build():
     today = date.today().isoformat()
     locs = [base + "/" if s == "index" else f"{base}/{s}/" for s in SITE["pages"]]
     locs += [f'{base}/writings/{w["slug"]}/' for w in WRITINGS]
+    locs += [f'{base}/paintings/{pt["slug"]}/' for pt in PAINTINGS]
     urls = [f'''  <url><loc>{loc}</loc><lastmod>{today}</lastmod>
     <xhtml:link rel="alternate" hreflang="am" href="{loc}"/>
     <xhtml:link rel="alternate" hreflang="en" href="{loc}?lang=en"/>

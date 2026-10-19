@@ -53,28 +53,45 @@
   </div>
 </header>
 <div class="page-body wrap">
-<section class="intro prose">
-  <h2><span lang="am">ለሥዕል ፈላጊዎች</span><span lang="en">For Those Seeking Paintings</span></h2>
-  <p><span lang="am">የአዘጋጁ ሥራዎች መጻሕፍትና የተዋቡ የባህል ሥዕሎችንም እናቀርባለን።</span><span lang="en">We offer the author’s works — his books, and finely crafted paintings in the traditional style.</span></p>
-  <p><a class="text-link" href="../contact/"><span lang="am">ስለ ሥዕሎቹ ይጠይቁ →</span><span lang="en">Enquire about a painting →</span></a></p>
-</section>
-
-<!-- One <figure> per painting. Put images in assets/img/paintings/ and replace the .ph div with
-     <img src="../assets/img/paintings/FILENAME.jpg" alt="Painting title" loading="lazy"> -->
+<!-- The gallery is built from content/paintings.json (one entry per painting, in display order).
+     Images live in assets/img/paintings/: NAME.jpg (large, shown on the painting's own page)
+     and NAME-sm.jpg (shown in the gallery). Titles in [brackets] are still to come. -->
 <div class="gallery">
-  <figure><div class="frame"><div class="ph" aria-hidden="true">፩</div></div>
-    <figcaption><span lang="am">‹ የሥዕሉ ርዕስ ›</span><span lang="en">‹ Painting title ›</span><small><span lang="am">‹ ዓመት · ዘዴ · ኦሪጂናል/ቅጂ ›</span><span lang="en">‹ Year · medium · original/reproduction ›</span></small></figcaption></figure>
-  <figure><div class="frame"><div class="ph" aria-hidden="true">፪</div></div>
-    <figcaption><span lang="am">‹ የሥዕሉ ርዕስ ›</span><span lang="en">‹ Painting title ›</span><small><span lang="am">‹ ዓመት · ዘዴ · ኦሪጂናል/ቅጂ ›</span><span lang="en">‹ Year · medium · original/reproduction ›</span></small></figcaption></figure>
-  <figure><div class="frame"><div class="ph" aria-hidden="true">፫</div></div>
-    <figcaption><span lang="am">‹ የሥዕሉ ርዕስ ›</span><span lang="en">‹ Painting title ›</span><small><span lang="am">‹ ዓመት · ዘዴ · ኦሪጂናል/ቅጂ ›</span><span lang="en">‹ Year · medium · original/reproduction ›</span></small></figcaption></figure>
-  <figure><div class="frame"><div class="ph" aria-hidden="true">፬</div></div>
-    <figcaption><span lang="am">‹ የሥዕሉ ርዕስ ›</span><span lang="en">‹ Painting title ›</span><small><span lang="am">‹ ዓመት · ዘዴ · ኦሪጂናል/ቅጂ ›</span><span lang="en">‹ Year · medium · original/reproduction ›</span></small></figcaption></figure>
-  <figure><div class="frame"><div class="ph" aria-hidden="true">፭</div></div>
-    <figcaption><span lang="am">‹ የሥዕሉ ርዕስ ›</span><span lang="en">‹ Painting title ›</span><small><span lang="am">‹ ዓመት · ዘዴ · ኦሪጂናል/ቅጂ ›</span><span lang="en">‹ Year · medium · original/reproduction ›</span></small></figcaption></figure>
-  <figure><div class="frame"><div class="ph" aria-hidden="true">፮</div></div>
-    <figcaption><span lang="am">‹ የሥዕሉ ርዕስ ›</span><span lang="en">‹ Painting title ›</span><small><span lang="am">‹ ዓመት · ዘዴ · ኦሪጂናል/ቅጂ ›</span><span lang="en">‹ Year · medium · original/reproduction ›</span></small></figcaption></figure>
+  <figure>
+    <a class="frame" href="hands-1989/"><img src="../assets/img/paintings/hands-1989-sm.jpg" alt="Oil painting by Yitbarek Gessese Merra" width="676" height="900" loading="lazy"></a>
+    <figcaption><a class="blk" href="hands-1989/"><span lang="am">[ርእስ]</span><span lang="en">[Title]</span></a><small><span lang="am">1989 ፡ የዘይት ቀለም</span><span lang="en">1989 · Oil on canvas</span></small></figcaption>
+  </figure>
+  <figure>
+    <a class="frame" href="saint-michael/"><img src="../assets/img/paintings/saint-michael-sm.jpg" alt="Saint Michael the Archangel" width="612" height="900" loading="lazy"></a>
+    <figcaption><a class="blk" href="saint-michael/"><span lang="am">ቅዱስ ሚካኤል</span><span lang="en">Saint Michael the Archangel</span></a><small><span lang="am">የዘይት ቀለም</span><span lang="en">Oil on canvas</span></small></figcaption>
+  </figure>
+  <figure>
+    <a class="frame" href="crowd-1985/"><img src="../assets/img/paintings/crowd-1985-sm.jpg" alt="Oil painting by Yitbarek Gessese Merra" width="900" height="713" loading="lazy"></a>
+    <figcaption><a class="blk" href="crowd-1985/"><span lang="am">[ርእስ]</span><span lang="en">[Title]</span></a><small><span lang="am">1985 ፡ የዘይት ቀለም</span><span lang="en">1985 · Oil on canvas</span></small></figcaption>
+  </figure>
+  <figure>
+    <a class="frame" href="abuna-aregawi/"><img src="../assets/img/paintings/abuna-aregawi-sm.jpg" alt="Abuna Aregawi" width="600" height="900" loading="lazy"></a>
+    <figcaption><a class="blk" href="abuna-aregawi/"><span lang="am">አቡነ አረጋዊ</span><span lang="en">Abuna Aregawi</span></a><small><span lang="am">የዘይት ቀለም</span><span lang="en">Oil on canvas</span></small></figcaption>
+  </figure>
+  <figure>
+    <a class="frame" href="fidel/"><img src="../assets/img/paintings/fidel-sm.jpg" alt="Oil painting by Yitbarek Gessese Merra" width="900" height="521" loading="lazy"></a>
+    <figcaption><a class="blk" href="fidel/"><span lang="am">[ርእስ]</span><span lang="en">[Title]</span></a><small><span lang="am">የዘይት ቀለም</span><span lang="en">Oil on canvas</span></small></figcaption>
+  </figure>
+  <figure>
+    <a class="frame" href="procession/"><img src="../assets/img/paintings/procession-sm.jpg" alt="Oil painting by Yitbarek Gessese Merra" width="773" height="900" loading="lazy"></a>
+    <figcaption><a class="blk" href="procession/"><span lang="am">[ርእስ]</span><span lang="en">[Title]</span></a><small><span lang="am">2016 ፡ የዘይት ቀለም</span><span lang="en">2016 · Oil on canvas</span></small></figcaption>
+  </figure>
+  <figure>
+    <a class="frame" href="trinity/"><img src="../assets/img/paintings/trinity-sm.jpg" alt="The Holy Trinity" width="359" height="380" loading="lazy"></a>
+    <figcaption><a class="blk" href="trinity/"><span lang="am">ቅድስት ሥላሴ</span><span lang="en">The Holy Trinity</span></a><small><span lang="am">የዘይት ቀለም</span><span lang="en">Oil on canvas</span></small></figcaption>
+  </figure>
+  <figure>
+    <a class="frame" href="still-life/"><img src="../assets/img/paintings/still-life-sm.jpg" alt="Oil painting by Yitbarek Gessese Merra" width="900" height="639" loading="lazy"></a>
+    <figcaption><a class="blk" href="still-life/"><span lang="am">[ርእስ]</span><span lang="en">[Title]</span></a><small><span lang="am">1975 ፡ የዘይት ቀለም</span><span lang="en">1975 · Oil on canvas</span></small></figcaption>
+  </figure>
 </div>
+
+<p class="enquire"><a class="more-link" href="../contact/"><span lang="am">ስለ ሥዕሎቹ ይጠይቁ →</span><span lang="en">Enquire about a painting →</span></a></p>
 
 </div>
 <p class="pb-bottom"><a class="big-btn" href=".././"><span aria-hidden="true">‹</span> <span lang="am">ወደ መጀመሪያው ገጽ</span><span lang="en">Back to the first page</span></a></p>

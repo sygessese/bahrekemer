@@ -647,7 +647,7 @@ html[data-lang="en"] .foot-contact span[lang="am"] { display: none; }
   .writings-list a { display: flex; flex-direction: column; padding: 1rem .2rem; min-height: 4.5rem; position: relative; padding-right: 2rem; }
   .writings-list a::after { content: "›"; position: absolute; right: .2rem; top: 50%; transform: translateY(-50%); font-size: 1.75rem; color: var(--accent); }
   .writings-list .wi-ex { display: none; }
-  .wi-title { font-size: 1.3rem; }
+  .wi-title { font-size: 1.125rem; }   /* titles fit on one line on most phones */
   .wi-title span[lang="en"] { font-family: var(--en) !important; font-style: normal !important; margin: 0; }
 
   /* footer stays at the bottom of every page */

@@ -17,7 +17,8 @@
     d.lang = l;
     document.title = d.getAttribute("data-title-" + l) || document.title;
     store("lang", l);
-    setRead(l === "en" ? "both" : "am");   // Amharic: Amharic only. English: both languages.
+    var phone = matchMedia("(max-width: 640px)").matches;
+    setRead(phone ? l : (l === "en" ? "both" : "am"));   // Amharic: Amharic only. English: both languages.
     try {
       var url = new URL(location.href);
       if (l === "en") url.searchParams.set("lang", "en"); else url.searchParams.delete("lang");
@@ -105,7 +106,7 @@
   }
 
   // ---- Gentle fade as content scrolls into view -------------------------------------------
-  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches && !matchMedia("(max-width: 640px)").matches) {
     var sel = ".front > *, .band-inner, .contents li, .more-item, .profile-inner > *, .book-strip li, " +
               ".page-body .bi, .page-body .prose > p, .key-sec, .num-entry, .notice, .qene, .worksheet, .poem, " +
               ".shelf-item, .gallery figure, .contact-card, .guest, .buy, .writings-list li";

@@ -133,8 +133,18 @@ MENU_BTN = ('<button class="menu-btn" type="button" aria-expanded="false" aria-c
             '<span class="menu-label">ክፍሎች <span class="menu-en">Sections</span></span></button>')
 
 
+def phone_bar(current, p):
+    back = "" if current == "index" else (
+        f'<a class="pb-home" href="{p}./"><span aria-hidden="true">‹</span> '
+        f'{t("መጀመሪያ ገጽ", "Home")}</a>')
+    brand = f'<a class="pb-brand" href="{p}./">ባሕረ ቀመር</a>'
+    return (f'<div class="phone-bar">{back or brand}'
+            '<button type="button" class="pb-lang pb-to-en" data-set-lang="en">English</button>'
+            '<button type="button" class="pb-lang pb-to-am" data-set-lang="am">አማርኛ</button></div>')
+
+
 def header(current, p):
-    util = f'''<a class="skip" href="#main">ወደ ዋናው ይዘት ይዝለሉ · Skip to content</a>
+    util = phone_bar(current, p) + f'''<a class="skip" href="#main">ወደ ዋናው ይዘት ይዝለሉ · Skip to content</a>
 <div class="util">
   <div class="wrap util-bar">
     <p class="today" data-today></p>
@@ -159,7 +169,6 @@ def header(current, p):
       <p class="mast-who blk">{t("የታሪክ ምሁርና ሠዓሊ ይትባረክ ገሠሠ መራ ሥራዎች", "The works of historian and painter Yitbarek Gessese Merra")}</p>
       <p class="mast-what">{t("ታሪክ ፡ ቅኔ ፡ ሥዕል ፡ የባሕረ ቀመር ቁጥር", "History · Qene · Painting · The Bahre Kemer numbers")}</p>
     </div>
-    <nav class="m-nav m-only" aria-label="ዋና ክፍሎች · Main sections">{group_links(p)}</nav>
     <div class="navrow">
       <nav id="nav" class="nav" aria-label="Main">{nav_links(current, p)}</nav>
       {MENU_BTN}
@@ -245,6 +254,23 @@ def home_front(p=""):
     return lead_html, side_html, more_html
 
 
+def phone_home(p=""):
+    w = WRITINGS[0]
+    rows = [(href(s), label(s)["am"], label(s)["en"]) for s in SITE["nav"]]
+    rows.insert(1, ("writings/", "ጽሑፎች", "Writings"))  # Introduction first, then Writings
+    items = "".join(f'<li><a href="{p}{h}"><span class="pr-title blk">{t(am, en)}</span>'
+                    f'<span class="pr-arrow" aria-hidden="true">›</span></a></li>' for h, am, en in rows)
+    return f'''<section class="phone-home" aria-label="ማውጫ · Contents">
+  <a class="latest-btn" href="{w_href(w, p)}">
+    <span class="nb-label">{t("አዲሱ ጽሑፍ", "Latest")}</span>
+    <span class="lb-row"><span class="nb-title blk">{t(w["title"]["am"], w["title"]["en"])}</span>
+    <span class="lb-read">{t("ያንብቡ", "Read")} <span aria-hidden="true">›</span></span></span>
+  </a>
+  <h2 class="ph-head">{t("ማውጫ", "Contents")}</h2>
+  <ol class="phone-rows">{items}</ol>
+</section>'''
+
+
 def earlier_list(p=""):
     rows = ""
     for w in WRITINGS[1:6]:
@@ -273,7 +299,7 @@ def build_home():
     pic = ('<figure class="profile-pic"><img src="assets/img/author.jpg" alt="Yitbarek Gessese Merra" '
            'width="600" height="750" loading="lazy"></figure>') if os.path.exists(portrait) else ""
     return (tpl.replace("<!--LEAD-->", lead).replace("<!--SIDE-->", side).replace("<!--MORE-->", more)
-               .replace("<!--CONTENTS-->", contents_list()).replace("<!--EARLIER-->", earlier_list()).replace("<!--PORTRAIT-->", pic))
+               .replace("<!--CONTENTS-->", contents_list()).replace("<!--EARLIER-->", earlier_list()).replace("<!--PHONE-->", phone_home()).replace("<!--PORTRAIT-->", pic))
 
 
 # ---------------------------------------------------------------- writing pages
@@ -311,7 +337,18 @@ def writing_page(i, w):
   {nav_item(newer, "pn-next", "አዲሱ →", "Newer →")}
 </nav>
 <p class="all-link"><a class="more-link" href="{p}writings/">{t("ሁሉም ጽሑፎች", "All writings")}</a></p>
+<div class="phone-end">
+  {next_button(older, p)}
+  <a class="big-btn" href="{p}writings/">{t("ሁሉም ጽሑፎች", "All writings")}</a>
+</div>
 </div>'''
+
+
+def next_button(w2, p):
+    if not w2:
+        return ""
+    return (f'<a class="next-btn" href="{w_href(w2, p)}"><span class="nb-label">{t("ቀጣዩ ጽሑፍ ›", "Next ›")}</span>'
+            f'<span class="nb-title blk">{t(w2["title"]["am"], w2["title"]["en"])}</span></a>')
 
 
 def writings_index():
@@ -346,9 +383,14 @@ def jsonld(slug, url):
 
 BOOT = ('(function(){var d=document.documentElement,l="am",r,b;try{var q=new URLSearchParams(location.search);'
         'l=q.get("lang")||localStorage.getItem("lang")||"am";r=localStorage.getItem("read");b=localStorage.getItem("big")}catch(e){}'
-        'if(l!=="en")l="am";if(["am","both","en"].indexOf(r)<0)r=l==="en"?"both":"am";'
+        'if(l!=="en")l="am";if(["am","both","en"].indexOf(r)<0)r=l==="en"?"both":"am";if(innerWidth<=640)r=l;'
         'd.className+=" js"+(b==="1"?" big":"");d.setAttribute("data-lang",l);d.setAttribute("data-read",r);d.lang=l;'
         'if(l==="en")document.title=d.getAttribute("data-title-en")})();')
+
+
+def home_button(p):
+    return (f'<p class="pb-bottom"><a class="big-btn" href="{p}./"><span aria-hidden="true">‹</span> '
+            f'{t("ወደ መጀመሪያው ገጽ", "Back to the first page")}</a></p>')
 
 
 def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False):
@@ -401,6 +443,7 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False)
 {header(slug, p)}
 <main id="main">
 {body}
+{"" if slug in ("index", "404") else home_button(p)}
 </main>
 {footer(p)}
 <script src="{p}assets/js/main.js" defer></script>

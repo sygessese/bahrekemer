@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>(function(){var d=document.documentElement,l="am",r,b;try{var q=new URLSearchParams(location.search);l=q.get("lang")||localStorage.getItem("lang")||"am";r=localStorage.getItem("read");b=localStorage.getItem("big")}catch(e){}if(l!=="en")l="am";if(["am","both","en"].indexOf(r)<0)r=l==="en"?"both":"am";d.className+=" js"+(b==="1"?" big":"");d.setAttribute("data-lang",l);d.setAttribute("data-read",r);d.lang=l;if(l==="en")document.title=d.getAttribute("data-title-en")})();</script>
+<script>(function(){var d=document.documentElement,l="am",r,b;try{var q=new URLSearchParams(location.search);l=q.get("lang")||localStorage.getItem("lang")||"am";r=localStorage.getItem("read");b=localStorage.getItem("big")}catch(e){}if(l!=="en")l="am";if(["am","both","en"].indexOf(r)<0)r=l==="en"?"both":"am";if(innerWidth<=640)r=l;d.className+=" js"+(b==="1"?" big":"");d.setAttribute("data-lang",l);d.setAttribute("data-read",r);d.lang=l;if(l==="en")document.title=d.getAttribute("data-title-en")})();</script>
 <title>ባሕረ ቀመር — ሃገራዊ ቅርስ</title>
 <meta name="description" content="የኢትዮጵያ ኦርቶዶክስ ትውፊት፣ ቅኔ፣ ግዕዝ፣ ሥዕልና የቁጥር ሥርዓቶች — የደራሲና ሠዓሊ ይትባረክ ገሠሠ መራ ሥራዎች። Ethiopian Orthodox tradition, Qene, Geez, painting and the sacred numerical systems of Ethiopia — the works of historian, author and artist Yitbarek Gessese Merra.">
 <link rel="canonical" href="https://bahrekemer.com/">
@@ -25,7 +25,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "name": "ባሕረ ቀመር", "alternateName": "Bahrekemer", "url": "https://bahrekemer.com/", "inLanguage": ["am", "en"]}, {"@type": "Person", "name": "Yitbarek Gessese Merra", "alternateName": "ይትባረክ ገሠሠ መራ", "url": "https://bahrekemer.com/", "jobTitle": "Historian, author and artist", "email": "mailto:yigeme.yg7@gmail.com", "telephone": "+251913547463", "address": {"@type": "PostalAddress", "postOfficeBoxNumber": "25458/1000", "addressLocality": "Addis Ababa", "addressCountry": "ET"}, "knowsAbout": ["Ethiopian Orthodox Tewahedo tradition", "Qene", "Geez", "Ethiopian painting", "Bahire Hasab", "Ethiopian history"]}]}</script>
 </head>
 <body class="page-index">
-<a class="skip" href="#main">ወደ ዋናው ይዘት ይዝለሉ · Skip to content</a>
+<div class="phone-bar"><a class="pb-brand" href="./">ባሕረ ቀመር</a><button type="button" class="pb-lang pb-to-en" data-set-lang="en">English</button><button type="button" class="pb-lang pb-to-am" data-set-lang="am">አማርኛ</button></div><a class="skip" href="#main">ወደ ዋናው ይዘት ይዝለሉ · Skip to content</a>
 <div class="util">
   <div class="wrap util-bar">
     <p class="today" data-today></p>
@@ -48,7 +48,6 @@
       <p class="mast-who blk"><span lang="am">የታሪክ ምሁርና ሠዓሊ ይትባረክ ገሠሠ መራ ሥራዎች</span><span lang="en">The works of historian and painter Yitbarek Gessese Merra</span></p>
       <p class="mast-what"><span lang="am">ታሪክ ፡ ቅኔ ፡ ሥዕል ፡ የባሕረ ቀመር ቁጥር</span><span lang="en">History · Qene · Painting · The Bahre Kemer numbers</span></p>
     </div>
-    <nav class="m-nav m-only" aria-label="ዋና ክፍሎች · Main sections"><a href="writings/"><span class="n-am">ጽሑፎች</span><span class="n-en">Writings</span></a><a href="megbiya/"><span class="n-am">ባሕረ ቀመር</span><span class="n-en">Bahre Kemer</span></a><a href="qene/"><span class="n-am">ቅኔና ግጥም</span><span class="n-en">Qene & Poetry</span></a><a href="books/"><span class="n-am">መጻሕፍትና ሥዕሎች</span><span class="n-en">Books & Paintings</span></a><a href="contact/"><span class="n-am">ያግኙን</span><span class="n-en">Contact</span></a></nav>
     <div class="navrow">
       <nav id="nav" class="nav" aria-label="Main"><a href="megbiya/"><span class="n-am">መግቢያ</span><span class="n-en">Introduction</span></a><a href="numbers/"><span class="n-am">ቁጥሮች</span><span class="n-en">Numbers</span></a><a href="key/"><span class="n-am">ቁልፍ</span><span class="n-en">Key</span></a><a href="qene/"><span class="n-am">ቅኔ</span><span class="n-en">Qene</span></a><a href="poetry/"><span class="n-am">ወቅታዊ ግጥም</span><span class="n-en">Poetry</span></a><a href="books/"><span class="n-am">መጻሕፍት</span><span class="n-en">Books</span></a><a href="paintings/"><span class="n-am">ሥዕሎች</span><span class="n-en">Paintings</span></a><a href="contact/"><span class="n-am">ያግኙን</span><span class="n-en">Contact</span></a></nav>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav"><span class="menu-icon" aria-hidden="true"></span><span class="menu-label">ክፍሎች <span class="menu-en">Sections</span></span></button>
@@ -169,47 +168,14 @@
   </aside>
 </section>
 
-<!-- ===== Phone only (≤640px): earlier writings, three doors, about + contact. Desktop uses the sections marked d-only. ===== -->
-<section class="m-only m-block wrap" aria-labelledby="earlier-h">
-  <h2 class="m-head" id="earlier-h"><span lang="am">ቀደምት ጽሑፎች</span><span lang="en">Earlier writings</span></h2>
-  <ul class="earlier"><li><a href="writings/fruit-of-peace/"><span class="e-title blk"><span lang="am">ወቅቱን ለማስታወስ — የሰላም ፍሬ</span><span lang="en">In Remembrance of the Season — The Fruit of Peace</span></span><span class="e-kind"><span lang="am">ግጥም</span><span lang="en">Poem</span></span></a></li><li><a href="writings/lamp-in-darkness/"><span class="e-title blk"><span lang="am">ንቃተ ሕሊና የጨለማ መብራት ነው</span><span lang="en">Consciousness Is a Lamp in the Darkness</span></span><span class="e-kind"><span lang="am">ድርሰት</span><span lang="en">Essay</span></span></a></li><li><a href="writings/leads-to-philosophy/"><span class="e-title blk"><span lang="am">ንቃተ ሕሊና ከፍልስፍና ያደርሳል</span><span lang="en">Consciousness Leads to Philosophy</span></span><span class="e-kind"><span lang="am">ድርሰት</span><span lang="en">Essay</span></span></a></li><li><a href="writings/idealist-philosophy/"><span class="e-title blk"><span lang="am">አይዲያሊስታዊ ፍልስፍና</span><span lang="en">Idealist Philosophy</span></span><span class="e-kind"><span lang="am">ድርሰት</span><span lang="en">Essay</span></span></a></li><li><a href="writings/soul-breath-spirit/"><span class="e-title blk"><span lang="am">ነፍስ፡ እስትንፋስ፡ መንፈስ</span><span lang="en">Soul, Breath, Spirit</span></span><span class="e-kind"><span lang="am">ድርሰት</span><span lang="en">Essay</span></span></a></li></ul>
-  <a class="more-link" href="writings/"><span lang="am">ሁሉም ጽሑፎች →</span><span lang="en">All writings →</span></a>
-</section>
-
-<section class="m-only doors" aria-labelledby="work-h">
-  <div class="wrap">
-    <h2 class="m-head center" id="work-h">፨ <span lang="am">ሥራዎቹ</span><span lang="en">His work</span> ፨</h2>
-    <a class="door" href="megbiya/">
-      <span class="door-num" aria-hidden="true">፻፼</span>
-      <span class="door-title blk"><span lang="am">ባሕረ ቀመር</span><span lang="en">The Bahre Kemer system</span></span>
-      <span lang="am" class="lx door-text">በባሕረ ቀመር ከ፩፻፼ ቤት በላይ የቀረበው ጥናት፡ የራሴ ግኝት እንደ ሆነ መታወቅ አለበት፡፡</span>
-      <span lang="en" class="lx door-text">How Ge’ez counts beyond a million — registered with the Ethiopian Intellectual Property Office in 2007 E.C.</span>
-    </a>
-    <p class="door-path"><a href="megbiya/">፩ <span lang="am" class="lx">መግቢያ</span><span lang="en" class="lx">Introduction</span></a> → <a href="numbers/">፪ <span lang="am" class="lx">ቁጥሮች</span><span lang="en" class="lx">Numbers</span></a> → <a href="key/">፫ <span lang="am" class="lx">ቁልፍ</span><span lang="en" class="lx">Key</span></a></p>
-    <a class="door" href="qene/">
-      <span class="door-verse" aria-hidden="true">ኖላዌ አባግዕ ኪሩቤል አማላከ ነግደ ኢዮር ዜና፡፡</span>
-      <span class="door-title blk"><span lang="am">ቅኔና ግጥም</span><span lang="en">Qene &amp; Poetry</span></span>
-      <span lang="am" class="lx door-text">በጥንታዊው የግዕዝና የአማርኛ ትውፊት የተቀኙ ቅኔዎች፣ ወቅቱን የሚያንጸባርቁ ግጥሞች።</span>
-      <span lang="en" class="lx door-text">Sacred poetry in the classical Ge’ez and Amharic tradition, and poems of the times.</span>
-    </a>
-    <p class="door-path"><a href="qene/"><span lang="am" class="lx">ቅኔ</span><span lang="en" class="lx">Qene</span></a> ፡ <a href="poetry/"><span lang="am" class="lx">ወቅታዊ ግጥም</span><span lang="en" class="lx">Poetry</span></a></p>
-    <a class="door" href="books/">
-      <span class="door-books" aria-hidden="true"><span></span><span></span><span></span><span class="wide"></span></span>
-      <span class="door-title blk"><span lang="am">መጻሕፍትና ሥዕሎች</span><span lang="en">Books &amp; Paintings</span></span>
-      <span lang="am" class="lx door-text">በኢትዮጵያ ኦርቶዶክስ ሃይማኖት፣ በግዕዝ፣ በአማርኛ፣ በታሪክና በባህል ላይ የታተሙ ሥራዎች።</span>
-      <span lang="en" class="lx door-text">Published works on Ethiopian Orthodox faith, Ge’ez, Amharic, history and culture.</span>
-    </a>
-    <p class="door-path"><a href="books/"><span lang="am" class="lx">መጻሕፍት</span><span lang="en" class="lx">Books</span></a> ፡ <a href="paintings/"><span lang="am" class="lx">ሥዕሎች</span><span lang="en" class="lx">Paintings</span></a></p>
-  </div>
-</section>
-
-<section class="m-only m-block wrap m-about" aria-labelledby="m-about-h">
-  <p class="kicker"><span lang="am">ስለ ደራሲው</span><span lang="en">About the author</span></p>
-  <h2 id="m-about-h" class="m-name blk"><span lang="am">መምህር ይትባረክ ገሠሠ መራ</span><span lang="en">Yitbarek Gessese Merra</span></h2>
-  <p class="roles"><span lang="am">የታሪክ ምሁር ፡ ሠዓሊ ፡ ዲያቆን ፡ ደራሲ</span><span lang="en">Historian · Painter · Deacon · Author</span></p>
-  <p lang="am" class="lx m-bio">ይትባረክ ገሠሠ መራ ኢትዮጵያዊ የታሪክ ምሁር፣ በሥነ ጥበብ ሥዕል የሠለጠነ ሠዓሊ፣ በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን የቅዳሴና የሊቃውንት ትውፊት የታነጸ የአብነት ዲያቆን፣ እንዲሁም ከአሥራ ሁለት በላይ መጻሕፍትን የጻፈ ደራሲ ነው።</p>
-  <p lang="en" class="lx m-bio">An Ethiopian historian, a painter trained in the fine arts, and a deacon formed in the liturgical and scholarly traditions of the Ethiopian Orthodox Church — author of more than a dozen books.</p>
-  <p class="m-contact"><a href="mailto:yigeme.yg7@gmail.com">yigeme.yg7@gmail.com</a><a href="tel:+251913547463">+251 913 547 463</a></p>
+<section class="phone-home" aria-label="ማውጫ · Contents">
+  <a class="latest-btn" href="writings/consciousness-faith/">
+    <span class="nb-label"><span lang="am">አዲሱ ጽሑፍ</span><span lang="en">Latest</span></span>
+    <span class="lb-row"><span class="nb-title blk"><span lang="am">ንቃተ ሕሊና ለእምነት መሠረት ነው</span><span lang="en">Consciousness Is the Foundation of Faith</span></span>
+    <span class="lb-read"><span lang="am">ያንብቡ</span><span lang="en">Read</span> <span aria-hidden="true">›</span></span></span>
+  </a>
+  <h2 class="ph-head"><span lang="am">ማውጫ</span><span lang="en">Contents</span></h2>
+  <ol class="phone-rows"><li><a href="megbiya/"><span class="pr-title blk"><span lang="am">መግቢያ</span><span lang="en">Introduction</span></span><span class="pr-arrow" aria-hidden="true">›</span></a></li><li><a href="writings/"><span class="pr-title blk"><span lang="am">ጽሑፎች</span><span lang="en">Writings</span></span><span class="pr-arrow" aria-hidden="true">›</span></a></li><li><a href="numbers/"><span class="pr-title blk"><span lang="am">ቁጥሮች</span><span lang="en">Numbers</span></span><span class="pr-arrow" aria-hidden="true">›</span></a></li><li><a href="key/"><span class="pr-title blk"><span lang="am">ቁልፍ</span><span lang="en">Key</span></span><span class="pr-arrow" aria-hidden="true">›</span></a></li><li><a href="qene/"><span class="pr-title blk"><span lang="am">ቅኔ</span><span lang="en">Qene</span></span><span class="pr-arrow" aria-hidden="true">›</span></a></li><li><a href="poetry/"><span class="pr-title blk"><span lang="am">ወቅታዊ ግጥም</span><span lang="en">Poetry</span></span><span class="pr-arrow" aria-hidden="true">›</span></a></li><li><a href="books/"><span class="pr-title blk"><span lang="am">መጻሕፍት</span><span lang="en">Books</span></span><span class="pr-arrow" aria-hidden="true">›</span></a></li><li><a href="paintings/"><span class="pr-title blk"><span lang="am">ሥዕሎች</span><span lang="en">Paintings</span></span><span class="pr-arrow" aria-hidden="true">›</span></a></li><li><a href="contact/"><span class="pr-title blk"><span lang="am">ያግኙን</span><span lang="en">Contact</span></span><span class="pr-arrow" aria-hidden="true">›</span></a></li></ol>
 </section>
 
 <section class="band d-only" aria-labelledby="band-h">
@@ -320,6 +286,7 @@
     <li><a href="books/"><span class="mini-cover">ስለ ሃገር እውነት ይነገር</span><span class="bs-title blk"><span lang="am">ስለ ሃገር እውነት ይነገር</span><span lang="en">Let the Truth Be Told About the Nation</span></span><span class="bs-meta">2008 <span lang="am">ዓ.ም.</span><span lang="en">E.C.</span></span></a></li>
   </ul>
 </section>
+
 
 </main>
 <footer class="site-footer">

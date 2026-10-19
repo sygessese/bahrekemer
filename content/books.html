@@ -1,8 +1,10 @@
-<!-- BOOKS
-     Each book is one <figure class="shelf-item">. The cover is drawn in CSS until a photo exists.
-     To add a photo: put it in assets/img/books/ and add inside .cover:
-       <img src="../assets/img/books/FILENAME.jpg" alt="Book title">
-     Optional details (year, pages, description) go in a <p class="shelf-meta"> after the title. -->
+<!-- BOOKS — built from content/books.json (one entry per book, newest first).
+     The book marked "newest" is shown large at the top; the rest go on the shelf below.
+     Every book gets its own page. To add cover photos for a book, put them in assets/img/books/
+     (e.g. NAME.jpg for the front, NAME-back.jpg for the back; a NAME-sm.jpg is used on the shelf if present)
+     and list them under "faces" in books.json — copy the entry for ኪነ ጥበባት በኢትዮጵያ መቼ. -->
+
+<!--NEWEST-->
 
 <section class="books-section">
   <header class="section-head">
@@ -11,48 +13,16 @@
     <div class="ornament" aria-hidden="true"><span></span></div>
   </header>
 
-  <div class="shelf">
-    <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ሰዋስወ ቀመር</span><span class="cover-no">፩</span></div>
-      <figcaption><h3 lang="am" class="always">ሰዋስወ ቀመር</h3><p lang="en"><i>Sewasewe Kemer</i> — The Grammar of Kemer</p><p class="shelf-meta"><span lang="am">2001 ዓ. ም. · 278 ገጽ</span><span lang="en">2001 E.C. · 278 pages</span></p></figcaption>
-    </figure>
-    <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ባሕረ ቀመር</span><span class="cover-no">፪</span></div>
-      <figcaption><h3 lang="am" class="always">ባሕረ ቀመር</h3><p lang="en"><i>Bahre Kemer</i> — The Sea of Kemer</p><p class="shelf-meta"><span lang="am">2003 ዓ. ም. · 188 ገጽ</span><span lang="en">2003 E.C. · 188 pages</span></p></figcaption>
-    </figure>
-    <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ባሕረ ቀመር ሁለተኛ</span><span class="cover-no">፫</span></div>
-      <figcaption><h3 lang="am" class="always">ባሕረ ቀመር ሁለተኛ</h3><p lang="en"><i>Bahre Kemer</i>, Volume Two</p><p class="shelf-meta"><span lang="am">2004 ዓ. ም. · 144 ገጽ</span><span lang="en">2004 E.C. · 144 pages</span></p></figcaption>
-    </figure>
-    <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ባሕረ ቀመር የሒሣብ መልመጃ ቁ. አንድ</span><span class="cover-no">፬</span></div>
-      <figcaption><h3 lang="am" class="always">ባሕረ ቀመር የሒሣብ መልመጃ ቁ. አንድ</h3><p lang="en"><i>Bahre Kemer</i> Arithmetic Exercises, No. 1</p><p class="shelf-meta"><span lang="am">96 ገጽ</span><span lang="en">96 pages</span></p></figcaption>
-    </figure>
-    <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">የዓለም እምነት ምልክቶች</span><span class="cover-no">፭</span></div>
-      <figcaption><h3 lang="am" class="always">የዓለም እምነት ምልክቶች</h3><p lang="en">Symbols of the World’s Faiths</p></figcaption>
-    </figure>
-    <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">በኪነ ጽሕፈት ጊዜ የፊደላት አቀማመጥ</span><span class="cover-no">፮</span></div>
-      <figcaption><h3 lang="am" class="always">በኪነ ጽሕፈት ጊዜ የፊደላት አቀማመጥ</h3><p lang="en">The Placement of Letters in the Art of Writing</p></figcaption>
-    </figure>
-    <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ስለ ሃገር እውነት ይነገር</span><span class="cover-no">፯</span></div>
-      <figcaption><h3 lang="am" class="always">ስለ ሃገር እውነት ይነገር</h3><p lang="en">Let the Truth Be Told About the Nation</p><p class="shelf-meta"><span lang="am">2008 ዓ. ም.</span><span lang="en">2008 E.C. (2015/16)</span></p></figcaption>
-    </figure>
-    <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">መልክዓ መለኮት</span><span class="cover-no">፰</span></div>
-      <figcaption><h3 lang="am" class="always">መልክዓ መለኮት</h3><p lang="en"><i>Melke’a Melekot</i> — A Portrait of the Godhead</p></figcaption>
-    </figure>
-  </div>
+<!--SHELF-->
 </section>
 
 <section class="buy" id="where-to-buy">
   <p class="eyebrow"><span lang="am">አዲስ አበባ</span><span lang="en">Addis Ababa</span></p>
   <h2><span lang="am">መጻሕፍቱን የት ማግኘት ይቻላል</span><span lang="en">Where to Find the Books</span></h2>
-  <!-- Replace the placeholder with one <li> per shop: name, area, phone. -->
+  <!-- One <li> per shop: name, then the areas where it has branches. -->
   <ul class="buy-list">
-    <li class="placeholder"><span lang="am">‹ የመጻሕፍት መደብር ስም · አካባቢ · ስልክ ›</span><span lang="en">‹ Bookshop name · area · phone ›</span></li>
+    <li><span class="shop blk"><span lang="am">የእውቀት በር መጻሕፍት መደብር</span><span lang="en">Ye’ewket Ber Bookstore</span></span><span class="where"><span lang="am" class="lx">ስታዲየም፣ አራት ኪሎ እና ሌሎች ቅርንጫፎች</span><span lang="en" class="lx">Stadium, Arat Kilo and other branches</span></span></li>
+    <li><span class="shop blk"><span lang="am">ጃፈር መጻሕፍት መደብር</span><span lang="en">Jafer Books</span></span><span class="where"><span lang="am" class="lx">ለገሀር፣ መርካቶ እና ሌሎች ቅርንጫፎች</span><span lang="en" class="lx">Legehar, Merkato and other branches</span></span></li>
   </ul>
 </section>
 

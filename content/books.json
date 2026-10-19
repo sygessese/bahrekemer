@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "kine-tibebat",
+    "newest": true,
+    "title": {"am": "ኪነ ጥበባት በኢትዮጵያ መቼ", "en": "The Arts in Ethiopia — Since When?"},
+    "sub": {"am": "ዘኢየኀልቅ ማዕደ አእምሮ", "en": "An Inexhaustible Feast for the Mind"},
+    "about": {"am": "የኪነ ጥበባት ታሪክና ውጤታቸዉ — ቅኔ፣ ሥዕል፣ መጽሐፍ፣ ማኅበር።", "en": "The history of the arts and what they have brought forth — qene, painting, books, society."},
+    "motto": {"am": "እውነት የእምነት ጥላ ነው፡፡ ዛፍ ከሌለ ጥላ አይገኝም፡፡", "en": "“Truth is the shade of faith. Where there is no tree, there is no shade.”"},
+    "year": "2016", "year_en": "2016 E.C. (2023/24)",
+    "publisher": {"am": "በረከት ማተሚያ ድርጅት", "en": "Bereket Printing Press"},
+    "price": "400",
+    "faces": [
+      {"img": "kine-tibebat", "label": {"am": "ፊት", "en": "Front"}},
+      {"img": "kine-tibebat-back", "label": {"am": "ጀርባ", "en": "Back"}}
+    ]
+  },
+  {
+    "slug": "sewasewe-kemer",
+    "title": {"am": "ሰዋስወ ቀመር", "en": "<i>Sewasewe Kemer</i> — The Grammar of Kemer"},
+    "year": "2001", "pages": "278",
+    "publisher": {"am": "አርቲስቲክ ማተሚያ ድርጅት", "en": "Artistic Printing Press"},
+    "faces": []
+  },
+  {
+    "slug": "bahre-kemer",
+    "title": {"am": "ባሕረ ቀመር", "en": "<i>Bahre Kemer</i> — The Sea of Kemer"},
+    "year": "2003", "pages": "188",
+    "publisher": {"am": "አርቲስቲክ ማተሚያ ድርጅት", "en": "Artistic Printing Press"},
+    "faces": []
+  },
+  {
+    "slug": "bahre-kemer-2",
+    "title": {"am": "ባሕረ ቀመር ሁለተኛ", "en": "<i>Bahre Kemer</i>, Volume Two"},
+    "year": "2004", "pages": "144",
+    "publisher": {"am": "ንግድ ማተሚያ ድርጅት", "en": "Commercial Printing Enterprise"},
+    "faces": []
+  },
+  {
+    "slug": "bahre-kemer-exercises",
+    "title": {"am": "ባሕረ ቀመር የሒሣብ መልመጃ ቁ. አንድ", "en": "<i>Bahre Kemer</i> Arithmetic Exercises, No. 1"},
+    "year": "2008", "pages": "96",
+    "publisher": {"am": "ንግድ ማተሚያ ድርጅት", "en": "Commercial Printing Enterprise"},
+    "faces": []
+  },
+  {
+    "slug": "world-faith-symbols",
+    "title": {"am": "የዓለም እምነት ምልክቶች", "en": "Symbols of the World’s Faiths"},
+    "year": "2004",
+    "publisher": {"am": "ብርሃንና ሰላም ማተሚያ ድርጅት", "en": "Berhanena Selam Printing Enterprise"},
+    "faces": []
+  },
+  {
+    "slug": "placement-of-letters",
+    "title": {"am": "በኪነ ጽሕፈት ጊዜ የፊደላት አቀማመጥ", "en": "The Placement of Letters in the Art of Writing"},
+    "year": "2006",
+    "faces": []
+  },
+  {
+    "slug": "truth-about-the-nation",
+    "title": {"am": "ስለ ሃገር እውነት ይነገር", "en": "Let the Truth Be Told About the Nation"},
+    "year": "2008", "year_en": "2008 E.C. (2015/16)",
+    "publisher": {"am": "ቦሌ ማተሚያ ድርጅት", "en": "Bole Printing Press"},
+    "faces": []
+  },
+  {
+    "slug": "melkea-melekot",
+    "title": {"am": "መልክዓ መለኮት", "en": "<i>Melke’a Melekot</i> — A Portrait of the Godhead"},
+    "year": "2001",
+    "publisher": {"am": "ብርሃንና ሰላም ማተሚያ ድርጅት", "en": "Berhanena Selam Printing Enterprise"},
+    "faces": []
+  }
+]

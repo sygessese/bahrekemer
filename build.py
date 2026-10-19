@@ -8,6 +8,7 @@ No dependencies. What you edit:
   content/index.html           the home page template (the <!--TOKENS--> are filled in here)
   content/writings.json        the list of writings, NEWEST FIRST — the home page fills itself from it
   content/writings/<slug>.html the text of each writing (Amharic in lang="am", English in lang="en")
+  content/books.json           books that have cover photos — each gets its own page (front/back)
   content/paintings.json       the paintings, in gallery order; images in assets/img/paintings/
                                (NAME.jpg large, NAME-sm.jpg for the gallery). Each gets its own page.
   site.json                    page titles, descriptions, nav order
@@ -21,6 +22,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = json.load(open(os.path.join(ROOT, "site.json"), encoding="utf-8"))
 WRITINGS = json.load(open(os.path.join(ROOT, "content", "writings.json"), encoding="utf-8"))
+BOOKS = json.load(open(os.path.join(ROOT, "content", "books.json"), encoding="utf-8"))
 PAINTINGS = json.load(open(os.path.join(ROOT, "content", "paintings.json"), encoding="utf-8"))
 GEEZ = ["", "፩", "፪", "፫", "፬", "፭", "፮", "፯", "፰", "፱", "፲"]
 KINDS = {"essay": ("ድርሰት", "Essay"), "poem": ("ግጥም", "Poem")}
@@ -203,7 +205,7 @@ def footer(p):
       <p class="label">{t("ያግኙን", "Contact")}</p>
       <a href="mailto:yigeme.yg7@gmail.com">yigeme.yg7@gmail.com</a>
       <span>+251 913 547 463</span>
-      <span>{t("ፖ.ሣ.ቁ. 25458/1000 ፡ አዲስ አበባ", "P.O. Box 25458/1000, Addis Ababa")}</span>
+      <span>{t("አዲስ አበባ፣ ኢትዮጵያ", "Addis Ababa, Ethiopia")}</span>
     </div>
   </div>
   <div class="wrap copy">© {SITE["since"]}–{date.today().year} {SITE["author"]}</div>
@@ -381,7 +383,11 @@ def jpeg_size(path):
 
 
 def img_attrs(name):
-    size = jpeg_size(os.path.join(ROOT, "assets", "img", "paintings", name))
+    return img_attrs_in("paintings", name)
+
+
+def img_attrs_in(folder, name):
+    size = jpeg_size(os.path.join(ROOT, "assets", "img", folder, name))
     return f' width="{size[0]}" height="{size[1]}"' if size else ""
 
 
@@ -433,6 +439,134 @@ def painting_page(i, pt):
 </div>'''
 
 
+# ---------------------------------------------------------------- books with cover photos
+def book_img(name, small=False):
+    """Path (from the site root) of a cover photo; the -sm version if asked for and present."""
+    if small and os.path.exists(os.path.join(ROOT, "assets", "img", "books", name + "-sm.jpg")):
+        return f"assets/img/books/{name}-sm.jpg", name + "-sm.jpg"
+    return f"assets/img/books/{name}.jpg", name + ".jpg"
+
+
+def book_meta(b, page=False):
+    """'2001 ዓ. ም. · 278 ገጽ' etc. The book's own page adds the printer and the price."""
+    am, en = [], []
+    if b.get("year"):
+        am.append(f'{b["year"]} ዓ. ም.'); en.append(b.get("year_en", f'{b["year"]} E.C.'))
+    if page and b.get("publisher"):
+        am.append(b["publisher"]["am"]); en.append(b["publisher"]["en"])
+    if b.get("pages"):
+        am.append(f'{b["pages"]} ገጽ'); en.append(f'{b["pages"]} pages')
+    if page and b.get("price"):
+        am.append(f'ዋጋ፡ {b["price"]} ብር'); en.append(f'{b["price"]} birr')
+    sep = " ፡ " if page else " · "
+    return t(sep.join(am), " · ".join(en)) if am else ""
+
+
+def cover_box(b, n, p, small=True, cls="cover"):
+    """The shelf cover: the photo if there is one, otherwise a drawn cover with the title."""
+    if b["faces"]:
+        src, f = book_img(b["faces"][0]["img"], small)
+        return (f'<div class="{cls} has-img"><img src="{p}{src}" alt=""{img_attrs_in("books", f)} loading="lazy"></div>')
+    return f'<div class="{cls}"><span class="cover-title">{b["title"]["am"]}</span><span class="cover-no">{GEEZ[n] if n < len(GEEZ) else n}</span></div>'
+
+
+def book_title_en_plain(b):
+    return strip_tags(b["title"]["en"])
+
+
+def newest_block():
+    b = next((x for x in BOOKS if x.get("newest")), None)
+    if not b:
+        return ""
+    s = b["slug"]
+    cover = cover_box(b, 0, "../", small=True, cls="newest-img")
+    sub_ = f'<p class="newest-sub">{t(b["sub"]["am"], b["sub"]["en"])}</p>' if b.get("sub") else ""
+    about = f'<p class="newest-about">{t(b["about"]["am"], b["about"]["en"])}</p>' if b.get("about") else ""
+    motto = (f'<blockquote class="newest-motto"><p lang="am">{b["motto"]["am"]}</p><p lang="en">{b["motto"]["en"]}</p></blockquote>'
+             if b.get("motto") else "")
+    see = (t("ፊትና ጀርባውን ይመልከቱ →", "See the front and back →") if len(b["faces"]) > 1
+           else t("ስለ መጽሐፉ →", "About the book →"))
+    return f'''<section class="newest" aria-labelledby="newest-h">
+  <a class="newest-cover" href="{s}/">{cover}</a>
+  <div class="newest-text">
+    <p class="eyebrow">{t("አዲሱ መጽሐፍ", "The Newest Book")}</p>
+    <h2 id="newest-h"><a href="{s}/">{t(b["title"]["am"], b["title"]["en"])}</a></h2>
+    {sub_}
+    {about}
+    {motto}
+    <p class="shelf-meta">{book_meta(b, page=True)}</p>
+    <p class="newest-links"><a class="more-link" href="{s}/">{see}</a><a class="more-link" href="#where-to-buy">{t("የት ይገኛል? →", "Where to find it →")}</a></p>
+  </div>
+</section>'''
+
+
+def shelf():
+    rest = [b for b in BOOKS if not b.get("newest")]
+    items = "".join(f'''
+    <figure class="shelf-item">
+      <a class="cover-link" href="{b["slug"]}/" aria-hidden="true" tabindex="-1">{cover_box(b, n, "../")}</a>
+      <figcaption><h3 lang="am" class="always"><a href="{b["slug"]}/">{b["title"]["am"]}</a></h3><p lang="en">{b["title"]["en"]}</p>{f'<p class="shelf-meta">{book_meta(b)}</p>' if book_meta(b) else ""}</figcaption>
+    </figure>''' for n, b in enumerate(rest, 1))
+    return f'  <div class="shelf">{items}\n  </div>'
+
+
+def book_page(i, b):
+    p = "../../"
+    faces = b["faces"]
+    rest = [x for x in BOOKS if not x.get("newest")]
+    n = rest.index(b) + 1 if b in rest else 0
+    if faces:
+        figs = "".join(
+            f'''
+    <figure class="flip-face{" is-on" if k == 0 else ""}" data-face="{k}"><img src="{p}{book_img(f["img"])[0]}" alt="{esc(b["title"]["am"])} — {esc(f["label"]["en"].lower())} cover"{img_attrs_in("books", book_img(f["img"])[1])}{"" if k == 0 else ' loading="lazy"'}></figure>'''
+            for k, f in enumerate(faces))
+        arrows = len(faces) > 1
+        tabs = "".join(f'<button type="button" data-flip-to="{k}" aria-pressed="{str(k == 0).lower()}">{t(f["label"]["am"], f["label"]["en"])}</button>'
+                       for k, f in enumerate(faces))
+        viewer = f'''<div class="flip" data-flip>
+  <div class="flip-stage">
+    {'<button type="button" class="flip-arrow flip-prev" data-flip-go="-1" aria-label="ቀዳሚ · Previous"><span aria-hidden="true">‹</span></button>' if arrows else ""}{figs}
+    {'<button type="button" class="flip-arrow flip-next" data-flip-go="1" aria-label="ቀጣይ · Next"><span aria-hidden="true">›</span></button>' if arrows else ""}
+  </div>
+  {f'<div class="flip-tabs" role="group" aria-label="ሽፋን · Cover">{tabs}</div>' if arrows else ""}
+</div>'''
+    else:
+        viewer = f'<div class="book-drawn">{cover_box(b, n, p, small=False)}</div>'
+    prev = BOOKS[i - 1] if i > 0 else None
+    nxt = BOOKS[i + 1] if i + 1 < len(BOOKS) else None
+
+    def nav_item(b2, cls, am, en):
+        if not b2:
+            return "<span></span>"
+        return (f'<a class="{cls}" href="../{b2["slug"]}/"><span class="label">{t(am, en)}</span>'
+                f'<span class="pn-title blk">{t(b2["title"]["am"], b2["title"]["en"])}</span></a>')
+    next_btn = "" if not nxt else (
+        f'<a class="next-btn" href="../{nxt["slug"]}/"><span class="nb-label">{t("ቀጣዩ መጽሐፍ ›", "Next book ›")}</span>'
+        f'<span class="nb-title blk">{t(nxt["title"]["am"], nxt["title"]["en"])}</span></a>')
+    sub_ = f'<p class="newest-sub">{t(b["sub"]["am"], b["sub"]["en"])}</p>' if b.get("sub") else ""
+    about = f'<p class="newest-about">{t(b["about"]["am"], b["about"]["en"])}</p>' if b.get("about") else ""
+    meta = book_meta(b, page=True)
+    return f'''<div class="painting-page book-page wrap">
+<p class="pt-back"><a href="../">{t("‹ ሁሉም መጻሕፍት", "‹ All books")}</a></p>
+{viewer}
+<div class="pt-caption">
+  <h1 class="pt-title">{t(b["title"]["am"], b["title"]["en"])}</h1>
+  {sub_}
+  {about}
+  {f'<p class="pt-meta">{meta}</p>' if meta else ""}
+</div>
+<p class="enquire"><a class="more-link" href="../#where-to-buy">{t("የት ይገኛል? →", "Where to find it →")}</a></p>
+<nav class="prevnext" aria-label="መጻሕፍት · Books">
+  {nav_item(prev, "pn-prev", "← የቀደመው መጽሐፍ", "← Previous book")}
+  {nav_item(nxt, "pn-next", "ቀጣዩ መጽሐፍ →", "Next book →")}
+</nav>
+<div class="phone-end">
+  {next_btn}
+  <a class="big-btn" href="../">{t("ሁሉም መጻሕፍት", "All books")}</a>
+</div>
+</div>'''
+
+
 # ---------------------------------------------------------------- page shell
 def jsonld(slug, url):
     if slug != "index":
@@ -445,8 +579,7 @@ def jsonld(slug, url):
             {"@type": "Person", "name": SITE["author"], "alternateName": AUTHOR_AM, "url": url,
              "jobTitle": "Historian, author and artist",
              "email": "mailto:yigeme.yg7@gmail.com", "telephone": "+251913547463",
-             "address": {"@type": "PostalAddress", "postOfficeBoxNumber": "25458/1000",
-                         "addressLocality": "Addis Ababa", "addressCountry": "ET"},
+             "address": {"@type": "PostalAddress", "addressLocality": "Addis Ababa", "addressCountry": "ET"},
              "knowsAbout": ["Ethiopian Orthodox Tewahedo tradition", "Qene", "Geez", "Ethiopian painting",
                             "Bahire Hasab", "Ethiopian history"]},
         ],
@@ -545,6 +678,7 @@ def build():
             body = open(src, encoding="utf-8").read() if os.path.exists(src) else ""
             reader = READER + "\n" if slug in readers else ""
             body = body.replace("<!--GALLERY-->", gallery())
+            body = body.replace("<!--NEWEST-->", newest_block()).replace("<!--SHELF-->", shelf())
             body = page_hero(slug) + f'\n<div class="page-body wrap">\n{reader}{body}\n</div>'
         out = "index.html" if slug == "index" else f"{slug}/index.html"
         write(out, render(slug, body, p="" if slug == "index" else "../", reader=slug in readers))
@@ -569,6 +703,16 @@ def build():
                           image=f'assets/img/paintings/{pt["slug"]}.jpg'))
         written.append(out)
 
+    for i, b in enumerate(BOOKS):
+        out = f'books/{b["slug"]}/index.html'
+        en = book_title_en_plain(b)
+        write(out, render("books", book_page(i, b), p="../../",
+                          title=(f'{b["title"]["am"]} · መጻሕፍት · ባሕረ ቀመር', f'{en} · Books · Bahrekemer'),
+                          desc=f'{b["title"]["am"]} — መጽሐፍ በ{AUTHOR_AM}። {en} — a book by {SITE["author"]}.',
+                          url_path=f'/books/{b["slug"]}/', back_to=("../", "መጻሕፍት", "Books"),
+                          image=f'assets/img/books/{b["faces"][0]["img"]}.jpg' if b["faces"] else None))
+        written.append(out)
+
     nf = f'''<section class="page-hero"><div class="wrap">
   <p class="kicker">404</p>
   <h1>{t("ገጹ አልተገኘም", "Page not found")}</h1>
@@ -583,6 +727,7 @@ def build():
     locs = [base + "/" if s == "index" else f"{base}/{s}/" for s in SITE["pages"]]
     locs += [f'{base}/writings/{w["slug"]}/' for w in WRITINGS]
     locs += [f'{base}/paintings/{pt["slug"]}/' for pt in PAINTINGS]
+    locs += [f'{base}/books/{b["slug"]}/' for b in BOOKS]
     urls = [f'''  <url><loc>{loc}</loc><lastmod>{today}</lastmod>
     <xhtml:link rel="alternate" hreflang="am" href="{loc}"/>
     <xhtml:link rel="alternate" hreflang="en" href="{loc}?lang=en"/>

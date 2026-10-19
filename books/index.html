@@ -53,11 +53,24 @@
   </div>
 </header>
 <div class="page-body wrap">
-<!-- BOOKS
-     Each book is one <figure class="shelf-item">. The cover is drawn in CSS until a photo exists.
-     To add a photo: put it in assets/img/books/ and add inside .cover:
-       <img src="../assets/img/books/FILENAME.jpg" alt="Book title">
-     Optional details (year, pages, description) go in a <p class="shelf-meta"> after the title. -->
+<!-- BOOKS — built from content/books.json (one entry per book, newest first).
+     The book marked "newest" is shown large at the top; the rest go on the shelf below.
+     Every book gets its own page. To add cover photos for a book, put them in assets/img/books/
+     (e.g. NAME.jpg for the front, NAME-back.jpg for the back; a NAME-sm.jpg is used on the shelf if present)
+     and list them under "faces" in books.json — copy the entry for ኪነ ጥበባት በኢትዮጵያ መቼ. -->
+
+<section class="newest" aria-labelledby="newest-h">
+  <a class="newest-cover" href="kine-tibebat/"><div class="newest-img has-img"><img src="../assets/img/books/kine-tibebat-sm.jpg" alt="" width="520" height="738" loading="lazy"></div></a>
+  <div class="newest-text">
+    <p class="eyebrow"><span lang="am">አዲሱ መጽሐፍ</span><span lang="en">The Newest Book</span></p>
+    <h2 id="newest-h"><a href="kine-tibebat/"><span lang="am">ኪነ ጥበባት በኢትዮጵያ መቼ</span><span lang="en">The Arts in Ethiopia — Since When?</span></a></h2>
+    <p class="newest-sub"><span lang="am">ዘኢየኀልቅ ማዕደ አእምሮ</span><span lang="en">An Inexhaustible Feast for the Mind</span></p>
+    <p class="newest-about"><span lang="am">የኪነ ጥበባት ታሪክና ውጤታቸዉ — ቅኔ፣ ሥዕል፣ መጽሐፍ፣ ማኅበር።</span><span lang="en">The history of the arts and what they have brought forth — qene, painting, books, society.</span></p>
+    <blockquote class="newest-motto"><p lang="am">እውነት የእምነት ጥላ ነው፡፡ ዛፍ ከሌለ ጥላ አይገኝም፡፡</p><p lang="en">“Truth is the shade of faith. Where there is no tree, there is no shade.”</p></blockquote>
+    <p class="shelf-meta"><span lang="am">2016 ዓ. ም. ፡ በረከት ማተሚያ ድርጅት ፡ ዋጋ፡ 400 ብር</span><span lang="en">2016 E.C. (2023/24) · Bereket Printing Press · 400 birr</span></p>
+    <p class="newest-links"><a class="more-link" href="kine-tibebat/"><span lang="am">ፊትና ጀርባውን ይመልከቱ →</span><span lang="en">See the front and back →</span></a><a class="more-link" href="#where-to-buy"><span lang="am">የት ይገኛል? →</span><span lang="en">Where to find it →</span></a></p>
+  </div>
+</section>
 
 <section class="books-section">
   <header class="section-head">
@@ -68,36 +81,36 @@
 
   <div class="shelf">
     <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ሰዋስወ ቀመር</span><span class="cover-no">፩</span></div>
-      <figcaption><h3 lang="am" class="always">ሰዋስወ ቀመር</h3><p lang="en"><i>Sewasewe Kemer</i> — The Grammar of Kemer</p><p class="shelf-meta"><span lang="am">2001 ዓ. ም. · 278 ገጽ</span><span lang="en">2001 E.C. · 278 pages</span></p></figcaption>
+      <a class="cover-link" href="sewasewe-kemer/" aria-hidden="true" tabindex="-1"><div class="cover"><span class="cover-title">ሰዋስወ ቀመር</span><span class="cover-no">፩</span></div></a>
+      <figcaption><h3 lang="am" class="always"><a href="sewasewe-kemer/">ሰዋስወ ቀመር</a></h3><p lang="en"><i>Sewasewe Kemer</i> — The Grammar of Kemer</p><p class="shelf-meta"><span lang="am">2001 ዓ. ም. · 278 ገጽ</span><span lang="en">2001 E.C. · 278 pages</span></p></figcaption>
     </figure>
     <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ባሕረ ቀመር</span><span class="cover-no">፪</span></div>
-      <figcaption><h3 lang="am" class="always">ባሕረ ቀመር</h3><p lang="en"><i>Bahre Kemer</i> — The Sea of Kemer</p><p class="shelf-meta"><span lang="am">2003 ዓ. ም. · 188 ገጽ</span><span lang="en">2003 E.C. · 188 pages</span></p></figcaption>
+      <a class="cover-link" href="bahre-kemer/" aria-hidden="true" tabindex="-1"><div class="cover"><span class="cover-title">ባሕረ ቀመር</span><span class="cover-no">፪</span></div></a>
+      <figcaption><h3 lang="am" class="always"><a href="bahre-kemer/">ባሕረ ቀመር</a></h3><p lang="en"><i>Bahre Kemer</i> — The Sea of Kemer</p><p class="shelf-meta"><span lang="am">2003 ዓ. ም. · 188 ገጽ</span><span lang="en">2003 E.C. · 188 pages</span></p></figcaption>
     </figure>
     <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ባሕረ ቀመር ሁለተኛ</span><span class="cover-no">፫</span></div>
-      <figcaption><h3 lang="am" class="always">ባሕረ ቀመር ሁለተኛ</h3><p lang="en"><i>Bahre Kemer</i>, Volume Two</p><p class="shelf-meta"><span lang="am">2004 ዓ. ም. · 144 ገጽ</span><span lang="en">2004 E.C. · 144 pages</span></p></figcaption>
+      <a class="cover-link" href="bahre-kemer-2/" aria-hidden="true" tabindex="-1"><div class="cover"><span class="cover-title">ባሕረ ቀመር ሁለተኛ</span><span class="cover-no">፫</span></div></a>
+      <figcaption><h3 lang="am" class="always"><a href="bahre-kemer-2/">ባሕረ ቀመር ሁለተኛ</a></h3><p lang="en"><i>Bahre Kemer</i>, Volume Two</p><p class="shelf-meta"><span lang="am">2004 ዓ. ም. · 144 ገጽ</span><span lang="en">2004 E.C. · 144 pages</span></p></figcaption>
     </figure>
     <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ባሕረ ቀመር የሒሣብ መልመጃ ቁ. አንድ</span><span class="cover-no">፬</span></div>
-      <figcaption><h3 lang="am" class="always">ባሕረ ቀመር የሒሣብ መልመጃ ቁ. አንድ</h3><p lang="en"><i>Bahre Kemer</i> Arithmetic Exercises, No. 1</p><p class="shelf-meta"><span lang="am">96 ገጽ</span><span lang="en">96 pages</span></p></figcaption>
+      <a class="cover-link" href="bahre-kemer-exercises/" aria-hidden="true" tabindex="-1"><div class="cover"><span class="cover-title">ባሕረ ቀመር የሒሣብ መልመጃ ቁ. አንድ</span><span class="cover-no">፬</span></div></a>
+      <figcaption><h3 lang="am" class="always"><a href="bahre-kemer-exercises/">ባሕረ ቀመር የሒሣብ መልመጃ ቁ. አንድ</a></h3><p lang="en"><i>Bahre Kemer</i> Arithmetic Exercises, No. 1</p><p class="shelf-meta"><span lang="am">2008 ዓ. ም. · 96 ገጽ</span><span lang="en">2008 E.C. · 96 pages</span></p></figcaption>
     </figure>
     <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">የዓለም እምነት ምልክቶች</span><span class="cover-no">፭</span></div>
-      <figcaption><h3 lang="am" class="always">የዓለም እምነት ምልክቶች</h3><p lang="en">Symbols of the World’s Faiths</p></figcaption>
+      <a class="cover-link" href="world-faith-symbols/" aria-hidden="true" tabindex="-1"><div class="cover"><span class="cover-title">የዓለም እምነት ምልክቶች</span><span class="cover-no">፭</span></div></a>
+      <figcaption><h3 lang="am" class="always"><a href="world-faith-symbols/">የዓለም እምነት ምልክቶች</a></h3><p lang="en">Symbols of the World’s Faiths</p><p class="shelf-meta"><span lang="am">2004 ዓ. ም.</span><span lang="en">2004 E.C.</span></p></figcaption>
     </figure>
     <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">በኪነ ጽሕፈት ጊዜ የፊደላት አቀማመጥ</span><span class="cover-no">፮</span></div>
-      <figcaption><h3 lang="am" class="always">በኪነ ጽሕፈት ጊዜ የፊደላት አቀማመጥ</h3><p lang="en">The Placement of Letters in the Art of Writing</p></figcaption>
+      <a class="cover-link" href="placement-of-letters/" aria-hidden="true" tabindex="-1"><div class="cover"><span class="cover-title">በኪነ ጽሕፈት ጊዜ የፊደላት አቀማመጥ</span><span class="cover-no">፮</span></div></a>
+      <figcaption><h3 lang="am" class="always"><a href="placement-of-letters/">በኪነ ጽሕፈት ጊዜ የፊደላት አቀማመጥ</a></h3><p lang="en">The Placement of Letters in the Art of Writing</p><p class="shelf-meta"><span lang="am">2006 ዓ. ም.</span><span lang="en">2006 E.C.</span></p></figcaption>
     </figure>
     <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">ስለ ሃገር እውነት ይነገር</span><span class="cover-no">፯</span></div>
-      <figcaption><h3 lang="am" class="always">ስለ ሃገር እውነት ይነገር</h3><p lang="en">Let the Truth Be Told About the Nation</p><p class="shelf-meta"><span lang="am">2008 ዓ. ም.</span><span lang="en">2008 E.C. (2015/16)</span></p></figcaption>
+      <a class="cover-link" href="truth-about-the-nation/" aria-hidden="true" tabindex="-1"><div class="cover"><span class="cover-title">ስለ ሃገር እውነት ይነገር</span><span class="cover-no">፯</span></div></a>
+      <figcaption><h3 lang="am" class="always"><a href="truth-about-the-nation/">ስለ ሃገር እውነት ይነገር</a></h3><p lang="en">Let the Truth Be Told About the Nation</p><p class="shelf-meta"><span lang="am">2008 ዓ. ም.</span><span lang="en">2008 E.C. (2015/16)</span></p></figcaption>
     </figure>
     <figure class="shelf-item">
-      <div class="cover"><span class="cover-title">መልክዓ መለኮት</span><span class="cover-no">፰</span></div>
-      <figcaption><h3 lang="am" class="always">መልክዓ መለኮት</h3><p lang="en"><i>Melke’a Melekot</i> — A Portrait of the Godhead</p></figcaption>
+      <a class="cover-link" href="melkea-melekot/" aria-hidden="true" tabindex="-1"><div class="cover"><span class="cover-title">መልክዓ መለኮት</span><span class="cover-no">፰</span></div></a>
+      <figcaption><h3 lang="am" class="always"><a href="melkea-melekot/">መልክዓ መለኮት</a></h3><p lang="en"><i>Melke’a Melekot</i> — A Portrait of the Godhead</p><p class="shelf-meta"><span lang="am">2001 ዓ. ም.</span><span lang="en">2001 E.C.</span></p></figcaption>
     </figure>
   </div>
 </section>
@@ -105,9 +118,10 @@
 <section class="buy" id="where-to-buy">
   <p class="eyebrow"><span lang="am">አዲስ አበባ</span><span lang="en">Addis Ababa</span></p>
   <h2><span lang="am">መጻሕፍቱን የት ማግኘት ይቻላል</span><span lang="en">Where to Find the Books</span></h2>
-  <!-- Replace the placeholder with one <li> per shop: name, area, phone. -->
+  <!-- One <li> per shop: name, then the areas where it has branches. -->
   <ul class="buy-list">
-    <li class="placeholder"><span lang="am">‹ የመጻሕፍት መደብር ስም · አካባቢ · ስልክ ›</span><span lang="en">‹ Bookshop name · area · phone ›</span></li>
+    <li><span class="shop blk"><span lang="am">የእውቀት በር መጻሕፍት መደብር</span><span lang="en">Ye’ewket Ber Bookstore</span></span><span class="where"><span lang="am" class="lx">ስታዲየም፣ አራት ኪሎ እና ሌሎች ቅርንጫፎች</span><span lang="en" class="lx">Stadium, Arat Kilo and other branches</span></span></li>
+    <li><span class="shop blk"><span lang="am">ጃፈር መጻሕፍት መደብር</span><span lang="en">Jafer Books</span></span><span class="where"><span lang="am" class="lx">ለገሀር፣ መርካቶ እና ሌሎች ቅርንጫፎች</span><span lang="en" class="lx">Legehar, Merkato and other branches</span></span></li>
   </ul>
 </section>
 
@@ -132,7 +146,7 @@
       <p class="label"><span lang="am">ያግኙን</span><span lang="en">Contact</span></p>
       <a href="mailto:yigeme.yg7@gmail.com">yigeme.yg7@gmail.com</a>
       <span>+251 913 547 463</span>
-      <span><span lang="am">ፖ.ሣ.ቁ. 25458/1000 ፡ አዲስ አበባ</span><span lang="en">P.O. Box 25458/1000, Addis Ababa</span></span>
+      <span><span lang="am">አዲስ አበባ፣ ኢትዮጵያ</span><span lang="en">Addis Ababa, Ethiopia</span></span>
     </div>
   </div>
   <div class="wrap copy">© 2016–2026 Yitbarek Gessese Merra</div>

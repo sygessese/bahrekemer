@@ -388,10 +388,31 @@ html[data-read="am"] .verse-pair, html[data-read="en"] .verse-pair { max-width: 
 .shelf-meta span[lang="en"] { font-family: "Instrument Sans", system-ui, sans-serif; display: inline !important; }
 html[data-lang="en"] .shelf-meta span[lang="am"], html[data-lang="am"] .shelf-meta span[lang="en"] { display: none !important; }
 .shelf-meta span[lang="en"]::before { content: none !important; }
+
+/* the newest book, large */
+.newest { display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); gap: 3.5rem; align-items: center; max-width: 60rem; margin: 0 auto 4.5rem; padding-bottom: 4rem; border-bottom: 3px double var(--ink); }
+.newest-cover img { display: block; width: 100%; height: auto; box-shadow: 0 22px 40px -24px rgba(0,0,0,.55); }
+.newest h2 { font-size: clamp(1.75rem, 3.4vw, 2.5rem); line-height: 1.3; margin: .35rem 0 0; }
+.newest-sub { margin: .75rem 0 0; font-size: 1.25rem; font-weight: 600; color: var(--ink-2); }
+.newest-sub span[lang="en"] { font-family: var(--display); font-style: italic; font-weight: 400; }
+.newest-about { margin: 1rem 0 0; font-size: 1.0625rem; color: var(--ink-2); }
+.newest-about span[lang="en"] { font-family: var(--en); }
+.newest-motto { margin: 1.5rem 0 0; padding: 0 0 0 1.1rem; border-left: 3px solid var(--accent); }
+.newest-motto p { margin: 0; font-size: 1.125rem; line-height: 1.8; }
+.newest-motto p[lang="en"] { font-family: var(--display); font-style: italic; margin-top: .25rem; }
+.newest .shelf-meta { margin: 1.25rem 0 .5rem !important; font-size: .9375rem !important; }
+.mini-cover.has-img { padding: 0; border: 0; overflow: hidden; }
+.mini-cover.has-img img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 760px) { .newest { grid-template-columns: minmax(0, 1fr); gap: 2rem; } .newest-cover { max-width: 17rem; margin: 0 auto; } }
 @media (max-width: 900px) { .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 1.25rem; } .cover-title { font-size: 1.1rem; } }
 .buy, .guest { max-width: var(--prose); margin: 4.5rem auto 0; padding-top: 2.25rem; border-top: 3px double var(--ink); }
 .buy h2, .guest h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
-.buy-list { list-style: none; padding: 0; margin: 1.25rem 0 0; display: grid; gap: .75rem; }
+.buy-list { list-style: none; padding: 0; margin: 1.25rem 0 0; display: grid; gap: 0; border-top: 1px solid var(--hair); }
+.buy-list li { padding: 1rem 0; border-bottom: 1px solid var(--hair); }
+.buy-list .shop { display: block; font-size: 1.25rem; font-weight: 700; line-height: 1.4; }
+.buy-list .shop span[lang="en"] { font-size: 1.05rem; }
+.buy-list .where { display: block; margin-top: .35rem; font-family: var(--sans); color: var(--ink-2); font-size: 1rem; }
+.buy-list .where span[lang="en"] { font-family: "Instrument Sans", system-ui, sans-serif; }
 .guest p { color: var(--ink-2); }
 
 /* Paintings */
@@ -426,6 +447,37 @@ html[data-lang="en"] .pt-back span[lang="am"] { display: none; }
 .pt-meta { margin: .5rem 0 0; font-family: var(--sans); color: var(--grey); font-size: 1rem; }
 .pt-meta span[lang="en"] { font-family: "Instrument Sans", system-ui, sans-serif !important; font-style: normal !important; }
 .painting-page .prevnext { margin-top: 2.25rem; }
+
+/* a book's page: front and back of the cover */
+.flip-stage { display: flex; align-items: center; justify-content: center; gap: 1.5rem; }
+.flip-face { margin: 0; }
+.flip-face + .flip-face { margin-left: 1.5rem; }               /* no script: both covers side by side */
+.js .flip-face:not(.is-on) { display: none; }
+.js .flip-face + .flip-face { margin-left: 0; }
+.flip-face img { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 12rem); box-shadow: 0 22px 40px -24px rgba(0,0,0,.5); }
+.flip-arrow, .flip-tabs { display: none; }
+.js .flip-arrow { display: grid; place-items: center; flex: none; width: 3.5rem; height: 3.5rem; border-radius: 50%; border: 2px solid var(--ink); background: var(--paper, #fff); color: var(--ink); font-size: 2rem; line-height: 1; cursor: pointer; padding: 0 0 .2rem; }
+.js .flip-arrow:hover { background: var(--ink); color: #fff; }
+.js .flip-arrow[hidden] { visibility: hidden; display: grid; }
+.js .flip-tabs { display: flex; justify-content: center; gap: .5rem; margin: 1.25rem 0 0; }
+.flip-tabs button { min-height: 2.75rem; padding: 0 1.1rem; border: 1px solid var(--hair); border-radius: 999px; background: none; color: var(--ink-2); font-family: var(--sans); font-size: .9375rem; font-weight: 600; cursor: pointer; }
+.flip-tabs button span[lang="en"] { font-family: "Instrument Sans", system-ui, sans-serif; }
+.flip-tabs button span[lang="en"]::before { content: " · " !important; }
+.flip-tabs button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+.pt-caption { max-width: var(--prose); margin: 1.75rem auto 0; text-align: center; }
+.pt-caption .newest-sub { margin-top: .6rem; }
+.book-page .enquire { margin-top: 1.5rem; }
+a.newest-cover { display: block; }
+.cover-link { display: block; text-decoration: none; color: inherit; }
+.shelf-item h3 a { text-decoration: none; }
+.shelf-item h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+.cover.has-img { padding: 0; }
+.book-drawn { max-width: 20rem; margin: 0 auto; }
+.book-drawn .cover { box-shadow: 0 22px 40px -24px rgba(0,0,0,.35); }
+.book-drawn .cover-title { font-size: 1.75rem; }
+.newest h2 a { text-decoration: none; }
+.newest h2 a:hover > span[lang="am"] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+.newest-links { display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; margin: 0; }
 
 /* Contact */
 .contact-card { max-width: var(--prose); margin: 0 auto; border-top: 3px double var(--ink); padding-top: 1.75rem; }
@@ -692,4 +744,15 @@ html[data-lang="en"] .foot-contact span[lang="am"] { display: none; }
   .pt-title span[lang="en"], .gallery figcaption span[lang="en"] { font-family: var(--en) !important; font-style: normal !important; margin: 0; }
   .pt-meta { font-size: 1.0625rem; }
   .painting-page .enquire { margin-top: 1.5rem; }
+  .js .flip-arrow { display: none !important; }
+  .book-drawn { max-width: 15rem; }
+  .book-drawn .cover-title { font-size: 1.4rem; }
+  .flip-face img { max-height: none; }
+  html:not(.js) .flip-face + .flip-face { margin: 1.25rem 0 0; }
+  .flip-stage { flex-direction: column; gap: 0; }
+  .js .flip-tabs { gap: .6rem; margin-top: 1.1rem; }
+  .flip-tabs button { flex: 1; min-height: 3.5rem; border: 2px solid var(--ink); border-radius: 6px; font-size: 1.125rem; color: var(--ink); }
+  html[data-lang="am"] .flip-tabs span[lang="en"], html[data-lang="en"] .flip-tabs span[lang="am"] { display: none; }
+  .flip-tabs button span[lang="en"]::before { content: none !important; }
+  .pt-caption .newest-sub span[lang="en"] { font-family: var(--en) !important; font-style: normal !important; }
 }

@@ -91,6 +91,34 @@
   }
   sync();
 
+  // ---- Book covers: front / back ------------------------------------------------------------
+  all("[data-flip]").forEach(function (f) {
+    var faces = all(".flip-face", f), i = 0;
+    function show(n) {
+      i = Math.max(0, Math.min(faces.length - 1, n));
+      faces.forEach(function (x, k) { x.classList.toggle("is-on", k === i); });
+      all("[data-flip-to]", f).forEach(function (b) { b.setAttribute("aria-pressed", String(+b.getAttribute("data-flip-to") === i)); });
+      var prev = f.querySelector(".flip-prev"), next = f.querySelector(".flip-next");
+      if (prev) prev.hidden = i === 0;
+      if (next) next.hidden = i === faces.length - 1;
+    }
+    all("[data-flip-go]", f).forEach(function (b) { b.addEventListener("click", function () { show(i + +b.getAttribute("data-flip-go")); }); });
+    all("[data-flip-to]", f).forEach(function (b) { b.addEventListener("click", function () { show(+b.getAttribute("data-flip-to")); }); });
+    faces.forEach(function (x) { x.addEventListener("click", function () { show(i === faces.length - 1 ? 0 : i + 1); }); x.style.cursor = "pointer"; });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") show(i + 1);
+      if (e.key === "ArrowLeft") show(i - 1);
+    });
+    var x0 = null;
+    f.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    f.addEventListener("touchend", function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1));
+    });
+    show(0);
+  });
+
   // ---- Menu ---------------------------------------------------------------------------------
   var menuBtn = document.querySelector(".menu-btn"), nav = document.getElementById("nav");
   if (menuBtn && nav) {

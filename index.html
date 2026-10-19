@@ -30,7 +30,7 @@
   <div class="wrap util-bar">
     <p class="today" data-today></p>
     <div class="util-ctl">
-      <button type="button" class="size-btn" data-size-toggle aria-pressed="false" aria-label="ፊደል አሳድግ · Larger text"><span class="s1" aria-hidden="true">ሀ</span><span class="s2" aria-hidden="true">ሀ</span></button>
+      <button type="button" class="size-btn" data-size-toggle aria-pressed="false" aria-label="ፊደል አሳድግ · Larger text"><span class="s1" aria-hidden="true">ሀ</span><span class="s2" aria-hidden="true">ሀ</span><span class="s-mob" aria-hidden="true">ሀ+ ፊደል</span></button>
       <div class="lang-switch" role="group" aria-label="ቋንቋ · Language">
         <button type="button" class="ls ls-am" data-set-lang="am">አማርኛ</button>
         <button type="button" class="ls ls-en" data-set-lang="en">English</button>
@@ -44,6 +44,11 @@
       <span class="mast-am">ባሕረ ቀመር</span>
       <span class="mast-sub">Bahrekemer · The works of Memhir Yitbarek Gessese Merra</span>
     </a>
+    <div class="mast-id m-only">
+      <p class="mast-who blk"><span lang="am">የታሪክ ምሁርና ሠዓሊ ይትባረክ ገሠሠ መራ ሥራዎች</span><span lang="en">The works of historian and painter Yitbarek Gessese Merra</span></p>
+      <p class="mast-what"><span lang="am">ታሪክ ፡ ቅኔ ፡ ሥዕል ፡ የባሕረ ቀመር ቁጥር</span><span lang="en">History · Qene · Painting · The Bahre Kemer numbers</span></p>
+    </div>
+    <nav class="m-nav m-only" aria-label="ዋና ክፍሎች · Main sections"><a href="writings/"><span class="n-am">ጽሑፎች</span><span class="n-en">Writings</span></a><a href="megbiya/"><span class="n-am">ባሕረ ቀመር</span><span class="n-en">Bahre Kemer</span></a><a href="qene/"><span class="n-am">ቅኔና ግጥም</span><span class="n-en">Qene & Poetry</span></a><a href="books/"><span class="n-am">መጻሕፍትና ሥዕሎች</span><span class="n-en">Books & Paintings</span></a><a href="contact/"><span class="n-am">ያግኙን</span><span class="n-en">Contact</span></a></nav>
     <div class="navrow">
       <nav id="nav" class="nav" aria-label="Main"><a href="megbiya/"><span class="n-am">መግቢያ</span><span class="n-en">Introduction</span></a><a href="numbers/"><span class="n-am">ቁጥሮች</span><span class="n-en">Numbers</span></a><a href="key/"><span class="n-am">ቁልፍ</span><span class="n-en">Key</span></a><a href="qene/"><span class="n-am">ቅኔ</span><span class="n-en">Qene</span></a><a href="poetry/"><span class="n-am">ወቅታዊ ግጥም</span><span class="n-en">Poetry</span></a><a href="books/"><span class="n-am">መጻሕፍት</span><span class="n-en">Books</span></a><a href="paintings/"><span class="n-am">ሥዕሎች</span><span class="n-en">Paintings</span></a><a href="contact/"><span class="n-am">ያግኙን</span><span class="n-en">Contact</span></a></nav>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav"><span class="menu-icon" aria-hidden="true"></span><span class="menu-label">ክፍሎች <span class="menu-en">Sections</span></span></button>
@@ -53,7 +58,8 @@
 <main id="main">
 <!-- Home page template. build.py fills in:
        <article class="lead">
-      <p class="kicker"><span lang="am">ድርሰት</span><span lang="en">Essay</span></p>
+      <p class="kicker d-only"><span lang="am">ድርሰት</span><span lang="en">Essay</span></p>
+      <p class="kicker m-only"><span lang="am">አዲሱ ጽሑፍ</span><span lang="en">Latest</span></p>
       <h1 class="lead-title"><a href="writings/consciousness-faith/"><span lang="am">ንቃተ ሕሊና ለእምነት መሠረት ነው</span><span lang="en">Consciousness Is the Foundation of Faith</span></a></h1>
       <div lang="am" class="lx dek"><p>ያለ ዕድሜያቸዉ የመንጌል መምህራን ተብለዉ የተሠየሙት ወጣት ኢትዮጵያዊያን አቦ ፈጠረኝን ስለ ሚያስተምሩ ንቃተ ሕልና ካለ አቦ ፈጠሩኝ ከማለት ያድናልና ነው፡፡ ጥናት ቢደረግ ኢትዮጵያዊያን ምእመናን ታቦተ ሕጉን ትተዉ ለሙዳየ ምጽዋት የሚሰግዱና አቦ ፈጠሩኝ የሚሉ ከ90% በላይ ሊሆኑ ይችላሉ፡፡</p><p>ምሁራኑም ደግሞ ከአባ ጳውሎስ ወዲህ ታቦተ ሕጉን ለኋሊት ጋርደዉ በማኅሌት ለአለቃ የሚሰግዱትና ካህናቱም በቅዳሴ ጊዜ በመቅደስ አለቃን የሚያንቆላጵሱት መቶ በመቶ ናቸዉ፡፡ መቅደሱም የአለቃዉና የመነኮሳት ሳሎን ይመስላል እንጂ የእግዚአብሔር ዙፋን መሆኑ የተረሳ ይመስላል፡፡</p></div><div lang="en" class="lx dek"><p>Young Ethiopians appointed as teachers of the Gospel before their time teach the faithful to say “Abo created me” — and it is consciousness that would save a person from saying “Abo created me.” Were a study to be made, the Ethiopian faithful who turn from the Tabot to bow before the alms box, saying “Abo created me,” could well number more than ninety percent.</p><p>As for the learned, since the time of Abba Paulos every one of them — one hundred percent — screens the Tabot behind him to bow before the administrator during the Mahlet, while the priests, during the Liturgy, fawn over the administrator within the sanctuary itself. The sanctuary has come to resemble a parlour for the administrator and the monks; that it is the throne of God seems to have been forgotten.</p></div>
       <div class="byline-row">
@@ -124,7 +130,8 @@
 <section class="front wrap" aria-label="ፊት ገጽ · Front page">
   <div class="front-lead">
     <article class="lead">
-      <p class="kicker"><span lang="am">ድርሰት</span><span lang="en">Essay</span></p>
+      <p class="kicker d-only"><span lang="am">ድርሰት</span><span lang="en">Essay</span></p>
+      <p class="kicker m-only"><span lang="am">አዲሱ ጽሑፍ</span><span lang="en">Latest</span></p>
       <h1 class="lead-title"><a href="writings/consciousness-faith/"><span lang="am">ንቃተ ሕሊና ለእምነት መሠረት ነው</span><span lang="en">Consciousness Is the Foundation of Faith</span></a></h1>
       <div lang="am" class="lx dek"><p>ያለ ዕድሜያቸዉ የመንጌል መምህራን ተብለዉ የተሠየሙት ወጣት ኢትዮጵያዊያን አቦ ፈጠረኝን ስለ ሚያስተምሩ ንቃተ ሕልና ካለ አቦ ፈጠሩኝ ከማለት ያድናልና ነው፡፡ ጥናት ቢደረግ ኢትዮጵያዊያን ምእመናን ታቦተ ሕጉን ትተዉ ለሙዳየ ምጽዋት የሚሰግዱና አቦ ፈጠሩኝ የሚሉ ከ90% በላይ ሊሆኑ ይችላሉ፡፡</p><p>ምሁራኑም ደግሞ ከአባ ጳውሎስ ወዲህ ታቦተ ሕጉን ለኋሊት ጋርደዉ በማኅሌት ለአለቃ የሚሰግዱትና ካህናቱም በቅዳሴ ጊዜ በመቅደስ አለቃን የሚያንቆላጵሱት መቶ በመቶ ናቸዉ፡፡ መቅደሱም የአለቃዉና የመነኮሳት ሳሎን ይመስላል እንጂ የእግዚአብሔር ዙፋን መሆኑ የተረሳ ይመስላል፡፡</p></div><div lang="en" class="lx dek"><p>Young Ethiopians appointed as teachers of the Gospel before their time teach the faithful to say “Abo created me” — and it is consciousness that would save a person from saying “Abo created me.” Were a study to be made, the Ethiopian faithful who turn from the Tabot to bow before the alms box, saying “Abo created me,” could well number more than ninety percent.</p><p>As for the learned, since the time of Abba Paulos every one of them — one hundred percent — screens the Tabot behind him to bow before the administrator during the Mahlet, while the priests, during the Liturgy, fawn over the administrator within the sanctuary itself. The sanctuary has come to resemble a parlour for the administrator and the monks; that it is the throne of God seems to have been forgotten.</p></div>
       <div class="byline-row">
@@ -162,7 +169,50 @@
   </aside>
 </section>
 
-<section class="band" aria-labelledby="band-h">
+<!-- ===== Phone only (≤640px): earlier writings, three doors, about + contact. Desktop uses the sections marked d-only. ===== -->
+<section class="m-only m-block wrap" aria-labelledby="earlier-h">
+  <h2 class="m-head" id="earlier-h"><span lang="am">ቀደምት ጽሑፎች</span><span lang="en">Earlier writings</span></h2>
+  <ul class="earlier"><li><a href="writings/fruit-of-peace/"><span class="e-title blk"><span lang="am">ወቅቱን ለማስታወስ — የሰላም ፍሬ</span><span lang="en">In Remembrance of the Season — The Fruit of Peace</span></span><span class="e-kind"><span lang="am">ግጥም</span><span lang="en">Poem</span></span></a></li><li><a href="writings/lamp-in-darkness/"><span class="e-title blk"><span lang="am">ንቃተ ሕሊና የጨለማ መብራት ነው</span><span lang="en">Consciousness Is a Lamp in the Darkness</span></span><span class="e-kind"><span lang="am">ድርሰት</span><span lang="en">Essay</span></span></a></li><li><a href="writings/leads-to-philosophy/"><span class="e-title blk"><span lang="am">ንቃተ ሕሊና ከፍልስፍና ያደርሳል</span><span lang="en">Consciousness Leads to Philosophy</span></span><span class="e-kind"><span lang="am">ድርሰት</span><span lang="en">Essay</span></span></a></li><li><a href="writings/idealist-philosophy/"><span class="e-title blk"><span lang="am">አይዲያሊስታዊ ፍልስፍና</span><span lang="en">Idealist Philosophy</span></span><span class="e-kind"><span lang="am">ድርሰት</span><span lang="en">Essay</span></span></a></li><li><a href="writings/soul-breath-spirit/"><span class="e-title blk"><span lang="am">ነፍስ፡ እስትንፋስ፡ መንፈስ</span><span lang="en">Soul, Breath, Spirit</span></span><span class="e-kind"><span lang="am">ድርሰት</span><span lang="en">Essay</span></span></a></li></ul>
+  <a class="more-link" href="writings/"><span lang="am">ሁሉም ጽሑፎች →</span><span lang="en">All writings →</span></a>
+</section>
+
+<section class="m-only doors" aria-labelledby="work-h">
+  <div class="wrap">
+    <h2 class="m-head center" id="work-h">፨ <span lang="am">ሥራዎቹ</span><span lang="en">His work</span> ፨</h2>
+    <a class="door" href="megbiya/">
+      <span class="door-num" aria-hidden="true">፻፼</span>
+      <span class="door-title blk"><span lang="am">ባሕረ ቀመር</span><span lang="en">The Bahre Kemer system</span></span>
+      <span lang="am" class="lx door-text">በባሕረ ቀመር ከ፩፻፼ ቤት በላይ የቀረበው ጥናት፡ የራሴ ግኝት እንደ ሆነ መታወቅ አለበት፡፡</span>
+      <span lang="en" class="lx door-text">How Ge’ez counts beyond a million — registered with the Ethiopian Intellectual Property Office in 2007 E.C.</span>
+    </a>
+    <p class="door-path"><a href="megbiya/">፩ <span lang="am" class="lx">መግቢያ</span><span lang="en" class="lx">Introduction</span></a> → <a href="numbers/">፪ <span lang="am" class="lx">ቁጥሮች</span><span lang="en" class="lx">Numbers</span></a> → <a href="key/">፫ <span lang="am" class="lx">ቁልፍ</span><span lang="en" class="lx">Key</span></a></p>
+    <a class="door" href="qene/">
+      <span class="door-verse" aria-hidden="true">ኖላዌ አባግዕ ኪሩቤል አማላከ ነግደ ኢዮር ዜና፡፡</span>
+      <span class="door-title blk"><span lang="am">ቅኔና ግጥም</span><span lang="en">Qene &amp; Poetry</span></span>
+      <span lang="am" class="lx door-text">በጥንታዊው የግዕዝና የአማርኛ ትውፊት የተቀኙ ቅኔዎች፣ ወቅቱን የሚያንጸባርቁ ግጥሞች።</span>
+      <span lang="en" class="lx door-text">Sacred poetry in the classical Ge’ez and Amharic tradition, and poems of the times.</span>
+    </a>
+    <p class="door-path"><a href="qene/"><span lang="am" class="lx">ቅኔ</span><span lang="en" class="lx">Qene</span></a> ፡ <a href="poetry/"><span lang="am" class="lx">ወቅታዊ ግጥም</span><span lang="en" class="lx">Poetry</span></a></p>
+    <a class="door" href="books/">
+      <span class="door-books" aria-hidden="true"><span></span><span></span><span></span><span class="wide"></span></span>
+      <span class="door-title blk"><span lang="am">መጻሕፍትና ሥዕሎች</span><span lang="en">Books &amp; Paintings</span></span>
+      <span lang="am" class="lx door-text">በኢትዮጵያ ኦርቶዶክስ ሃይማኖት፣ በግዕዝ፣ በአማርኛ፣ በታሪክና በባህል ላይ የታተሙ ሥራዎች።</span>
+      <span lang="en" class="lx door-text">Published works on Ethiopian Orthodox faith, Ge’ez, Amharic, history and culture.</span>
+    </a>
+    <p class="door-path"><a href="books/"><span lang="am" class="lx">መጻሕፍት</span><span lang="en" class="lx">Books</span></a> ፡ <a href="paintings/"><span lang="am" class="lx">ሥዕሎች</span><span lang="en" class="lx">Paintings</span></a></p>
+  </div>
+</section>
+
+<section class="m-only m-block wrap m-about" aria-labelledby="m-about-h">
+  <p class="kicker"><span lang="am">ስለ ደራሲው</span><span lang="en">About the author</span></p>
+  <h2 id="m-about-h" class="m-name blk"><span lang="am">መምህር ይትባረክ ገሠሠ መራ</span><span lang="en">Yitbarek Gessese Merra</span></h2>
+  <p class="roles"><span lang="am">የታሪክ ምሁር ፡ ሠዓሊ ፡ ዲያቆን ፡ ደራሲ</span><span lang="en">Historian · Painter · Deacon · Author</span></p>
+  <p lang="am" class="lx m-bio">ይትባረክ ገሠሠ መራ ኢትዮጵያዊ የታሪክ ምሁር፣ በሥነ ጥበብ ሥዕል የሠለጠነ ሠዓሊ፣ በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተ ክርስቲያን የቅዳሴና የሊቃውንት ትውፊት የታነጸ የአብነት ዲያቆን፣ እንዲሁም ከአሥራ ሁለት በላይ መጻሕፍትን የጻፈ ደራሲ ነው።</p>
+  <p lang="en" class="lx m-bio">An Ethiopian historian, a painter trained in the fine arts, and a deacon formed in the liturgical and scholarly traditions of the Ethiopian Orthodox Church — author of more than a dozen books.</p>
+  <p class="m-contact"><a href="mailto:yigeme.yg7@gmail.com">yigeme.yg7@gmail.com</a><a href="tel:+251913547463">+251 913 547 463</a></p>
+</section>
+
+<section class="band d-only" aria-labelledby="band-h">
   <div class="wrap band-inner">
     <p class="kicker" id="band-h"><span lang="am">ከመግቢያው</span><span lang="en">From the Introduction</span></p>
     <blockquote class="band-quote">
@@ -173,7 +223,7 @@
   </div>
 </section>
 
-<section class="block wrap" aria-labelledby="contents-h">
+<section class="block wrap d-only" aria-labelledby="contents-h">
   <h2 class="rule-head" id="contents-h"><span lang="am">ማውጫ</span><span lang="en">Contents</span></h2>
   <ol class="contents"><li><a href="megbiya/">
         <span class="c-no" aria-hidden="true">፩</span>
@@ -210,7 +260,7 @@
         <span class="c-arrow" aria-hidden="true">→</span></a></li></ol>
 </section>
 
-<section class="block wrap" aria-labelledby="more-h">
+<section class="block wrap d-only" aria-labelledby="more-h">
   <div class="sec-head">
     <h2 id="more-h"><span lang="am">ተጨማሪ ጽሑፎች</span><span lang="en">More writings</span></h2>
     <a href="writings/"><span lang="am">ሁሉም ጽሑፎች →</span><span lang="en">All writings →</span></a>
@@ -232,7 +282,7 @@
   </div>
 </section>
 
-<section class="profile" aria-labelledby="profile-h">
+<section class="profile d-only" aria-labelledby="profile-h">
   <div class="wrap profile-inner">
     
     <div class="profile-text">
@@ -258,7 +308,7 @@
   </div>
 </section>
 
-<section class="block wrap" aria-labelledby="books-h">
+<section class="block wrap d-only" aria-labelledby="books-h">
   <div class="sec-head">
     <h2 id="books-h"><span lang="am">መጻሕፍት</span><span lang="en">Books</span></h2>
     <a href="books/"><span lang="am">ሁሉም መጻሕፍት →</span><span lang="en">All books →</span></a>

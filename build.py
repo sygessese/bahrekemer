@@ -115,6 +115,19 @@ def nav_links(current, p):
         for s in SITE["nav"])
 
 
+GROUPS = [  # phone home page: five groups instead of eight items
+    ("writings/", "ጽሑፎች", "Writings"),
+    ("megbiya/", "ባሕረ ቀመር", "Bahre Kemer"),
+    ("qene/", "ቅኔና ግጥም", "Qene & Poetry"),
+    ("books/", "መጻሕፍትና ሥዕሎች", "Books & Paintings"),
+    ("contact/", "ያግኙን", "Contact"),
+]
+
+
+def group_links(p):
+    return "".join(f'<a href="{p}{h}"><span class="n-am">{am}</span><span class="n-en">{en}</span></a>' for h, am, en in GROUPS)
+
+
 MENU_BTN = ('<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">'
             '<span class="menu-icon" aria-hidden="true"></span>'
             '<span class="menu-label">ክፍሎች <span class="menu-en">Sections</span></span></button>')
@@ -126,7 +139,7 @@ def header(current, p):
   <div class="wrap util-bar">
     <p class="today" data-today></p>
     <div class="util-ctl">
-      <button type="button" class="size-btn" data-size-toggle aria-pressed="false" aria-label="ፊደል አሳድግ · Larger text"><span class="s1" aria-hidden="true">ሀ</span><span class="s2" aria-hidden="true">ሀ</span></button>
+      <button type="button" class="size-btn" data-size-toggle aria-pressed="false" aria-label="ፊደል አሳድግ · Larger text"><span class="s1" aria-hidden="true">ሀ</span><span class="s2" aria-hidden="true">ሀ</span><span class="s-mob" aria-hidden="true">ሀ+ ፊደል</span></button>
       <div class="lang-switch" role="group" aria-label="ቋንቋ · Language">
         <button type="button" class="ls ls-am" data-set-lang="am">አማርኛ</button>
         <button type="button" class="ls ls-en" data-set-lang="en">English</button>
@@ -142,6 +155,11 @@ def header(current, p):
       <span class="mast-am">ባሕረ ቀመር</span>
       <span class="mast-sub">Bahrekemer · The works of Memhir Yitbarek Gessese Merra</span>
     </a>
+    <div class="mast-id m-only">
+      <p class="mast-who blk">{t("የታሪክ ምሁርና ሠዓሊ ይትባረክ ገሠሠ መራ ሥራዎች", "The works of historian and painter Yitbarek Gessese Merra")}</p>
+      <p class="mast-what">{t("ታሪክ ፡ ቅኔ ፡ ሥዕል ፡ የባሕረ ቀመር ቁጥር", "History · Qene · Painting · The Bahre Kemer numbers")}</p>
+    </div>
+    <nav class="m-nav m-only" aria-label="ዋና ክፍሎች · Main sections">{group_links(p)}</nav>
     <div class="navrow">
       <nav id="nav" class="nav" aria-label="Main">{nav_links(current, p)}</nav>
       {MENU_BTN}
@@ -206,7 +224,8 @@ def page_hero(slug):
 def home_front(p=""):
     lead, side, more = WRITINGS[0], WRITINGS[1:4], WRITINGS[4:8]
     lead_html = f'''<article class="lead">
-      <p class="kicker">{kicker(lead)}</p>
+      <p class="kicker d-only">{kicker(lead)}</p>
+      <p class="kicker m-only">{t("አዲሱ ጽሑፍ", "Latest")}</p>
       <h1 class="lead-title"><a href="{w_href(lead, p)}">{t(lead["title"]["am"], lead["title"]["en"])}</a></h1>
       {lx(opening(lead, "am"), opening(lead, "en"), tag="div", cls="dek")}
       <div class="byline-row">
@@ -224,6 +243,15 @@ def home_front(p=""):
         <h3><a href="{w_href(w, p)}">{t(w["title"]["am"], w["title"]["en"])}</a></h3>
       </article>''' for w in more)
     return lead_html, side_html, more_html
+
+
+def earlier_list(p=""):
+    rows = ""
+    for w in WRITINGS[1:6]:
+        kam, ken = KINDS.get(w["kind"], KINDS["essay"])
+        rows += (f'<li><a href="{w_href(w, p)}"><span class="e-title blk">{t(w["title"]["am"], w["title"]["en"])}</span>'
+                 f'<span class="e-kind">{t(kam, ken)}</span></a></li>')
+    return f'<ul class="earlier">{rows}</ul>'
 
 
 def contents_list():
@@ -245,7 +273,7 @@ def build_home():
     pic = ('<figure class="profile-pic"><img src="assets/img/author.jpg" alt="Yitbarek Gessese Merra" '
            'width="600" height="750" loading="lazy"></figure>') if os.path.exists(portrait) else ""
     return (tpl.replace("<!--LEAD-->", lead).replace("<!--SIDE-->", side).replace("<!--MORE-->", more)
-               .replace("<!--CONTENTS-->", contents_list()).replace("<!--PORTRAIT-->", pic))
+               .replace("<!--CONTENTS-->", contents_list()).replace("<!--EARLIER-->", earlier_list()).replace("<!--PORTRAIT-->", pic))
 
 
 # ---------------------------------------------------------------- writing pages

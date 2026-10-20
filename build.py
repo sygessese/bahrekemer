@@ -9,6 +9,7 @@ No dependencies. What you edit:
   content/writings.json        the list of writings, NEWEST FIRST — the home page fills itself from it
   content/writings/<slug>.html the text of each writing (Amharic in lang="am", English in lang="en")
   content/books.json           books that have cover photos — each gets its own page (front/back)
+  sync/                        the nightly Google Drive sync (his Amharic lives in Google Docs — read sync/PROCEDURE.md)
   content/paintings.json       the paintings, in gallery order; images in assets/img/paintings/
                                (NAME.jpg large, NAME-sm.jpg for the gallery). Each gets its own page.
   site.json                    page titles, descriptions, nav order
@@ -367,7 +368,9 @@ def writings_index():
 
 # ---------------------------------------------------------------- paintings
 def jpeg_size(path):
-    """(width, height) of a JPEG, read from its header."""
+    """(width, height) of a JPEG, read from its header (None if the file isn't there yet)."""
+    if not os.path.exists(path):
+        return None
     with open(path, "rb") as f:
         f.read(2)
         while True:
@@ -393,7 +396,8 @@ def img_attrs_in(folder, name):
 
 def painting_meta(pt):
     y = pt.get("year", "")
-    return t((y + " ፡ " if y else "") + "የዘይት ቀለም", (y + " · " if y else "") + "Oil on canvas")
+    m = pt.get("medium") or {"am": "የዘይት ቀለም", "en": "Oil on canvas"}
+    return t((y + " ፡ " if y else "") + m["am"], (y + " · " if y else "") + m["en"])
 
 
 def gallery():
@@ -771,7 +775,7 @@ def build():
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n'
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
           + "\n".join(urls) + "\n</urlset>\n")
-    write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /content/\nSitemap: {base}/sitemap.xml\n")
+    write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /content/\nDisallow: /sync/\nSitemap: {base}/sitemap.xml\n")
     print(f"Built {len(written)} pages + sitemap.xml, robots.txt")
 
 

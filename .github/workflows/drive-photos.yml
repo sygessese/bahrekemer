@@ -1,0 +1,29 @@
+# Fetches new photos from the shared Google Drive folder for the nightly sync (see sync/PROCEDURE.md).
+# Runs when the sync branch adds requests to sync/photo-requests.json. The Drive folder must be shared
+# "Anyone with the link", otherwise the downloads fail and the request is marked with an error.
+name: Drive photos
+on:
+  push:
+    branches: [drive-sync]
+    paths: [sync/photo-requests.json]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - run: python3 sync/fetch_photos.py
+      - name: Commit photos
+        run: |
+          git config user.name "bahrekemer-sync"
+          git config user.email "sync@bahrekemer.com"
+          git add assets/img sync/photo-requests.json
+          git diff --cached --quiet || (git commit -m "Photos from Google Drive" && git push)

@@ -1,0 +1,133 @@
+{
+ "_about": "Drive files that feed the site. The repo is public, so files are matched by idhash (sync/idhash.py), never by raw id. Folder and Sheet ids are in the scheduled task's instructions. Written by the nightly sync — see sync/PROCEDURE.md.",
+ "folders": {
+  "root": "c8f4a26b770008f5",
+  "essays": "8ee6c97c5430c72d",
+  "poems": "d406745c4ff7b19c",
+  "photos": "ae84b951ba24c62d",
+  "photos_books": "1475b3a82743453d",
+  "photos_paintings": "5dc3de678b88586a"
+ },
+ "start_here": "0619edce245cf9b5",
+ "sheet": {
+  "idhash": "4a9afc134f105e84",
+  "seen_modified": "2026-10-20T18:35:00Z"
+ },
+ "docs": {
+  "index": {
+   "idhash": "1c229761f631a495",
+   "name": "፩ · መነሻ ገጽ",
+   "folder": "root",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "megbiya": {
+   "idhash": "ab38fb44fa561378",
+   "name": "፪ · መግቢያ",
+   "folder": "root",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "numbers": {
+   "idhash": "595efa128fa13a6b",
+   "name": "፫ · ቁጥሮች",
+   "folder": "root",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "key": {
+   "idhash": "7fbe34970d1d8fdd",
+   "name": "፬ · ቁልፍ",
+   "folder": "root",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "qene": {
+   "idhash": "845a4e59eaece5e3",
+   "name": "፭ · ቅኔ",
+   "folder": "root",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "poetry": {
+   "idhash": "792b831975c488d1",
+   "name": "፮ · ወቅታዊ ግጥም",
+   "folder": "root",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "books": {
+   "idhash": "145f558a9497e381",
+   "name": "፯ · መጻሕፍት",
+   "folder": "root",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "paintings": {
+   "idhash": "bc628687ae91d65e",
+   "name": "፰ · ሥዕሎች",
+   "folder": "root",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "contact": {
+   "idhash": "b32f4bb0041b6cdf",
+   "name": "፱ · ያግኙን",
+   "folder": "root",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "writings/consciousness-faith": {
+   "idhash": "598db1b275fe3b7d",
+   "name": "ንቃተ ሕሊና ለእምነት መሠረት ነው",
+   "folder": "essays",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "writings/fruit-of-peace": {
+   "idhash": "a2a57e56cd48c232",
+   "name": "ወቅቱን ለማስታወስ — የሰላም ፍሬ",
+   "folder": "poems",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "writings/lamp-in-darkness": {
+   "idhash": "ccdb65998b45adb7",
+   "name": "ንቃተ ሕሊና የጨለማ መብራት ነው",
+   "folder": "essays",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "writings/leads-to-philosophy": {
+   "idhash": "6cdffe75ea074de8",
+   "name": "ንቃተ ሕሊና ከፍልስፍና ያደርሳል",
+   "folder": "essays",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "writings/idealist-philosophy": {
+   "idhash": "5b38ce322fe770bc",
+   "name": "አይዲያሊስታዊ ፍልስፍና",
+   "folder": "essays",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "writings/soul-breath-spirit": {
+   "idhash": "2833830a39a25716",
+   "name": "ነፍስ፡ እስትንፋስ፡ መንፈስ",
+   "folder": "essays",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "writings/examining-religion": {
+   "idhash": "ee4ed777d13c7894",
+   "name": "ሃይማኖትን መመርመር",
+   "folder": "essays",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "writings/zera-yacob": {
+   "idhash": "48fa83dc55f2531a",
+   "name": "ፍላስፋው ዘርዓ ያዕቆብ",
+   "folder": "essays",
+   "seen_modified": "2026-10-20T18:35:00Z"
+  }
+ },
+ "book_photo_folders": {
+  "kine-tibebat": "8743f8eed84329a5",
+  "sewasewe-kemer": "97f56d16a8d6e22b",
+  "bahre-kemer": "a98eb83de68f0608",
+  "bahre-kemer-2": "faaec4c361130c90",
+  "bahre-kemer-exercises": "2cc5aa5b911b31e4",
+  "world-faith-symbols": "9a037fcd1aa1551f",
+  "placement-of-letters": "52d4838e7401f6ee",
+  "truth-about-the-nation": "3047826ba174d8e2",
+  "melkea-melekot": "ed529f8a5397e83c"
+ },
+ "processed_photos": [],
+ "last_run": "2026-10-20T18:35:00Z"
+}

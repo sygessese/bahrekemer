@@ -1,15 +1,11 @@
 {
- "_about": "Drive files that feed the site. The repo is public, so files are matched by idhash (sync/idhash.py), never by raw id. Folder and Sheet ids are in the scheduled task's instructions. Written by the nightly sync — see sync/PROCEDURE.md.",
+ "_about": "Drive files that feed the site. The repo is public, so files are matched by idhash (sync/idhash.py), never by raw id. Folder ids are in the scheduled task's instructions. Written by the nightly sync — see sync/PROCEDURE.md.",
  "folders": {
   "root": "c8f4a26b770008f5",
   "essays": "8ee6c97c5430c72d",
   "poems": "d406745c4ff7b19c"
  },
- "start_here": "27f13e60aeaa3208",
- "sheet": {
-  "idhash": "dc3006f09d7ef650",
-  "seen_modified": "2026-10-22T12:30:00Z"
- },
+ "start_here": "33bc80f08d546ce8",
  "docs": {
   "index": {
    "idhash": "1c229761f631a495",
@@ -106,6 +102,12 @@
    "name": "ፍላስፋው ዘርዓ ያዕቆብ",
    "folder": "essays",
    "seen_modified": "2026-10-20T18:35:00Z"
+  },
+  "catalog": {
+   "idhash": "dd5ac73da62eff13",
+   "name": "፰ · መጻሕፍትና ሥዕሎች",
+   "folder": "root",
+   "seen_modified": "2026-10-22T14:03:01.091Z"
   }
  },
  "last_run": "2026-10-20T18:35:00Z"

@@ -169,10 +169,13 @@ def header(current, p, back_to=None):
   <div class="wrap">
     <a class="mast-title" href="{p}./">
       <span class="mast-am">ባሕረ ቀመር</span>
-      <span class="mast-sub">Bahrekemer · The works of Memhir Yitbarek Gessese Merra</span>
+      <span class="mast-tag">ሥነ ጥበባት ማዕከል</span>
+      <span class="mast-by">ከይትባረክ ገሠሠ መራ፡ የቅኔ መምህር፡ ሠዓሊና ደራሲ</span>
+      <span class="mast-sub">Bahrekemer · A Centre for the Arts · Yitbarek Gessese Merra, teacher of Qene, painter and author</span>
     </a>
     <div class="mast-id m-only">
-      <p class="mast-who blk">{t("የታሪክ ምሁርና ሠዓሊ ይትባረክ ገሠሠ መራ ሥራዎች", "The works of historian and painter Yitbarek Gessese Merra")}</p>
+      <p class="mast-tagline blk">{t("ሥነ ጥበባት ማዕከል", "A Centre for the Arts")}</p>
+      <p class="mast-who blk">{t('<span class="nw">ከይትባረክ ገሠሠ መራ፡</span> <span class="nw">የቅኔ መምህር፡ ሠዓሊና ደራሲ</span>', "By Yitbarek Gessese Merra — teacher of Qene, painter and author")}</p>
       <p class="mast-what">{t("ታሪክ ፡ ቅኔ ፡ ሥዕል ፡ የባሕረ ቀመር ቁጥር", "History · Qene · Painting · The Bahre Kemer numbers")}</p>
     </div>
     <div class="navrow">

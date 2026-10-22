@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Amharic text of each page as an ordered list of blocks — the same shape the Google Docs have.
 
-Used three ways:
+Used by sync/docs.py (which splits the seven Docs into sections) and directly:
   python3 sync/blocks.py doc-html KEY      HTML to create a Google Doc for KEY (Amharic only)
   python3 sync/blocks.py diff KEY FILE     compare a Doc (FILE = its text from read_file_content) with the site
   python3 sync/blocks.py show KEY          print the site's blocks for KEY

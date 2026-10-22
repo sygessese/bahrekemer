@@ -1,114 +1,100 @@
 {
- "_about": "Drive files that feed the site. The repo is public, so files are matched by idhash (sync/idhash.py), never by raw id. Folder ids are in the scheduled task's instructions. Written by the nightly sync — see sync/PROCEDURE.md.",
+ "_about": "The seven Google Docs that feed the site (sync/docs.py). The repo is public, so files are matched by idhash (sync/idhash.py), never by raw id; the folder id is in the scheduled task's instructions. sections maps each numbered heading in a Doc to the page, writing, book or painting it feeds. Written by the nightly sync — see sync/PROCEDURE.md.",
  "folders": {
-  "root": "c8f4a26b770008f5",
-  "essays": "8ee6c97c5430c72d",
-  "poems": "d406745c4ff7b19c"
+  "root": "c8f4a26b770008f5"
  },
- "start_here": "33bc80f08d546ce8",
  "docs": {
-  "index": {
-   "idhash": "1c229761f631a495",
-   "name": "፩ · መነሻ ገጽ",
+  "essays": {
+   "idhash": "5b6fffa63049633f",
+   "name": "፩ · ድርሰቶች",
    "folder": "root",
-   "seen_modified": "2026-10-20T18:35:00Z"
+   "seen_modified": "2026-10-22T15:40:00Z",
+   "sections": {
+    "1": "writings/zera-yacob",
+    "2": "writings/examining-religion",
+    "3": "writings/soul-breath-spirit",
+    "4": "writings/idealist-philosophy",
+    "5": "writings/leads-to-philosophy",
+    "6": "writings/lamp-in-darkness",
+    "7": "writings/consciousness-faith"
+   }
   },
-  "megbiya": {
-   "idhash": "ab38fb44fa561378",
-   "name": "፪ · መግቢያ",
+  "poems": {
+   "idhash": "155c7df907ca7910",
+   "name": "፪ · ግጥሞች",
    "folder": "root",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "numbers": {
-   "idhash": "595efa128fa13a6b",
-   "name": "፫ · ቁጥሮች",
-   "folder": "root",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "key": {
-   "idhash": "7fbe34970d1d8fdd",
-   "name": "፬ · ቁልፍ",
-   "folder": "root",
-   "seen_modified": "2026-10-20T18:35:00Z"
+   "seen_modified": "2026-10-22T15:40:00Z",
+   "sections": {
+    "1": "poetry",
+    "2": "writings/fruit-of-peace"
+   }
   },
   "qene": {
-   "idhash": "845a4e59eaece5e3",
-   "name": "፭ · ቅኔ",
+   "idhash": "5192b304c2af0fba",
+   "name": "፫ · ቅኔ",
    "folder": "root",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "poetry": {
-   "idhash": "792b831975c488d1",
-   "name": "፮ · ወቅታዊ ግጥም",
-   "folder": "root",
-   "seen_modified": "2026-10-20T18:35:00Z"
+   "seen_modified": "2026-10-22T15:40:00Z",
+   "sections": {
+    "1": "qene"
+   }
   },
   "books": {
-   "idhash": "145f558a9497e381",
-   "name": "፯ · መጻሕፍት",
+   "idhash": "be0274cefc6e1840",
+   "name": "፬ · መጻሕፍት",
    "folder": "root",
-   "seen_modified": "2026-10-20T18:35:00Z"
+   "seen_modified": "2026-10-22T15:40:00Z",
+   "sections": {
+    "1": "kine-tibebat",
+    "2": "sewasewe-kemer",
+    "3": "bahre-kemer",
+    "4": "bahre-kemer-2",
+    "5": "bahre-kemer-exercises",
+    "6": "world-faith-symbols",
+    "7": "placement-of-letters",
+    "8": "truth-about-the-nation",
+    "9": "melkea-melekot",
+    "10": "kine-tibeb-sine-tibeb",
+    "11": "ye-tarik-mastawesha"
+   }
   },
-  "contact": {
-   "idhash": "b32f4bb0041b6cdf",
-   "name": "፱ · ያግኙን",
+  "paintings": {
+   "idhash": "445718075c23136c",
+   "name": "፭ · ሥዕሎች",
    "folder": "root",
-   "seen_modified": "2026-10-20T18:35:00Z"
+   "seen_modified": "2026-10-22T15:40:00Z",
+   "sections": {
+    "1": "hands-1989",
+    "2": "saint-michael",
+    "3": "crowd-1985",
+    "4": "abuna-aregawi",
+    "5": "fidel",
+    "6": "procession",
+    "7": "trinity",
+    "8": "still-life"
+   }
   },
-  "writings/consciousness-faith": {
-   "idhash": "598db1b275fe3b7d",
-   "name": "ንቃተ ሕሊና ለእምነት መሠረት ነው",
-   "folder": "essays",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "writings/fruit-of-peace": {
-   "idhash": "a2a57e56cd48c232",
-   "name": "ወቅቱን ለማስታወስ — የሰላም ፍሬ",
-   "folder": "poems",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "writings/lamp-in-darkness": {
-   "idhash": "ccdb65998b45adb7",
-   "name": "ንቃተ ሕሊና የጨለማ መብራት ነው",
-   "folder": "essays",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "writings/leads-to-philosophy": {
-   "idhash": "6cdffe75ea074de8",
-   "name": "ንቃተ ሕሊና ከፍልስፍና ያደርሳል",
-   "folder": "essays",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "writings/idealist-philosophy": {
-   "idhash": "5b38ce322fe770bc",
-   "name": "አይዲያሊስታዊ ፍልስፍና",
-   "folder": "essays",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "writings/soul-breath-spirit": {
-   "idhash": "2833830a39a25716",
-   "name": "ነፍስ፡ እስትንፋስ፡ መንፈስ",
-   "folder": "essays",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "writings/examining-religion": {
-   "idhash": "ee4ed777d13c7894",
-   "name": "ሃይማኖትን መመርመር",
-   "folder": "essays",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "writings/zera-yacob": {
-   "idhash": "48fa83dc55f2531a",
-   "name": "ፍላስፋው ዘርዓ ያዕቆብ",
-   "folder": "essays",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "catalog": {
-   "idhash": "dd5ac73da62eff13",
-   "name": "፰ · መጻሕፍትና ሥዕሎች",
+  "numbers": {
+   "idhash": "6f89b20d582d868e",
+   "name": "፮ · ቁጥሮችና ቁልፍ",
    "folder": "root",
-   "seen_modified": "2026-10-22T14:03:01.091Z"
+   "seen_modified": "2026-10-22T15:40:00Z",
+   "sections": {
+    "1": "numbers",
+    "2": "key"
+   }
+  },
+  "pages": {
+   "idhash": "1184a13a6f9b5a68",
+   "name": "፯ · መግቢያና ሌሎች ገጾች",
+   "folder": "root",
+   "seen_modified": "2026-10-22T15:40:00Z",
+   "sections": {
+    "1": "megbiya",
+    "2": "index",
+    "3": "books",
+    "4": "contact"
+   }
   }
  },
- "last_run": "2026-10-20T18:35:00Z"
+ "last_run": null
 }

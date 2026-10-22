@@ -1,55 +1,39 @@
 <!-- Home page template. build.py fills in:
-       <!--LEAD-->, <!--SIDE-->, <!--MORE-->  from content/writings.json (newest first)
-       <!--CONTENTS-->                        from site.json
-       <!--PORTRAIT-->                        assets/img/author.jpg, once it exists
-     Everything else below is edited here. -->
+       <!--LEAD-->, <!--WRITINGS-->   from content/writings.json (newest first)
+       <!--BOOKS-->, <!--PAINTINGS--> from content/books.json, content/paintings.json
+       <!--PHONE-->                   the phone home (latest piece + contents)
+       <!--PORTRAIT-->                assets/img/author.jpg, once it exists
+     Everything else below is edited here. Labels with class "ui" are design, not his text (the Drive sync skips them). -->
 
 <section class="front wrap" aria-label="ፊት ገጽ · Front page">
   <div class="front-lead">
     <!--LEAD-->
   </div>
-  <div class="front-side">
-    <!--SIDE-->
+  <div class="front-list" aria-labelledby="wl-h">
+    <!--WRITINGS-->
   </div>
-  <aside class="front-aside" aria-labelledby="bk-h">
-    <p class="kicker"><span lang="am">ቁጥሮች</span><span lang="en">Numbers</span></p>
-    <p class="big-num" aria-hidden="true">፻፼</p>
-    <p class="label"><span lang="am">አንድ ሚሊየን</span><span lang="en">One million</span></p>
-    <h2 id="bk-h" class="aside-title blk"><span lang="am">ከ፩፻፼ በላይ</span><span lang="en">Beyond a million</span></h2>
-    <p lang="am" class="lx aside-text">በባሕረ ቀመር ከ፩፻፼ ቤት በላይ የቀረበው ጥናት፡ የራሴ ግኝት እንደ ሆነ መታወቅ አለበት፡፡</p>
-    <p lang="en" class="lx aside-text">Earlier scholars never agreed on how Ge’ez counts past a million. The Bahre Kemer system resolves it — registered with the Ethiopian Intellectual Property Office in 2007 E.C.</p>
-    <ul class="aside-links">
-      <li><a href="numbers/"><span lang="am">ቁጥሮቹ</span><span lang="en">The numbers</span></a></li>
-      <li><a href="key/"><span lang="am">ቁልፍ</span><span lang="en">The key to reading them</span></a></li>
-    </ul>
-  </aside>
 </section>
 
 <!--PHONE-->
 
-<section class="band d-only" aria-labelledby="band-h">
+<section class="band d-only" aria-label="ከመግቢያውና ከቁጥሮቹ · From the Introduction and the Numbers">
   <div class="wrap band-inner">
-    <p class="kicker" id="band-h"><span lang="am">ከመግቢያው</span><span lang="en">From the Introduction</span></p>
-    <blockquote class="band-quote">
-      <p class="band-am">ንቃተ ሕሊና ቀስ በቀስ ከማሠብ ይፈጠራል፡ ይመነጫል፡ ይመሠረታል።</p>
-      <p lang="en" class="lx band-en">“Consciousness is born of thinking, little by little: it springs from thought, and is founded upon it.”</p>
-    </blockquote>
-    <a class="more-link light" href="megbiya/"><span lang="am">መግቢያውን ያንብቡ →</span><span lang="en">Read the Introduction →</span></a>
-  </div>
-</section>
-
-<section class="block wrap d-only" aria-labelledby="contents-h">
-  <h2 class="rule-head" id="contents-h"><span lang="am">ማውጫ</span><span lang="en">Contents</span></h2>
-  <!--CONTENTS-->
-</section>
-
-<section class="block wrap d-only" aria-labelledby="more-h">
-  <div class="sec-head">
-    <h2 id="more-h"><span lang="am">ተጨማሪ ጽሑፎች</span><span lang="en">More writings</span></h2>
-    <a href="writings/"><span lang="am">ሁሉም ጽሑፎች →</span><span lang="en">All writings →</span></a>
-  </div>
-  <div class="more-grid">
-    <!--MORE-->
+    <div class="band-quote-col">
+      <p class="kicker ui"><span lang="am">ከመግቢያው</span><span lang="en">From the Introduction</span></p>
+      <blockquote class="band-quote">
+        <p class="band-am">ንቃተ ሕሊና ቀስ በቀስ ከማሠብ ይፈጠራል፡ ይመነጫል፡ ይመሠረታል።</p>
+        <p lang="en" class="lx band-en">“Consciousness is born of thinking, little by little: it springs from thought, and is founded upon it.”</p>
+      </blockquote>
+      <a class="more-link light" href="megbiya/"><span lang="am">መግቢያውን ያንብቡ →</span><span lang="en">Read the Introduction →</span></a>
+    </div>
+    <div class="band-num-col">
+      <p class="kicker ui"><span lang="am">ቁጥሮች</span><span lang="en">Numbers</span></p>
+      <p class="big-num" aria-hidden="true">፻፼</p>
+      <h2 class="band-num-title blk"><span lang="am">ከ፩፻፼ በላይ</span><span lang="en">Beyond a million</span></h2>
+      <p lang="am" class="lx band-num-text">በባሕረ ቀመር ከ፩፻፼ ቤት በላይ የቀረበው ጥናት፡ የራሴ ግኝት እንደ ሆነ መታወቅ አለበት፡፡</p>
+      <p lang="en" class="lx band-num-text">Earlier scholars never agreed on how Ge’ez counts past a million. The Bahre Kemer system resolves it — registered with the Ethiopian Intellectual Property Office in 2007 E.C.</p>
+      <p class="band-links ui"><a class="more-link light" href="numbers/"><span lang="am">ቁጥሮቹ →</span><span lang="en">The numbers →</span></a> <a class="more-link light" href="key/"><span lang="am">ቁልፍ →</span><span lang="en">The key →</span></a></p>
+    </div>
   </div>
 </section>
 
@@ -58,7 +42,7 @@
     <!--PORTRAIT-->
     <div class="profile-text">
       <div class="profile-head">
-      <p class="kicker"><span lang="am">ስለ ደራሲው</span><span lang="en">Profile</span></p>
+      <p class="kicker ui"><span lang="am">ስለ ደራሲው</span><span lang="en">Profile</span></p>
       <h2 id="profile-h" class="profile-name blk"><span lang="am">መምህር ይትባረክ ገሠሠ መራ</span><span lang="en">Yitbarek Gessese Merra</span></h2>
       <p class="roles"><span lang="am">የታሪክ ምሁር ፡ ሠዓሊ ፡ ዲያቆን ፡ ደራሲ</span><span lang="en">Historian · Painter · Deacon · Author</span></p>
       </div>
@@ -84,10 +68,13 @@
     <h2 id="books-h"><span lang="am">መጻሕፍት</span><span lang="en">Books</span></h2>
     <a href="books/"><span lang="am">ሁሉም መጻሕፍት →</span><span lang="en">All books →</span></a>
   </div>
-  <ul class="book-strip">
-    <li><a href="books/kine-tibebat/"><span class="mini-cover has-img"><img src="assets/img/books/kine-tibebat-sm.jpg" alt="" width="520" height="738" loading="lazy"></span><span class="bs-title blk"><span lang="am">ኪነ ጥበባት በኢትዮጵያ መቼ</span><span lang="en">The Arts in Ethiopia — Since When?</span></span><span class="bs-meta">2016 <span lang="am">ዓ.ም. ፡ አዲሱ</span><span lang="en">E.C. · Newest</span></span></a></li>
-    <li><a href="books/sewasewe-kemer/"><span class="mini-cover">ሰዋስወ ቀመር</span><span class="bs-title blk"><span lang="am">ሰዋስወ ቀመር</span><span lang="en">The Grammar of Kemer</span></span><span class="bs-meta">2001 <span lang="am">ዓ.ም.</span><span lang="en">E.C.</span></span></a></li>
-    <li><a href="books/bahre-kemer/"><span class="mini-cover">ባሕረ ቀመር</span><span class="bs-title blk"><span lang="am">ባሕረ ቀመር</span><span lang="en">The Sea of Kemer</span></span><span class="bs-meta">2003 <span lang="am">ዓ.ም.</span><span lang="en">E.C.</span></span></a></li>
-    <li><a href="books/truth-about-the-nation/"><span class="mini-cover">ስለ ሃገር እውነት ይነገር</span><span class="bs-title blk"><span lang="am">ስለ ሃገር እውነት ይነገር</span><span lang="en">Let the Truth Be Told About the Nation</span></span><span class="bs-meta">2008 <span lang="am">ዓ.ም.</span><span lang="en">E.C.</span></span></a></li>
-  </ul>
+  <!--BOOKS-->
+</section>
+
+<section class="block wrap d-only" aria-labelledby="paint-h">
+  <div class="sec-head">
+    <h2 id="paint-h"><span lang="am">ሥዕሎች</span><span lang="en">Paintings</span></h2>
+    <a href="paintings/"><span lang="am">ሁሉም ሥዕሎች →</span><span lang="en">All paintings →</span></a>
+  </div>
+  <!--PAINTINGS-->
 </section>

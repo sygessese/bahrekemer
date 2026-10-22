@@ -18,7 +18,7 @@ WRITINGS = json.load(open(os.path.join(ROOT, "content", "writings.json"), encodi
 ETH = re.compile(r"[ሀ-᎟ⶀ-⷟꬀-꬯]")
 
 BLOCK = {"h1", "h2", "h3", "h4", "p", "li", "tr", "dt", "dd", "figcaption", "blockquote"}
-SKIP_CLASSES = {"more-link", "text-link", "btn", "reader", "cover-no", "big-num", "ornament", "book-strip", "end-mark"}
+SKIP_CLASSES = {"ui", "sec-head", "paint-strip", "more-link", "text-link", "btn", "reader", "cover-no", "big-num", "ornament", "book-strip", "end-mark"}
 
 
 def norm(s):

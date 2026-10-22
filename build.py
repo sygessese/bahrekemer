@@ -240,27 +240,34 @@ def page_hero(slug):
 
 # ---------------------------------------------------------------- home
 def home_front(p=""):
-    lead, side, more = WRITINGS[0], WRITINGS[1:4], WRITINGS[4:8]
+    lead, rest = WRITINGS[0], WRITINGS[1:]
     lead_html = f'''<article class="lead">
-      <p class="kicker d-only">{kicker(lead)}</p>
+      <p class="kicker d-only">{t(KINDS.get(lead["kind"], KINDS["essay"])[0] + " ፡ አዲሱ", KINDS.get(lead["kind"], KINDS["essay"])[1] + " · Latest")}</p>
       <p class="kicker m-only">{t("አዲሱ ጽሑፍ", "Latest")}</p>
       <h1 class="lead-title"><a href="{w_href(lead, p)}">{t(lead["title"]["am"], lead["title"]["en"])}</a></h1>
-      {lx(opening(lead, "am"), opening(lead, "en"), tag="div", cls="dek")}
+      {lx(opening(lead, "am", paras=3), opening(lead, "en", paras=3), tag="div", cls="dek")}
       <div class="byline-row">
         <p class="byline">{t(AUTHOR_AM, "By " + SITE["author"])}</p>
         <a class="more-link" href="{w_href(lead, p)}">{t("ሙሉውን ያንብቡ →", "Read in full →")}</a>
       </div>
     </article>'''
-    side_html = "".join(f'''<article class="side-item">
-        <p class="kicker">{kicker(w)}</p>
-        <h3><a href="{w_href(w, p)}">{t(w["title"]["am"], w["title"]["en"])}</a></h3>
-        {lx(excerpt(w, "am", 120), excerpt(w, "en", 120), cls="side-ex")}
-      </article>''' for w in side)
-    more_html = "".join(f'''<article class="more-item">
-        <p class="kicker">{kicker(w)}</p>
-        <h3><a href="{w_href(w, p)}">{t(w["title"]["am"], w["title"]["en"])}</a></h3>
-      </article>''' for w in more)
-    return lead_html, side_html, more_html
+    items = "".join(f'''<li><a href="{w_href(w, p)}"><span class="kicker">{kicker(w)}</span>
+        <span class="wl-title blk">{t(w["title"]["am"], w["title"]["en"])}</span></a></li>''' for w in rest)
+    list_html = f'''<div class="sec-head"><h2 id="wl-h">{t("ጽሑፎች", "Writings")}</h2></div>
+    <ol class="wlist">{items}</ol>
+    <a class="more-link" href="{p}writings/">{t("ሁሉም ጽሑፎች →", "All writings →")}</a>'''
+    return lead_html, list_html
+
+
+def home_books(p="", count=6):
+    picks = [b for b in BOOKS if b["faces"]][:count]
+    items = "".join(f'''<li><a href="{p}books/{b["slug"]}/">{cover_box(b, BOOKS.index(b) + 1, p)}<span class="bs-title blk">{t(b["title"]["am"], b["title"]["en"])}</span>{f'<span class="bs-meta">{t(b["year"] + " ዓ. ም.", b.get("year_en", b["year"] + " E.C."))}</span>' if b.get("year") else ""}</a></li>''' for b in picks)
+    return f'<ul class="book-strip">{items}</ul>'
+
+
+def home_paintings(p="", count=4):
+    items = "".join(f'''<li><a href="{p}paintings/{pt["slug"]}/"><span class="hp-frame"><img src="{p}assets/img/paintings/{pt["slug"]}-sm.jpg" alt="{esc(pt["alt"])}" loading="lazy"></span><span class="hp-title blk">{t(pt["title"]["am"], pt["title"]["en"])}</span></a></li>''' for pt in sorted(PAINTINGS, key=lambda x: "[" in x["title"]["am"])[:count])
+    return f'<ul class="paint-strip">{items}</ul>'
 
 
 def phone_home(p=""):
@@ -303,12 +310,12 @@ def contents_list():
 
 def build_home():
     tpl = open(os.path.join(ROOT, "content", "index.html"), encoding="utf-8").read()
-    lead, side, more = home_front()
+    lead, wlist = home_front()
     portrait = os.path.join(ROOT, "assets", "img", "author.jpg")
     pic = ('<figure class="profile-pic"><img src="assets/img/author.jpg" alt="Yitbarek Gessese Merra" '
            'width="600" height="750" loading="lazy"></figure>') if os.path.exists(portrait) else ""
-    return (tpl.replace("<!--LEAD-->", lead).replace("<!--SIDE-->", side).replace("<!--MORE-->", more)
-               .replace("<!--CONTENTS-->", contents_list()).replace("<!--EARLIER-->", earlier_list()).replace("<!--PHONE-->", phone_home()).replace("<!--PORTRAIT-->", pic))
+    return (tpl.replace("<!--LEAD-->", lead).replace("<!--WRITINGS-->", wlist)
+               .replace("<!--BOOKS-->", home_books()).replace("<!--PAINTINGS-->", home_paintings()).replace("<!--PHONE-->", phone_home()).replace("<!--PORTRAIT-->", pic))
 
 
 # ---------------------------------------------------------------- writing pages
@@ -528,7 +535,7 @@ def newest_block():
 
 
 def shelf():
-    rest = [b for b in BOOKS if not b.get("newest")]
+    rest = BOOKS  # every book, the newest included (it is also featured above)
     items = "".join(f'''
     <figure class="shelf-item">
       <a class="cover-link" href="{b["slug"]}/" aria-hidden="true" tabindex="-1">{cover_box(b, n, "../")}</a>
@@ -540,8 +547,7 @@ def shelf():
 def book_page(i, b):
     p = "../../"
     faces = b["faces"]
-    rest = [x for x in BOOKS if not x.get("newest")]
-    n = rest.index(b) + 1 if b in rest else 0
+    n = BOOKS.index(b) + 1
     if faces:
         figs = "".join(
             f'''

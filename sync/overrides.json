@@ -1,1 +1,8 @@
-[]
+[
+ {
+  "key": "books",
+  "doc": "አሁን ያሉን መጻሕፍት",
+  "site": "የታተሙ መጻሕፍት",
+  "note": "Selly renamed the shelf heading on 22 Oct; paste the new wording into the ፯ · መጻሕፍት Doc, then remove this entry."
+ }
+]

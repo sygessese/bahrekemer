@@ -68,7 +68,26 @@
       "am": "አርቲስቲክ ማተሚያ ድርጅት",
       "en": "Artistic Printing Press"
     },
-    "faces": []
+    "faces": [
+      {
+        "img": "bahre-kemer",
+        "label": {
+          "am": "ፊት",
+          "en": "Front"
+        }
+      },
+      {
+        "img": "bahre-kemer-back",
+        "label": {
+          "am": "ጀርባ",
+          "en": "Back"
+        }
+      }
+    ],
+    "sub": {
+      "am": "ሰዋስወ ቀመር ሁለተኛ",
+      "en": "<i>Sewasewe Kemer</i>, Part Two"
+    }
   },
   {
     "slug": "bahre-kemer-2",
@@ -82,7 +101,26 @@
       "am": "ንግድ ማተሚያ ድርጅት",
       "en": "Commercial Printing Enterprise"
     },
-    "faces": []
+    "faces": [
+      {
+        "img": "bahre-kemer-2",
+        "label": {
+          "am": "ፊት",
+          "en": "Front"
+        }
+      },
+      {
+        "img": "bahre-kemer-2-back",
+        "label": {
+          "am": "ጀርባ",
+          "en": "Back"
+        }
+      }
+    ],
+    "sub": {
+      "am": "የአኀዝና የባሕረ ቀመር ቁጥር መድበል",
+      "en": "A Compendium of Ge’ez and Bahre Kemer Numerals"
+    }
   },
   {
     "slug": "bahre-kemer-exercises",
@@ -90,13 +128,28 @@
       "am": "ባሕረ ቀመር የሒሣብ መልመጃ ቁ. አንድ",
       "en": "<i>Bahre Kemer</i> Arithmetic Exercises, No. 1"
     },
-    "year": "2008",
+    "year": "2007",
     "pages": "96",
     "publisher": {
       "am": "ንግድ ማተሚያ ድርጅት",
       "en": "Commercial Printing Enterprise"
     },
-    "faces": []
+    "faces": [
+      {
+        "img": "bahre-kemer-exercises",
+        "label": {
+          "am": "ፊት",
+          "en": "Front"
+        }
+      },
+      {
+        "img": "bahre-kemer-exercises-back",
+        "label": {
+          "am": "ጀርባ",
+          "en": "Back"
+        }
+      }
+    ]
   },
   {
     "slug": "world-faith-symbols",
@@ -118,7 +171,26 @@
       "en": "The Placement of Letters in the Art of Writing"
     },
     "year": "2006",
-    "faces": []
+    "faces": [
+      {
+        "img": "placement-of-letters",
+        "label": {
+          "am": "ፊት",
+          "en": "Front"
+        }
+      },
+      {
+        "img": "placement-of-letters-back",
+        "label": {
+          "am": "ጀርባ",
+          "en": "Back"
+        }
+      }
+    ],
+    "sub": {
+      "am": "ሀ ሐ ኀ ሠ ሰ ጸ ፀ",
+      "en": "ሀ ሐ ኀ ሠ ሰ ጸ ፀ — the letters that sound alike"
+    }
   },
   {
     "slug": "truth-about-the-nation",
@@ -184,6 +256,39 @@
       "am": "ብርሃን በጨለማ ይበራ ነበር። ጨለማም አላሸነፈውም። — ዮሐንስ ፩፡፭",
       "en": "“The light shines in the darkness, and the darkness has not overcome it.” — John 1:5"
     }
+  },
+  {
+    "slug": "kine-tibeb-sine-tibeb",
+    "title": {
+      "am": "ኪነ ጥበብና ሥነ ጥበብ",
+      "en": "<i>Kine Tibeb and Sine Tibeb</i>"
+    },
+    "sub": {
+      "am": "የአኀዝ መዝገበ ቁጥር — ከነባር እስከ ምርምር",
+      "en": "A Register of Ge’ez Numerals, from Tradition to Research"
+    },
+    "year": "1986",
+    "pages": "268",
+    "publisher": {
+      "am": "ቦሌ ማተሚያ ድርጅት",
+      "en": "Bole Printing Press"
+    },
+    "faces": [
+      {
+        "img": "kine-tibeb-sine-tibeb",
+        "label": {
+          "am": "ፊት",
+          "en": "Front"
+        }
+      },
+      {
+        "img": "kine-tibeb-sine-tibeb-back",
+        "label": {
+          "am": "ጀርባ",
+          "en": "Back"
+        }
+      }
+    ]
   },
   {
     "slug": "ye-tarik-mastawesha",

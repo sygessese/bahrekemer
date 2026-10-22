@@ -266,8 +266,10 @@ def home_books(p="", count=6):
 
 
 def home_paintings(p="", count=4):
-    items = "".join(f'''<li><a href="{p}paintings/{pt["slug"]}/"><span class="hp-frame"><img src="{p}assets/img/paintings/{pt["slug"]}-sm.jpg" alt="{esc(pt["alt"])}" loading="lazy"></span><span class="hp-title blk">{t(pt["title"]["am"], pt["title"]["en"])}</span></a></li>''' for pt in sorted(PAINTINGS, key=lambda x: "[" in x["title"]["am"])[:count])
-    return f'<ul class="paint-strip">{items}</ul>'
+    titled = [pt for pt in PAINTINGS if "[" not in pt["title"]["am"]]  # placeholders wait until he names them
+    picks = (titled or PAINTINGS)[:count]
+    items = "".join(f'''<li><a href="{p}paintings/{pt["slug"]}/"><span class="hp-frame"><img src="{p}assets/img/paintings/{pt["slug"]}-sm.jpg" alt="{esc(pt["alt"])}" loading="lazy"></span><span class="hp-title blk">{t(pt["title"]["am"], pt["title"]["en"])}</span></a></li>''' for pt in picks)
+    return f'<ul class="paint-strip" style="--n:{len(picks)}">{items}</ul>'
 
 
 def phone_home(p=""):

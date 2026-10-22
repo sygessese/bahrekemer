@@ -273,7 +273,7 @@ html[data-lang="en"] .sec-head h2 span[lang="am"] + span[lang="en"] { margin-lef
 .profile-bio [lang="en"] p { font-size: 1.1875rem; line-height: 1.6; }
 
 /* Painting strip */
-.paint-strip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem 1.75rem; }
+.paint-strip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: 2rem 1.75rem; }
 .paint-strip a { display: flex; flex-direction: column; gap: .75rem; text-decoration: none; }
 .hp-frame { display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--wash); box-shadow: 0 14px 28px -18px rgba(0,0,0,.45); }
 .hp-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }

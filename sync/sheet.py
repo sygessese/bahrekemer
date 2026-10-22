@@ -31,7 +31,7 @@ PAINTING_COLS = {
     "ርእስ": lambda p: p["title"]["am"],
     "Title (English)": lambda p: p["title"]["en"],
     "ዓመት": lambda p: p.get("year", ""),
-    "ቅብ": lambda p: (p.get("medium") or {"am": "የዘይት ቀለም"})["am"],
+    "ቅብ": lambda p: (p.get("medium") or {"am": ""})["am"],
     "የፎቶው ስም": lambda p: p.get("photo", "(በድረ ገጹ ላይ ያለ)"),
 }
 

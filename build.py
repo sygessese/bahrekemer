@@ -399,8 +399,10 @@ def img_attrs_in(folder, name):
 
 def painting_meta(pt):
     y = pt.get("year", "")
-    m = pt.get("medium") or {"am": "የዘይት ቀለም", "en": "Oil on canvas"}
-    return t((y + " ፡ " if y else "") + m["am"], (y + " · " if y else "") + m["en"])
+    m = pt.get("medium") or {"am": "", "en": ""}
+    am = " ፡ ".join(x for x in (y, m["am"]) if x)
+    en = " · ".join(x for x in (y, m["en"]) if x)
+    return t(am, en) if am else ""
 
 
 def gallery():
@@ -629,7 +631,7 @@ def book_ld(b, url):
 def painting_ld(pt, url):
     base = SITE["url"].rstrip("/")
     return {"@type": "VisualArtwork", "name": pt["title"]["en"], "alternateName": pt["title"]["am"], "url": url,
-            "image": f'{base}/assets/img/paintings/{pt["slug"]}.jpg', "artMedium": "Oil on canvas",
+            "image": f'{base}/assets/img/paintings/{pt["slug"]}.jpg', **({"artMedium": pt["medium"]["en"]} if pt.get("medium") else {}),
             "creator": person(base)}
 
 

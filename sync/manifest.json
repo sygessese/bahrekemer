@@ -3,10 +3,7 @@
  "folders": {
   "root": "c8f4a26b770008f5",
   "essays": "8ee6c97c5430c72d",
-  "poems": "d406745c4ff7b19c",
-  "photos": "ae84b951ba24c62d",
-  "photos_books": "1475b3a82743453d",
-  "photos_paintings": "5dc3de678b88586a"
+  "poems": "d406745c4ff7b19c"
  },
  "start_here": "27f13e60aeaa3208",
  "sheet": {
@@ -53,12 +50,6 @@
   "books": {
    "idhash": "145f558a9497e381",
    "name": "፯ · መጻሕፍት",
-   "folder": "root",
-   "seen_modified": "2026-10-20T18:35:00Z"
-  },
-  "paintings": {
-   "idhash": "bc628687ae91d65e",
-   "name": "፰ · ሥዕሎች",
    "folder": "root",
    "seen_modified": "2026-10-20T18:35:00Z"
   },
@@ -117,18 +108,5 @@
    "seen_modified": "2026-10-20T18:35:00Z"
   }
  },
- "book_photo_folders": {
-  "kine-tibebat": "8743f8eed84329a5",
-  "sewasewe-kemer": "97f56d16a8d6e22b",
-  "bahre-kemer": "a98eb83de68f0608",
-  "bahre-kemer-2": "faaec4c361130c90",
-  "bahre-kemer-exercises": "2cc5aa5b911b31e4",
-  "world-faith-symbols": "9a037fcd1aa1551f",
-  "placement-of-letters": "52d4838e7401f6ee",
-  "truth-about-the-nation": "3047826ba174d8e2",
-  "melkea-melekot": "ed529f8a5397e83c",
-  "ye-tarik-mastawesha": "b78b5a89fbb0e1cf"
- },
- "processed_photos": [],
  "last_run": "2026-10-20T18:35:00Z"
 }

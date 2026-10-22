@@ -698,6 +698,7 @@ html[data-lang="en"] .foot-contact span[lang="am"] { display: none; }
   .mast-tagline span[lang="en"] { font-family: var(--en) !important; font-style: normal !important; font-weight: 600; font-size: 1.3rem !important; margin: 0; }
   .mast-who { margin: .15rem 0 0; font-size: 1.0625rem; line-height: 1.75; color: var(--ink-2); text-wrap: balance; }
   .mast-who .nw { white-space: nowrap; }
+  html[data-lang="am"] .mast-who { white-space: nowrap; font-size: min(1.0625rem, 4.05vw); letter-spacing: -.005em; }
   .mast-who span[lang="en"] { font-family: var(--en) !important; font-style: normal !important; font-size: 1.0625rem !important; margin: 0; }
   .mast-what { display: none; }
   .phone-home { display: block; padding: 1.25rem 1rem 1.5rem; }

@@ -11,7 +11,7 @@ Follow this file exactly. Work in the repo `sygessese/bahrekemer` (GitHub Pages 
 | Amharic text of every page and writing | Google Docs in the Drive folder | Dad (or Selly, in the Doc) |
 | English text | the repo (`content/`, `site.json`) | this sync, or Claude in chat |
 | Book and painting facts | the Google Sheet "መጻሕፍትና ሥዕሎች" | anyone with the link |
-| Photos | Drive `ፎቶዎች/` → repo `assets/img/` (via the GitHub Action) | Selly drops them in |
+| Photos | the repo `assets/img/` | Selly sends them to Claude in chat — not part of this sync |
 | Design, layout, code | the repo | Claude in chat |
 
 `sync/manifest.json` maps every Drive file to its page. **The repo is public, so it never holds Drive ids** — only `idhash` = the first 16 hex characters of sha256(id) (`python3 sync/idhash.py <id>`). The ids of the Drive folders and the Sheet are in your scheduled-task instructions; never write them into the repo. `sync/blocks.py` turns a page (or a Doc's text) into an ordered list of Amharic blocks and compares them. `sync/sheet.py` compares the Sheet with `content/books.json` / `content/paintings.json`. `sync/overrides.json` lists known, accepted differences between a Doc and the site (skip them, but mention them). `sync/GLOSSARY.md` is the translation guide — **read it before translating**.
@@ -29,13 +29,13 @@ If `drive-sync` already existed, it holds changes Selly hasn't approved yet — 
 
 ### 2. Find what changed in Drive
 Read `sync/manifest.json`. Using the Google Drive tools:
-- `search_files` with `parentId = '<id>'` (and `excludeContentSnippets: true`) for each folder id in your instructions: root, essays, poems, photos_paintings, photos_books — and for each subfolder of photos_books (one per book). Note each file's `id`, `title`, `mimeType`, `modifiedTime`, and compute its `idhash` (`python3 sync/idhash.py id1 id2 …`).
-- Match files to the manifest by `idhash` (docs, the Sheet, book photo folders).
+- `search_files` with `parentId = '<id>'` (and `excludeContentSnippets: true`) for each folder id in your instructions: root, essays, poems. Note each file's `id`, `title`, `mimeType`, `modifiedTime`, and compute its `idhash` (`python3 sync/idhash.py id1 id2 …`).
+- Match files to the manifest by `idhash` (docs and the Sheet).
 - A **known Doc** changed if its `modifiedTime` is later than its `seen_modified`. If its title changed, update `name` too.
 - A **new Doc** is one whose idhash isn't in the manifest: in `essays` → new essay; in `poems` → new poem; in `root` → don't guess, list it under **Needs you** in the summary.
 - A **known Doc missing** from its folder (moved or trashed): don't delete anything from the site; list it under **Needs you**.
 - The **Sheet** changed if its `modifiedTime` > `sheet.seen_modified`.
-- **New photos**: image files whose idhash isn't in `processed_photos`.
+- Ignore images or other files in the folder; photos are not part of this sync (list anything unexpected under **Needs you**).
 
 If nothing changed and there is no pending `drive-sync` work: reply with one line, "No changes in the Drive folder tonight.", and stop. If nothing changed but `drive-sync` has unapproved changes: one line reminding Selly they're waiting, and stop.
 
@@ -72,19 +72,13 @@ If nothing changed and there is no pending `drive-sync` work: reply with one lin
 ### 5. The Sheet
 1. `read_file_content` the Sheet; save to `/tmp/sheet.json`; run `python3 sync/sheet.py /tmp/sheet.json`.
 2. **changed** cells → update `content/books.json` / `content/paintings.json`. For each Amharic field that changed (`title.am`, `sub.am`, `publisher.am`, `about.am`, `motto.am`), update its `en` too (translate; for printers use the English names already in the file when the Amharic matches). "Title (English)" in the Sheet is compared as plain text — if it changed, use it, keeping `<i>…</i>` around a transliterated book name as the existing titles do. Only one book may have `"newest": true` (the ✓ row).
-3. **new_rows** → a new book or painting. Make a slug from the English title (translate the Amharic title if the English is empty), add the entry, and for a book create a photo folder for it in Drive (`create_file`, folder, parent = the photos_books folder id, named its Amharic title) and record its idhash in `book_photo_folders`. You can't edit the Sheet, so under **Needs you** give Selly the slug to paste into that row's "መለያ (አይቀየር)" cell (until she does, match the row by its Amharic title).
+3. **new_rows** → a new book or painting. Make a slug from the English title (translate the Amharic title if the English is empty), add the entry. Its cover photos come later from Selly in chat; until then the site draws a plain cover. You can't edit the Sheet, so under **Needs you** give Selly the slug to paste into that row's "መለያ (አይቀየር)" cell (until she does, match the row by its Amharic title).
 4. **missing_from_sheet** → don't delete; ask under **Needs you**.
 5. Keep the order of `books.json` / `paintings.json` the same as the Sheet's rows (the newest book first).
 6. Set `sheet.seen_modified`.
 
 ### 6. Photos
-For each new image file:
-- In a **book's folder** (`book_photo_folders`): a name containing ፊት/front is the front cover, ጀርባ/back the back; otherwise the older file is the front. Add a request to `sync/photo-requests.json`:
-  `{"id": "<file id>", "dest": "assets/img/books/<slug>" (front) or "assets/img/books/<slug>-back" (back), "large": 1100, "small": 520, "side": "width", "status": "pending"}`
-  and set the book's `faces` in `books.json` to `[{"img": "<slug>", "label": {"am": "ፊት", "en": "Front"}}, {"img": "<slug>-back", "label": {"am": "ጀርባ", "en": "Back"}}]` (only the faces that exist).
-- In **`photos_paintings`**: match it to the Sheet row whose "የፎቶው ስም" equals the file's name. Request `{"id": …, "dest": "assets/img/paintings/<slug>", "large": 1800, "small": 900, "side": "long", "status": "pending"}`. No matching row → **Needs you**.
-- Add every handled file's idhash to `processed_photos`. (The request itself must carry the real id so the Action can download it; `fetch_photos.py` replaces it with the hash once fetched.)
-- The GitHub Action `drive-photos` downloads them after you push the branch; it needs the Drive folder shared "Anyone with the link". Photos therefore appear on the branch a few minutes after your push, not in tonight's screenshots — say so.
+Not part of the sync: Selly sends cover and painting photos to Claude in chat.
 
 ### 7. Build, check, push the branch
 ```

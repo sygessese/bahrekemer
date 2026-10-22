@@ -473,6 +473,19 @@ a.newest-cover { display: block; }
 .shelf-item h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
 .cover.has-img { padding: 0; }
 .book-drawn { max-width: 20rem; margin: 0 auto; }
+
+/* sold out: a faint band across the cover */
+.cover.is-sold-out img, .flip-face.is-sold-out img, .mini-cover.is-sold-out img { filter: grayscale(.35) opacity(.88); }
+.cover.is-sold-out, .flip-face.is-sold-out { position: relative; }
+.sold-out { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 1;
+  display: flex; justify-content: center; align-items: baseline; gap: .6em; padding: .55em .5em;
+  background: rgba(255,255,255,.78); border-top: 1px solid rgba(0,0,0,.18); border-bottom: 1px solid rgba(0,0,0,.18);
+  color: rgba(17,17,17,.78); font-family: var(--sans); font-size: .9375rem; font-weight: 600; line-height: 1.2; pointer-events: none; }
+.sold-out span[lang="en"] { font-family: "Instrument Sans", system-ui, sans-serif; font-size: .75em; letter-spacing: .14em; text-transform: uppercase; }
+.sold-out span[lang="en"]::before { content: none !important; }
+.flip-face .sold-out { font-size: 1.125rem; }
+.sold-note { text-align: center; margin: 1.25rem 0 0; font-family: var(--sans); font-weight: 600; color: var(--grey); }
+.book-motto { max-width: 34rem; margin: 1.25rem auto 0; text-align: left; }
 .book-drawn .cover { box-shadow: 0 22px 40px -24px rgba(0,0,0,.35); }
 .book-drawn .cover-title { font-size: 1.75rem; }
 .newest h2 a { text-decoration: none; }

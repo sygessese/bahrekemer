@@ -466,12 +466,17 @@ def book_meta(b, page=False):
     return t(sep.join(am), " · ".join(en)) if am else ""
 
 
+SOLD_OUT = ('<span class="sold-out" aria-hidden="true"><span lang="am" class="always">ተሸጦ አልቋል</span>'
+            '<span lang="en" class="always">Sold out</span></span>')
+
+
 def cover_box(b, n, p, small=True, cls="cover"):
     """The shelf cover: the photo if there is one, otherwise a drawn cover with the title."""
     if b["faces"]:
         src, f = book_img(b["faces"][0]["img"], small)
-        return (f'<div class="{cls} has-img"><img src="{p}{src}" alt=""{img_attrs_in("books", f)} loading="lazy"></div>')
-    return f'<div class="{cls}"><span class="cover-title">{b["title"]["am"]}</span><span class="cover-no">{GEEZ[n] if n < len(GEEZ) else n}</span></div>'
+        return (f'<div class="{cls} has-img{" is-sold-out" if b.get("sold_out") else ""}"><img src="{p}{src}" alt=""{img_attrs_in("books", f)} loading="lazy">'
+                f'{SOLD_OUT if b.get("sold_out") else ""}</div>')
+    return f'<div class="{cls}{" is-sold-out" if b.get("sold_out") else ""}">{SOLD_OUT if b.get("sold_out") else ""}<span class="cover-title">{b["title"]["am"]}</span><span class="cover-no">{GEEZ[n] if n < len(GEEZ) else n}</span></div>'
 
 
 def book_title_en_plain(b):
@@ -522,7 +527,7 @@ def book_page(i, b):
     if faces:
         figs = "".join(
             f'''
-    <figure class="flip-face{" is-on" if k == 0 else ""}" data-face="{k}"><img src="{p}{book_img(f["img"])[0]}" alt="{esc(b["title"]["am"])} — {esc(f["label"]["en"].lower())} cover"{img_attrs_in("books", book_img(f["img"])[1])}{"" if k == 0 else ' loading="lazy"'}></figure>'''
+    <figure class="flip-face{" is-on" if k == 0 else ""}{" is-sold-out" if b.get("sold_out") else ""}" data-face="{k}"><img src="{p}{book_img(f["img"])[0]}" alt="{esc(b["title"]["am"])} — {esc(f["label"]["en"].lower())} cover"{img_attrs_in("books", book_img(f["img"])[1])}{"" if k == 0 else ' loading="lazy"'}>{SOLD_OUT if b.get("sold_out") and k == 0 else ""}</figure>'''
             for k, f in enumerate(faces))
         arrows = len(faces) > 1
         tabs = "".join(f'<button type="button" data-flip-to="{k}" aria-pressed="{str(k == 0).lower()}">{t(f["label"]["am"], f["label"]["en"])}</button>'
@@ -557,9 +562,10 @@ def book_page(i, b):
   <h1 class="pt-title">{t(b["title"]["am"], b["title"]["en"])}</h1>
   {sub_}
   {about}
+  {f'<blockquote class="newest-motto book-motto"><p lang="am">{b["motto"]["am"]}</p><p lang="en">{b["motto"]["en"]}</p></blockquote>' if b.get("motto") else ""}
   {f'<p class="pt-meta">{meta}</p>' if meta else ""}
 </div>
-<p class="enquire"><a class="more-link" href="../#where-to-buy">{t("የት ይገኛል? →", "Where to find it →")}</a></p>
+{('<p class="sold-note">' + t("ይህ መጽሐፍ ተሸጦ አልቋል።", "This book is sold out.") + '</p><p class="enquire"><a class="more-link" href="' + p + 'contact/">' + t("ስለ መጽሐፉ ይጠይቁ →", "Ask about this book →") + '</a></p>') if b.get("sold_out") else ('<p class="enquire"><a class="more-link" href="../#where-to-buy">' + t("የት ይገኛል? →", "Where to find it →") + '</a></p>')}
 <nav class="prevnext" aria-label="መጻሕፍት · Books">
   {nav_item(prev, "pn-prev", "← የቀደመው መጽሐፍ", "← Previous book")}
   {nav_item(nxt, "pn-next", "ቀጣዩ መጽሐፍ →", "Next book →")}

@@ -24,6 +24,7 @@ BOOK_COLS = {  # sheet header -> getter on a books.json entry
     "አዲሱ መጽሐፍ (✓)": lambda b: "✓" if b.get("newest") else "",
     "ስለ መጽሐፉ": lambda b: b.get("about", {}).get("am", ""),
     "መሪ ቃል": lambda b: b.get("motto", {}).get("am", ""),
+    "ተሸጦ አልቋል (✓)": lambda b: "✓" if b.get("sold_out") else "",
 }
 PAINTING_COLS = {
     "መለያ (አይቀየር)": lambda p: p["slug"],

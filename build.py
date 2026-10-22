@@ -370,6 +370,18 @@ def writings_index():
 
 
 # ---------------------------------------------------------------- paintings
+def about_html(item, cls="pt-about"):
+    """The free text about a book or painting: paragraphs separated by newlines, Amharic paired with English."""
+    a = item.get("about") or {}
+    am = [x for x in a.get("am", "").split("\n") if x.strip()]
+    en = [x for x in a.get("en", "").split("\n") if x.strip()]
+    if not am:
+        return ""
+    rows = "".join(f'<p lang="am">{esc(x)}</p>' + (f'<p lang="en">{esc(en[i])}</p>' if i < len(en) else "")
+                   for i, x in enumerate(am))
+    return f'<div class="{cls}">{rows}</div>'
+
+
 def jpeg_size(path):
     """(width, height) of a JPEG, read from its header (None if the file isn't there yet)."""
     if not os.path.exists(path):
@@ -434,6 +446,7 @@ def painting_page(i, pt):
   <figcaption>
     <h1 class="pt-title">{t(pt["title"]["am"], pt["title"]["en"])}</h1>
     <p class="pt-meta">{painting_meta(pt)}</p>
+    {about_html(pt)}
   </figcaption>
 </figure>
 <nav class="prevnext" aria-label="ሥዕሎች · Paintings">
@@ -558,7 +571,7 @@ def book_page(i, b):
         f'<a class="next-btn" href="../{nxt["slug"]}/"><span class="nb-label">{t("ቀጣዩ መጽሐፍ ›", "Next book ›")}</span>'
         f'<span class="nb-title blk">{t(nxt["title"]["am"], nxt["title"]["en"])}</span></a>')
     sub_ = f'<p class="newest-sub">{t(b["sub"]["am"], b["sub"]["en"])}</p>' if b.get("sub") else ""
-    about = f'<p class="newest-about">{t(b["about"]["am"], b["about"]["en"])}</p>' if b.get("about") else ""
+    about = about_html(b)
     meta = book_meta(b, page=True)
     return f'''<div class="painting-page book-page wrap">
 <p class="pt-back"><a href="../">{t("‹ ሁሉም መጻሕፍት", "‹ All books")}</a></p>

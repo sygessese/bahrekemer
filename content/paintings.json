@@ -1,10 +1,74 @@
 [
-  {"slug": "hands-1989",    "title": {"am": "[ርእስ]", "en": "[Title]"}, "year": "1989", "alt": "Oil painting by Yitbarek Gessese Merra"},
-  {"slug": "saint-michael", "title": {"am": "ቅዱስ ሚካኤል", "en": "Saint Michael the Archangel"}, "year": "", "alt": "Saint Michael the Archangel"},
-  {"slug": "crowd-1985",    "title": {"am": "[ርእስ]", "en": "[Title]"}, "year": "1985", "alt": "Oil painting by Yitbarek Gessese Merra"},
-  {"slug": "abuna-aregawi", "title": {"am": "አቡነ አረጋዊ", "en": "Abuna Aregawi"}, "year": "", "alt": "Abuna Aregawi"},
-  {"slug": "fidel",         "title": {"am": "[ርእስ]", "en": "[Title]"}, "year": "", "alt": "Oil painting by Yitbarek Gessese Merra"},
-  {"slug": "procession",    "title": {"am": "[ርእስ]", "en": "[Title]"}, "year": "2016", "alt": "Oil painting by Yitbarek Gessese Merra"},
-  {"slug": "trinity",       "title": {"am": "ቅድስት ሥላሴ", "en": "The Holy Trinity"}, "year": "", "alt": "The Holy Trinity"},
-  {"slug": "still-life",    "title": {"am": "[ርእስ]", "en": "[Title]"}, "year": "1975", "alt": "Oil painting by Yitbarek Gessese Merra"}
+  {
+    "slug": "hands-1989",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1989",
+    "alt": "Painting by Yitbarek Gessese Merra"
+  },
+  {
+    "slug": "saint-michael",
+    "title": {
+      "am": "ቅዱስ ሚካኤል",
+      "en": "Saint Michael the Archangel"
+    },
+    "year": "",
+    "alt": "Saint Michael the Archangel"
+  },
+  {
+    "slug": "crowd-1985",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1985",
+    "alt": "Painting by Yitbarek Gessese Merra"
+  },
+  {
+    "slug": "abuna-aregawi",
+    "title": {
+      "am": "አቡነ አረጋዊ",
+      "en": "Abuna Aregawi"
+    },
+    "year": "",
+    "alt": "Abuna Aregawi"
+  },
+  {
+    "slug": "fidel",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "",
+    "alt": "Painting by Yitbarek Gessese Merra"
+  },
+  {
+    "slug": "procession",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "2016",
+    "alt": "Painting by Yitbarek Gessese Merra"
+  },
+  {
+    "slug": "trinity",
+    "title": {
+      "am": "ቅድስት ሥላሴ",
+      "en": "The Holy Trinity"
+    },
+    "year": "",
+    "alt": "The Holy Trinity"
+  },
+  {
+    "slug": "still-life",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1975",
+    "alt": "Painting by Yitbarek Gessese Merra"
+  }
 ]

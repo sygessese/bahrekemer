@@ -10,11 +10,11 @@ Follow this file exactly. Work in the repo `sygessese/bahrekemer` (GitHub Pages 
 |---|---|---|
 | Amharic text of every page and writing | Google Docs in the Drive folder | Dad (or Selly, in the Doc) |
 | English text | the repo (`content/`, `site.json`) | this sync, or Claude in chat |
-| Book and painting facts | the Google Sheet "መጻሕፍትና ሥዕሎች" | anyone with the link |
+| Book and painting facts and descriptions | the Doc "መጻሕፍትና ሥዕሎች" (one section per item) | Dad (or Selly) |
 | Photos | the repo `assets/img/` | Selly sends them to Claude in chat — not part of this sync |
 | Design, layout, code | the repo | Claude in chat |
 
-`sync/manifest.json` maps every Drive file to its page. **The repo is public, so it never holds Drive ids** — only `idhash` = the first 16 hex characters of sha256(id) (`python3 sync/idhash.py <id>`). The ids of the Drive folders and the Sheet are in your scheduled-task instructions; never write them into the repo. `sync/blocks.py` turns a page (or a Doc's text) into an ordered list of Amharic blocks and compares them. `sync/sheet.py` compares the Sheet with `content/books.json` / `content/paintings.json`. `sync/overrides.json` lists known, accepted differences between a Doc and the site (skip them, but mention them). `sync/GLOSSARY.md` is the translation guide — **read it before translating**.
+`sync/manifest.json` maps every Drive file to its page. **The repo is public, so it never holds Drive ids** — only `idhash` = the first 16 hex characters of sha256(id) (`python3 sync/idhash.py <id>`). The ids of the Drive folders are in your scheduled-task instructions; never write them into the repo. `sync/blocks.py` turns a page (or a Doc's text) into an ordered list of Amharic blocks and compares them. `sync/catalog.py` compares the books-and-paintings Doc with `content/books.json` / `content/paintings.json`. `sync/overrides.json` lists known, accepted differences between a Doc and the site (skip them, but mention them). `sync/GLOSSARY.md` is the translation guide — **read it before translating**.
 
 ## Every night (2am Addis Ababa)
 
@@ -30,11 +30,10 @@ If `drive-sync` already existed, it holds changes Selly hasn't approved yet — 
 ### 2. Find what changed in Drive
 Read `sync/manifest.json`. Using the Google Drive tools:
 - `search_files` with `parentId = '<id>'` (and `excludeContentSnippets: true`) for each folder id in your instructions: root, essays, poems. Note each file's `id`, `title`, `mimeType`, `modifiedTime`, and compute its `idhash` (`python3 sync/idhash.py id1 id2 …`).
-- Match files to the manifest by `idhash` (docs and the Sheet).
+- Match files to the manifest by `idhash` (every Doc, including the books-and-paintings Doc under the key `catalog`).
 - A **known Doc** changed if its `modifiedTime` is later than its `seen_modified`. If its title changed, update `name` too.
 - A **new Doc** is one whose idhash isn't in the manifest: in `essays` → new essay; in `poems` → new poem; in `root` → don't guess, list it under **Needs you** in the summary.
 - A **known Doc missing** from its folder (moved or trashed): don't delete anything from the site; list it under **Needs you**.
-- The **Sheet** changed if its `modifiedTime` > `sheet.seen_modified`.
 - Ignore images or other files in the folder; photos are not part of this sync (list anything unexpected under **Needs you**).
 
 If nothing changed and there is no pending `drive-sync` work: reply with one line, "No changes in the Drive folder tonight.", and stop. If nothing changed but `drive-sync` has unapproved changes: one line reminding Selly they're waiting, and stop.
@@ -69,13 +68,17 @@ If nothing changed and there is no pending `drive-sync` work: reply with one lin
 5. Add it to the manifest under `docs` as `writings/<slug>` (`idhash`, `name`, `folder`, `seen_modified`).
 6. `python3 sync/blocks.py diff writings/<slug> /tmp/doc.json` must report no changes.
 
-### 5. The Sheet
-1. `read_file_content` the Sheet; save to `/tmp/sheet.json`; run `python3 sync/sheet.py /tmp/sheet.json`.
-2. **changed** cells → update `content/books.json` / `content/paintings.json`. For each Amharic field that changed (`title.am`, `sub.am`, `publisher.am`, `about.am`, `motto.am`), update its `en` too (translate; for printers use the English names already in the file when the Amharic matches). "Title (English)" in the Sheet is compared as plain text — if it changed, use it, keeping `<i>…</i>` around a transliterated book name as the existing titles do. Only one book may have `"newest": true` (the ✓ row).
-3. **new_rows** → a new book or painting. Make a slug from the English title (translate the Amharic title if the English is empty), add the entry. Its cover photos come later from Selly in chat; until then the site draws a plain cover. You can't edit the Sheet, so under **Needs you** give Selly the slug to paste into that row's "መለያ (አይቀየር)" cell (until she does, match the row by its Amharic title).
-4. **missing_from_sheet** → don't delete; ask under **Needs you**.
-5. Keep the order of `books.json` / `paintings.json` the same as the Sheet's rows (the newest book first).
-6. Set `sheet.seen_modified`.
+### 5. The books-and-paintings Doc (manifest key `catalog`)
+1. `read_file_content` it; save to `/tmp/catalog.json`; run `python3 sync/catalog.py diff /tmp/catalog.json`.
+2. **changed** → update `content/books.json` / `content/paintings.json`:
+   - `ርእስ` (title) → `title.am`, and translate `title.en` (keep `<i>…</i>` around a transliterated book name, as the existing titles do).
+   - Plain fields (year, pages, price) copy as they are; `ተሸጦ አልቋል` / `አዲሱ መጽሐፍ` are "አዎ" (yes) or empty → `sold_out` / `newest` true or absent. Only one book may be `newest`.
+   - Amharic text fields (`sub`, `publisher`, `motto`, `medium`) → set `am`, translate `en` (printers: reuse the English names already in the file).
+   - `ስለ መጽሐፉ` / `ስለ ሥዕሉ` → `about`: `{"am": paragraphs joined with "\n", "en": the same paragraphs translated, joined with "\n"}`.
+3. **new_items** (no `መለያ` line) → a new book or painting: make a slug from the English title, add it to the JSON in the Doc's order. You may add the `(መለያ፡ <slug> — አይቀየር)` line under it in the Doc with the Google Docs tools; otherwise tell Selly under **Needs you**. Photos come later from Selly in chat (until then books get a drawn cover; a painting without a photo can't be shown — say so).
+4. **missing_from_doc** → don't delete; ask under **Needs you**.
+5. **order_changed** → reorder the JSON to match `doc_order`.
+6. Re-run the diff: it must be empty. Set the Doc's `seen_modified`.
 
 ### 6. Photos
 Not part of the sync: Selly sends cover and painting photos to Claude in chat.

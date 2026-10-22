@@ -6,5 +6,5 @@
   - Design, layout, code and English can be changed here freely.
   - If you change any **Amharic** here, the Doc will disagree with the site. Add an entry to `sync/overrides.json` and give Selly the exact text to paste into the Doc.
   - If you add, rename or remove a page or writing, mirror it in Drive (create/rename/trash the Doc) and update `sync/manifest.json` in the same change.
-  - Book and painting facts come from the Google Sheet "መጻሕፍትና ሥዕሎች"; keep `content/books.json` / `content/paintings.json` in step with it.
+  - Book and painting facts and descriptions come from the Doc "መጻሕፍትና ሥዕሎች" (`sync/catalog.py`); keep `content/books.json` / `content/paintings.json` in step with it. The Google Docs connector can edit Docs directly when needed.
 - Phones (≤640px) get a simplified layout for older readers; desktop is the editorial layout. Check both.

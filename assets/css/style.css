@@ -446,6 +446,9 @@ html[data-lang="en"] .pt-back span[lang="am"] { display: none; }
 .pt-figure img { display: block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 9rem); box-shadow: 0 22px 40px -24px rgba(0,0,0,.5); }
 .pt-figure figcaption { max-width: var(--prose); margin: 1.75rem auto 0; }
 .pt-title { margin: 0; font-size: 1.75rem; font-weight: 700; line-height: 1.35; }
+.pt-about { max-width: var(--prose); margin: 1.25rem auto 0; text-align: left; }
+.pt-about p { font-size: 1.0625rem; line-height: 1.8; margin: 0 0 .8rem; }
+.pt-about p[lang="en"] { font-family: var(--en); }
 .pt-meta { margin: .5rem 0 0; font-family: var(--sans); color: var(--grey); font-size: 1rem; }
 .pt-meta span[lang="en"] { font-family: "Instrument Sans", system-ui, sans-serif !important; font-style: normal !important; }
 .painting-page .prevnext { margin-top: 2.25rem; }

@@ -32,8 +32,16 @@
       "am": "አቡነ አረጋዊ",
       "en": "Abuna Aregawi"
     },
-    "year": "",
-    "alt": "Abuna Aregawi"
+    "year": "2008",
+    "alt": "Abuna Aregawi",
+    "medium": {
+      "am": "የዘይት ቀለም በጨርቅ ላይ",
+      "en": "oil on canvas"
+    },
+    "about": {
+      "am": "አቡነ አረጋዊ ከተስዓቱ ቅዱሳን አንዱ ሲሆኑ ምንኩስናን ከሮም ወደ ኢትዮጵያ ያመጡ ናቸዉ፡፡ የደረሳቸዉ ተራራ ደብረ ዳሞ ሲሆን የደብረ ዳሞ ቤተ ክርስቲያን ለመጀመርያ በማርያም ሥም የሠሩት ዓፄ ገብረ መስቀል ናቸዉ፡፡ በዚሁ ጊዜ አረጋዊ ቀዳሽ መነኩሴ ነበሩ፡፡",
+      "en": "Abuna Aregawi, one of the Nine Saints, brought monasticism from Rome to Ethiopia. The mountain that fell to him was Debre Damo; the church of Debre Damo was first built, in the name of Mary, by Emperor Gebre Meskel. At that time Aregawi was a monk who celebrated the Liturgy."
+    }
   },
   {
     "slug": "fidel",

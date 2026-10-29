@@ -28,7 +28,7 @@
 
   // ---------------------------------------------------------------- session
   function session() {
-    try { var s = JSON.parse(localStorage.getItem('bk-ed')); return s && s.exp * 1000 > Date.now() ? s : null; } catch (e) { return null; }
+    try { var s = JSON.parse(localStorage.getItem('bk-ed')); return s && s.exp * 1000 > Date.now() && (s.token === 'demo') === (API === 'demo') ? s : null; } catch (e) { return null; }
   }
   var S = session();
   if (!S) {

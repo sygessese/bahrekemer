@@ -36,7 +36,7 @@
 (function () {
   var LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   var API = window.BK_EDITOR_API || (LOCAL ? 'demo' : ''), form = document.getElementById('login'), msg = document.getElementById('msg');
-  function session() { try { var s = JSON.parse(localStorage.getItem('bk-ed')); return s && s.exp * 1000 > Date.now() ? s : null; } catch (e) { return null; } }
+  function session() { try { var s = JSON.parse(localStorage.getItem('bk-ed')); return s && s.exp * 1000 > Date.now() && (s.token === 'demo') === (API === 'demo') ? s : null; } catch (e) { return null; } }
   function show() { var on = !!session(); form.hidden = on; document.getElementById('in').hidden = !on; }
   show();
   if (!API) { msg.textContent = 'ማስተካከያው ገና አልተዘጋጀም።'; }

@@ -150,5 +150,10 @@
     "key",
     "qene",
     "poetry"
-  ]
+  ],
+  "editor": {
+    "api": "",
+    "repo": "sygessese/bahrekemer",
+    "branch": "dad-edits"
+  }
 }

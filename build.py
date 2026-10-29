@@ -9,7 +9,8 @@ No dependencies. What you edit:
   content/writings.json        the list of writings, NEWEST FIRST — the home page fills itself from it
   content/writings/<slug>.html the text of each writing (Amharic in lang="am", English in lang="en")
   content/books.json           books that have cover photos — each gets its own page (front/back)
-  sync/                        the nightly Google Drive sync (his Amharic lives in Google Docs — read sync/PROCEDURE.md)
+  editor/, assets/edit/        his editor (bahrekemer.com/edit/) — see editor/README.md
+  sync/                        the nightly sync of his edits (read sync/PROCEDURE.md)
   content/paintings.json       the paintings, in gallery order; images in assets/img/paintings/
                                (NAME.jpg large, NAME-sm.jpg for the gallery). Each gets its own page.
   site.json                    page titles, descriptions, nav order
@@ -668,7 +669,14 @@ def home_button(p):
             f'{t("ወደ መጀመሪያው ገጽ", "Back to the first page")}</a></p>')
 
 
-def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False, back_to=None, image=None, ld=None):
+def editor_loader(p):
+    """Loads edit mode only on a computer that has logged in to the editor (/edit/). Visitors get nothing."""
+    return ('<script>try{if(localStorage.getItem("bk-ed"))document.write(\'<link rel="stylesheet" href="' + p + 'assets/edit/edit.css">'
+            '<script src="' + p + 'assets/edit/config.js"><\\/script><script src="' + p + 'assets/edit/edit.js" defer><\\/script>\')}catch(e){}</script>')
+
+
+def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False, back_to=None, image=None, ld=None,
+           ed=None, noindex=False, fields=None):
     pg = SITE["pages"].get(slug, SITE["pages"]["index"])
     base = SITE["url"].rstrip("/")
     if url_path is None:
@@ -689,7 +697,7 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False,
     is_article = url_path.startswith("/writings/") and url_path != "/writings/"
     fonts = "".join(f'<link rel="preload" href="{p}assets/fonts/{f}" as="font" type="font/woff2" crossorigin>\n'
                     for f in ["noto-serif-ethiopic-ethiopic-700-normal.woff2", "noto-serif-ethiopic-ethiopic-400-normal.woff2"])
-    seo = "" if slug == "404" else f'''<link rel="canonical" href="{url}">
+    seo = '<meta name="robots" content="noindex">\n' if noindex else "" if slug == "404" else f'''<link rel="canonical" href="{url}">
 <link rel="alternate" hreflang="am" href="{url}">
 <link rel="alternate" hreflang="en" href="{url}?lang=en">
 <link rel="alternate" hreflang="x-default" href="{url}">
@@ -703,6 +711,7 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False,
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="google-site-verification" content="2qinzVbJGqyWP3mJ21NA8HnJ_RhQJbTOh6HNQHyRnwM">
 <script>{BOOT}</script>
+{editor_loader(p)}
 <title>{esc(ta)}</title>
 <meta name="description" content="{esc(desc)}">
 {seo}<meta property="og:type" content="{"article" if is_article else "website"}">
@@ -718,7 +727,7 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False,
 {jsonld(slug, url, ld)}</head>
 <body class="page-{slug}{" is-reader" if reader else ""}{" is-article" if is_article else ""}">
 {header(slug, p, back_to)}
-<main id="main">
+<main id="main" data-ed="{esc(ed if ed is not None else slug)}"{f' data-fields="{esc(json.dumps(fields, ensure_ascii=False))}"' if fields else ""}>
 {body}
 {"" if slug in ("index", "404") else home_button(p)}
 </main>
@@ -727,6 +736,41 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False,
 </body>
 </html>
 '''
+
+
+# ---------------------------------------------------------------- editor (for Yitbarek; see editor/README.md)
+def ed_fields_book(b):
+    return {"year": b.get("year", ""), "pages": b.get("pages", ""), "publisher": (b.get("publisher") or {}).get("am", ""),
+            "price": b.get("price", ""), "sold_out": bool(b.get("sold_out")), "has_about": bool((b.get("about") or {}).get("am"))}
+
+
+def ed_fields_painting(pt):
+    return {"year": pt.get("year", ""), "medium": (pt.get("medium") or {}).get("am", ""),
+            "has_about": bool((pt.get("about") or {}).get("am"))}
+
+
+def build_editor():
+    ed = SITE.get("editor", {})
+    repo, branch = ed.get("repo", "sygessese/bahrekemer"), ed.get("branch", "dad-edits")
+    write("assets/edit/config.js",
+          f'window.BK_EDITOR_API = {json.dumps(ed.get("api", ""))};\n'
+          f'window.BK_RAW = {json.dumps(f"https://raw.githubusercontent.com/{repo}/{branch}/")};\n')
+    login = open(os.path.join(ROOT, "editor", "login.html"), encoding="utf-8").read()
+    write("edit/index.html", login)
+    body = '''<div class="newp wrap" id="newp">
+  <div class="kind" role="group">
+    <button type="button" data-kind="essay">ድርሰት</button><button type="button" data-kind="poem">ግጥም</button><button type="button" data-kind="painting">ሥዕል</button><button type="button" data-kind="book">መጽሐፍ</button>
+  </div>
+  <p class="lbl">ርእስ</p>
+  <div class="np-title" data-field="title" contenteditable="true"></div>
+  <div class="np-year-row"><p class="lbl">ዓመት (ዓ.ም.)</p><input class="np-year" data-field="year" inputmode="numeric" maxlength="4"></div>
+  <p class="lbl np-text-lbl">ጽሑፉ</p>
+  <div class="np-text" data-field="text" contenteditable="true"></div>
+  <div class="np-photos"></div>
+  <p class="np-back"><a href="../../">← ወደ መነሻ ገጽ</a></p>
+</div>'''
+    write("edit/new/index.html", render("edit", body, p="../../", title=("አዲስ · ማስተካከያ · ባሕረ ቀመር", "New · Editor · Bahrekemer"),
+                                        url_path="/edit/new/", ed="edit-new", noindex=True))
 
 
 def write(out, text):
@@ -758,7 +802,7 @@ def build():
     written.append("writings/index.html")
     for i, w in enumerate(WRITINGS):
         out = f'writings/{w["slug"]}/index.html'
-        write(out, render("writings", writing_page(i, w), p="../../", reader=True,
+        write(out, render("writings", writing_page(i, w), p="../../", reader=True, ed=f'writings/{w["slug"]}',
                           title=(f'{w["title"]["am"]} · ባሕረ ቀመር', f'{w["title"]["en"]} · Bahrekemer'),
                           desc=f'{strip_tags(excerpt(w, "am", 150))} {strip_tags(excerpt(w, "en", 150))}',
                           url_path=f'/writings/{w["slug"]}/'))
@@ -766,7 +810,7 @@ def build():
 
     for i, pt in enumerate(PAINTINGS):
         out = f'paintings/{pt["slug"]}/index.html'
-        write(out, render("paintings", painting_page(i, pt), p="../../",
+        write(out, render("paintings", painting_page(i, pt), p="../../", ed=f'painting:{pt["slug"]}', fields=ed_fields_painting(pt),
                           title=(f'{pt["title"]["am"]} — ሥዕል በ{AUTHOR_AM} · ባሕረ ቀመር', f'{pt["title"]["en"]} — painting by {SITE["author"]} · Bahrekemer'),
                           desc=f'{pt["title"]["am"]} — ሥዕል በ{AUTHOR_AM}። {pt["title"]["en"]} — a painting by {SITE["author"]}.',
                           url_path=f'/paintings/{pt["slug"]}/', back_to=("../", "ሥዕሎች", "Paintings"),
@@ -777,13 +821,16 @@ def build():
     for i, b in enumerate(BOOKS):
         out = f'books/{b["slug"]}/index.html'
         en = book_title_en_plain(b)
-        write(out, render("books", book_page(i, b), p="../../",
+        write(out, render("books", book_page(i, b), p="../../", ed=f'book:{b["slug"]}', fields=ed_fields_book(b),
                           title=(f'{b["title"]["am"]} — {AUTHOR_AM} · ባሕረ ቀመር', f'{en} — {SITE["author"]} · Bahrekemer'),
                           desc=f'{b["title"]["am"]} — መጽሐፍ በ{AUTHOR_AM}። {en} — a book by {SITE["author"]}.',
                           url_path=f'/books/{b["slug"]}/', back_to=("../", "መጻሕፍት", "Books"),
                           image=f'assets/img/books/{b["faces"][0]["img"]}.jpg' if b["faces"] else None,
                           ld=book_ld(b, f'{SITE["url"].rstrip("/")}/books/{b["slug"]}/')))
         written.append(out)
+
+    build_editor()
+    written += ["edit/index.html", "edit/new/index.html"]
 
     nf = f'''<section class="page-hero"><div class="wrap">
   <p class="kicker">404</p>
@@ -807,7 +854,7 @@ def build():
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n'
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
           + "\n".join(urls) + "\n</urlset>\n")
-    write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /content/\nDisallow: /sync/\nSitemap: {base}/sitemap.xml\n")
+    write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /content/\nDisallow: /sync/\nDisallow: /edit/\nSitemap: {base}/sitemap.xml\n")
     print(f"Built {len(written)} pages + sitemap.xml, robots.txt")
 
 

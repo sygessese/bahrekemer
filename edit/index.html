@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="am" data-lang="am">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ማስተካከያ · ባሕረ ቀመር</title>
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/noto-serif-ethiopic-ethiopic-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/edit/edit.css">
+<script src="../assets/edit/config.js"></script>
+</head>
+<body class="ed-login-page">
+<main class="ed-card">
+  <p class="ed-card-mast">ባሕረ ቀመር</p>
+  <p class="ed-card-sub">የድረ ገጹ ማስተካከያ</p>
+
+  <form id="login" autocomplete="on">
+    <input type="text" name="username" value="yitbarek" autocomplete="username" hidden>
+    <label for="pw">የይለፍ ቃል</label>
+    <input id="pw" name="password" type="password" autocomplete="current-password" required>
+    <button class="ed-btn ed-btn-wide" type="submit">ግባ</button>
+    <p class="ed-card-msg" id="msg" role="status"></p>
+  </form>
+
+  <div id="in" hidden>
+    <p class="ed-card-ok">ገብተዋል ✓</p>
+    <a class="ed-btn ed-btn-wide" href="../">ወደ ድረ ገጹ ይሂዱና ያስተካክሉ</a>
+    <button class="ed-btn-out" id="out" type="button">ውጣ</button>
+  </div>
+
+  <p class="ed-card-note">አንዴ ከገቡ ይህ ኮምፒውተር ያስታውስዎታል።</p>
+</main>
+<script>
+(function () {
+  var API = window.BK_EDITOR_API, form = document.getElementById('login'), msg = document.getElementById('msg');
+  function session() { try { var s = JSON.parse(localStorage.getItem('bk-ed')); return s && s.exp * 1000 > Date.now() ? s : null; } catch (e) { return null; } }
+  function show() { var on = !!session(); form.hidden = on; document.getElementById('in').hidden = !on; }
+  show();
+  if (!API) { msg.textContent = 'ማስተካከያው ገና አልተዘጋጀም።'; }
+  document.getElementById('out').onclick = function () { try { localStorage.removeItem('bk-ed'); } catch (e) {} show(); };
+  form.onsubmit = function (e) {
+    e.preventDefault();
+    if (!API) return;
+    var btn = form.querySelector('button'); btn.disabled = true; msg.className = 'ed-card-msg'; msg.textContent = 'እባክዎ ይጠብቁ…';
+    fetch(API + '/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: document.getElementById('pw').value }) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        btn.disabled = false;
+        if (!res.ok) { msg.className = 'ed-card-msg bad'; msg.textContent = res.j.error === 'slow' ? 'ብዙ ጊዜ ተሞክሯል። ጥቂት ደቂቃ ቆይተው እንደገና ይሞክሩ።' : 'የይለፍ ቃሉ ትክክል አይደለም። እንደገና ይሞክሩ።'; return; }
+        localStorage.setItem('bk-ed', JSON.stringify({ token: res.j.token, exp: res.j.exp }));
+        location.href = '../';
+      })
+      .catch(function () { btn.disabled = false; msg.className = 'ed-card-msg bad'; msg.textContent = 'ኢንተርኔት አልተገኘም። እንደገና ይሞክሩ።'; });
+  };
+})();
+</script>
+</body>
+</html>

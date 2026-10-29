@@ -2,4 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /content/
 Disallow: /sync/
+Disallow: /edit/
 Sitemap: https://bahrekemer.com/sitemap.xml

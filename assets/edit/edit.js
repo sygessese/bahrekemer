@@ -13,7 +13,11 @@
  */
 (function () {
   'use strict';
-  var API = window.BK_EDITOR_API || '', RAW = window.BK_RAW || '';
+  var LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  // On a local preview with no editor service set up, a practice mode keeps saves in this browser only.
+  var API = window.BK_EDITOR_API || (LOCAL ? 'demo' : ''), RAW = window.BK_RAW || '';
+  var DEMO = API === 'demo';
+  function src(file) { return /^data:/.test(file) ? file : RAW + file; }
   var me = document.currentScript;
   var ROOT = me ? me.src.replace(/assets\/edit\/edit\.js.*$/, '') : '/';
   var d = document.documentElement, main = document.getElementById('main');
@@ -49,7 +53,21 @@
   function textOf(b) { return isVerse(b) ? norm(b.innerText).replace(/\n\n+/g, '\n') : norm(b.innerText).replace(/\n+/g, ' '); }
   function setText(b, t) { if (isVerse(b)) b.innerHTML = t.split('\n').map(esc).join('<br>'); else b.textContent = t; }
 
+  function demoCall(path, body) {
+    var all = [];
+    try { all = JSON.parse(localStorage.getItem('bk-ed-demo') || '[]'); } catch (e) {}
+    if (path === '/pending') return Promise.resolve({ edits: all });
+    var rec = JSON.parse(JSON.stringify(body)), out = { ok: true };
+    rec.id = new Date().toISOString().replace(/[-:.]/g, '') + Math.random().toString(36).slice(2, 6); out.id = rec.id;
+    if (rec.type === 'photo') { rec.file = rec.photo.data; delete rec.photo; }
+    if (rec.type === 'new') { rec.piece_id = body.id; rec.photos = (rec.photos || []).map(function (p) { return { role: p.role, file: p.data || p.file }; }); out.photos = rec.photos; }
+    all.push(rec);
+    try { localStorage.setItem('bk-ed-demo', JSON.stringify(all)); }
+    catch (e) { return Promise.reject(new Error('full')); }
+    return new Promise(function (res) { setTimeout(function () { res(out); }, 300); });
+  }
   function call(path, body) {
+    if (DEMO) return demoCall(path, body);
     var opt = { headers: { 'Authorization': 'Bearer ' + S.token } };
     if (body) { opt.method = 'POST'; opt.headers['Content-Type'] = 'application/json'; opt.body = JSON.stringify(body); }
     return fetch(API + path, opt).then(function (r) {
@@ -381,7 +399,7 @@
           });
         }
       });
-      else if (e.type === 'photo' && e.target === KEY && e.file) showPhoto(e.face, RAW + e.file);
+      else if (e.type === 'photo' && e.target === KEY && e.file) showPhoto(e.face, src(e.file));
       else if (e.type === 'new') latestNew[e.piece_id] = e;
     });
     var lists = main.querySelectorAll('.ed-pending-list');
@@ -421,7 +439,7 @@
       textLbl.textContent = TEXT_LBL[piece.kind][0]; text.setAttribute('data-ph', TEXT_LBL[piece.kind][1]);
       photosBox.innerHTML = '';
       SLOTS[piece.kind].forEach(function (s) {
-        var p = piece.photos[s[0]], src = p ? (p.data || RAW + p.file) : '';
+        var p = piece.photos[s[0]], src = p ? (p.data || src(p.file)) : '';
         var slot = el('div', 'np-photo', '<div class="ph-box">' + (src ? '<img alt="" src="' + esc(src) + '">' : '<span>📷</span>') + '</div>');
         var b = el('button', 'ed-btn ed-btn-line', src ? 'ፎቶ ቀይር' : esc(s[1])); b.type = 'button';
         b.onclick = function () { pickImage().then(function (data) { piece.photos[s[0]] = { data: data }; drawKind(); refresh(); }); };
@@ -471,5 +489,6 @@
   }
 
   refresh();
+  if (DEMO) bar.querySelector('.edbar-hint').textContent = 'ልምምድ ብቻ — የሚቀመጠው በዚህ ኮምፒውተር ብቻ ነው፤ ወደ ድረ ገጹ አይላክም።';
   if (!API) { statusEl.className = 'edbar-status bad'; statusEl.textContent = 'ማስተካከያው ገና አልተገናኘም'; }
 })();

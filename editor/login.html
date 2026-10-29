@@ -34,15 +34,18 @@
 </main>
 <script>
 (function () {
-  var API = window.BK_EDITOR_API, form = document.getElementById('login'), msg = document.getElementById('msg');
+  var LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  var API = window.BK_EDITOR_API || (LOCAL ? 'demo' : ''), form = document.getElementById('login'), msg = document.getElementById('msg');
   function session() { try { var s = JSON.parse(localStorage.getItem('bk-ed')); return s && s.exp * 1000 > Date.now() ? s : null; } catch (e) { return null; } }
   function show() { var on = !!session(); form.hidden = on; document.getElementById('in').hidden = !on; }
   show();
   if (!API) { msg.textContent = 'ማስተካከያው ገና አልተዘጋጀም።'; }
+  if (API === 'demo') { msg.textContent = 'ልምምድ፡ ማንኛውም የይለፍ ቃል ይሠራል። የሚቀመጠው በዚህ ኮምፒውተር ብቻ ነው።'; }
   document.getElementById('out').onclick = function () { try { localStorage.removeItem('bk-ed'); } catch (e) {} show(); };
   form.onsubmit = function (e) {
     e.preventDefault();
     if (!API) return;
+    if (API === 'demo') { localStorage.setItem('bk-ed', JSON.stringify({ token: 'demo', exp: Math.floor(Date.now() / 1000) + 30 * 86400 })); location.href = '../'; return; }
     var btn = form.querySelector('button'); btn.disabled = true; msg.className = 'ed-card-msg'; msg.textContent = 'እባክዎ ይጠብቁ…';
     fetch(API + '/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: document.getElementById('pw').value }) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })

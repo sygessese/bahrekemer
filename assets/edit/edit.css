@@ -91,7 +91,7 @@ html.editing a .ed, html.editing .ed a { pointer-events: auto; }
 
 /* new piece page */
 .page-edit .newp { max-width: 46rem; margin: 2.5rem auto 5rem; }
-.newp .kind { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin: 0 0 2rem; }
+.newp .kind { display: grid; grid-template-columns: repeat(5, 1fr); gap: .75rem; margin: 0 0 2rem; }
 .newp .kind button { font-family: var(--sans); font-size: 1.25rem; font-weight: 700; padding: 1rem .5rem; border-radius: 10px; border: 2px solid #bbb; background: #fff; cursor: pointer; }
 .newp .kind button[aria-pressed="true"] { border-color: var(--ed-green); background: var(--ed-green-wash); color: var(--ed-green); }
 .newp .lbl { font-family: var(--sans); font-weight: 600; font-size: 1.1rem; color: #444; margin: 0 0 .4rem; }
@@ -109,4 +109,12 @@ html.editing a .ed, html.editing .ed a { pointer-events: auto; }
 .newp .np-photo img { width: 100%; height: 100%; object-fit: cover; }
 .newp .np-back { margin-top: 2.5rem; font-family: var(--sans); }
 .page-edit .page-hero, .page-edit .pb-bottom { display: none; }
-@media (max-width: 640px) { .edbar-hint { display: none; } .newp .kind { grid-template-columns: repeat(2, 1fr); } }
+/* the qene boxes */
+.newp .np-qene { margin: 1.75rem 0 0; }
+.newp .np-qene label { display: block; margin: 0 0 1.25rem; }
+.newp .np-qene input, .newp .np-qene textarea { width: 100%; box-sizing: border-box; font-family: var(--serif); font-size: 1.15rem; line-height: 1.8; padding: .6rem .9rem; border: 2px dashed var(--ed-gold); border-radius: 8px; }
+.newp .np-qene input:focus, .newp .np-qene textarea:focus { outline: none; border-style: solid; background: #fffdf0; }
+/* the home photo spot */
+.ed-mast-slot { display: flex; justify-content: center; gap: .75rem; margin: 0 0 1rem; }
+.mast-photo[hidden] { display: none; }
+@media (max-width: 640px) { .edbar-hint { display: none; } .newp .kind { grid-template-columns: repeat(3, 1fr); } }

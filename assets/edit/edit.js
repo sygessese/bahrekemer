@@ -144,7 +144,7 @@
   var SKIP = 'nav, footer, .ui, .kicker, .label, .byline, .source, .reader, .phone-end, .pb-bottom, .phone-home, ' +
     '.flip-tabs, .more-link, .prevnext, .enquire, .wlist, .writings-list, .book-strip, .paint-strip, .sec-head, .pt-back, ' +
     '.pt-meta, .shelf, .gallery, .newest-links, .rule-head, .contents, table, .edbar, .ed-adds, .ed-pending-list, .ed-fields, ' +
-    'a, button, .cover, .shelf-meta, .end-mark, .all-link, .key-toc, .cite, .newp';
+    'a, button, .cover, .shelf-meta, .end-mark, .all-link, .key-toc, .cite, .newp, .worksheet, .grand';
   var blocks = [], nextId = 1, fieldInputs = [];
 
   function mark(b, orig) {
@@ -161,7 +161,7 @@
   if (KEY !== 'edit-new') {
     main.querySelectorAll('h1, h2, h3, h4, p, li, dt, dd, blockquote, div.verse').forEach(function (x) {
       if (x.closest(SKIP)) return;
-      if (x.matches('div.verse') && x.getAttribute('lang') !== 'am') return;
+      if (x.matches('div.verse') && x.getAttribute('lang') !== 'am' && !x.classList.contains('geez')) return;
       if (!x.matches('div.verse') && x.closest('div.verse')) return;
       if (x.matches('blockquote') && x.querySelector('p')) return;
       var t = x.querySelector(':scope > span[lang="am"]') || x;
@@ -173,6 +173,8 @@
       mark(t);
     });
   }
+
+  if (KEY === 'index') document.querySelectorAll('.masthead .mast-tag, .masthead .mast-by').forEach(function (x) { mark(x); });
 
   function changedCount() {
     var n = blocks.filter(function (b) { return b.isConnected && (b.dataset.isNew ? !!textOf(b) : textOf(b) !== b.dataset.orig); }).length;
@@ -292,6 +294,7 @@
   var leaving = false;
   window.addEventListener('beforeunload', function (e) { if (!leaving && changedCount()) { e.preventDefault(); e.returnValue = ''; } });
   document.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('.ed') && e.target.closest('a[href]')) { e.preventDefault(); return; }   // typing, not following the link
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a || !changedCount() || a.target === '_blank' || a.getAttribute('href').charAt(0) === '#') return;
     e.preventDefault();
@@ -352,13 +355,49 @@
   }
   photoButton();
 
+  // the optional photo above the name on the home page
+  function homeSlot() {
+    if (KEY !== 'index') return null;
+    var mh = document.querySelector('.masthead .wrap'); if (!mh) return null;
+    var slot = el('div', 'ed-mast-slot');
+    var add = el('button', 'ed-btn ed-btn-line', ''); add.type = 'button';
+    var rm = el('button', 'ed-btn-out', 'ፎቶውን አስወግድ'); rm.type = 'button';
+    slot.appendChild(add); slot.appendChild(rm);
+    (mh.querySelector('.mast-photo') || mh.querySelector('.mast-title')).before(slot);
+    function draw() { var has = !!mh.querySelector('.mast-photo:not([hidden])'); add.textContent = has ? '📷 ፎቶውን ቀይር' : '📷 እዚህ ፎቶ ጨምር (ካስፈለገ)'; rm.hidden = !has; }
+    slot.show = function (src) {
+      var fig = mh.querySelector('.mast-photo');
+      if (!fig) { fig = el('figure', 'mast-photo', '<img alt="">'); slot.after(fig); }
+      if (src) { fig.hidden = false; fig.querySelector('img').src = src; fig.querySelector('img').removeAttribute('width'); } else fig.hidden = true;
+      draw();
+    };
+    add.onclick = function () {
+      pickImage().then(function (data) {
+        slot.show(data); toast('ፎቶው እየተቀመጠ ነው…', false, 3000);
+        call('/save', { type: 'photo', page: location.pathname, target: 'home', face: 'main', photo: { data: data } })
+          .then(function () { toast('ፎቶው ተቀምጧል ✓<small>ሰላም ካየችው በኋላ ድረ ገጹ ላይ ይወጣል።</small>'); }, failed);
+      });
+    };
+    rm.onclick = function () {
+      modal('ፎቶውን ላስወግደው?', '', [{ label: 'አዎ፣ አስወግድ', go: function () {
+        slot.show(null);
+        call('/save', { type: 'photo', page: location.pathname, target: 'home', remove: true })
+          .then(function () { toast('ተቀምጧል ✓<small>ፎቶው ሰላም ካየችው በኋላ ይወገዳል።</small>'); }, failed);
+      } }, { label: 'ተመለስ', cancel: true }]);
+    };
+    draw();
+    return slot;
+  }
+  var home = homeSlot();
+
   // ---------------------------------------------------------------- "add new" buttons and waiting pieces
-  var KIND_LABEL = { essay: 'ድርሰት', poem: 'ግጥም', painting: 'ሥዕል', book: 'መጽሐፍ' };
+  var KIND_LABEL = { essay: 'ድርሰት', poem: 'ግጥም', qene: 'ቅኔ', painting: 'ሥዕል', book: 'መጽሐፍ' };
   function addButtons() {
     var spots = [
       ['index', '.front-list .wlist', [['essay', '＋ አዲስ ጽሑፍ ጨምር']]],
       ['writings', '.writings-list', [['essay', '＋ አዲስ ድርሰት ጨምር'], ['poem', '＋ አዲስ ግጥም ጨምር']]],
       ['poetry', '.page-body', [['poem', '＋ አዲስ ግጥም ጨምር']]],
+      ['qene', '.page-body', [['qene', '＋ አዲስ ቅኔ ጨምር']]],
       ['books', '.shelf', [['book', '＋ አዲስ መጽሐፍ ጨምር']]],
       ['paintings', '.gallery', [['painting', '＋ አዲስ ሥዕል ጨምር']]]
     ];
@@ -399,11 +438,12 @@
           });
         }
       });
+      else if (e.type === 'photo' && e.target === 'home' && home) home.show(e.remove ? null : src(e.file));
       else if (e.type === 'photo' && e.target === KEY && e.file) showPhoto(e.face, src(e.file));
       else if (e.type === 'new') latestNew[e.piece_id] = e;
     });
     var lists = main.querySelectorAll('.ed-pending-list');
-    var kinds = { index: ['essay', 'poem'], writings: ['essay', 'poem'], poetry: ['poem'], books: ['book'], paintings: ['painting'] }[KEY] || [];
+    var kinds = { index: ['essay', 'poem'], writings: ['essay', 'poem'], poetry: ['poem'], qene: ['qene'], books: ['book'], paintings: ['painting'] }[KEY] || [];
     Object.keys(latestNew).forEach(function (id) {
       var n = latestNew[id];
       if (kinds.indexOf(n.kind) < 0) return;
@@ -427,16 +467,27 @@
     var title = box.querySelector('.np-title'), text = box.querySelector('.np-text'), year = box.querySelector('.np-year');
     var photosBox = box.querySelector('.np-photos'), textLbl = box.querySelector('.np-text-lbl');
     title.setAttribute('data-ph', 'ርእሱን እዚህ ይጻፉ…');
-    var saved = { title: '', text: '', year: '', photos: '' };
-    function cur() { return { title: norm(title.innerText).replace(/\n+/g, ' '), text: norm(text.innerText), year: norm(year.value), photos: JSON.stringify(piece.photos) }; }
-    extraDirty = function () { var c = cur(); return (c.title !== saved.title || c.text !== saved.text || c.year !== saved.year || c.photos !== saved.photos) ? 1 : 0; };
-    var SLOTS = { essay: [['main', 'ፎቶ (ካለ)']], poem: [['main', 'ፎቶ (ካለ)']], painting: [['main', 'የሥዕሉ ፎቶ']], book: [['front', 'የፊት ሽፋን'], ['back', 'የጀርባ ሽፋን']] };
+    var qbox = box.querySelector('.np-qene'), titleLbl = box.querySelector('.np-title-lbl');
+    var QF = ['author', 'meaning', 'sem', 'werq', 'calc'];
+    function qval(f) { var x = qbox.querySelector('[data-q="' + f + '"]'); return x ? norm(x.value) : ''; }
+    var saved = {};
+    function cur() {
+      var c = { title: norm(title.innerText).replace(/\n+/g, ' '), text: norm(text.innerText), year: norm(year.value), photos: JSON.stringify(piece.photos) };
+      QF.forEach(function (f) { c[f] = piece.kind === 'qene' ? qval(f) : ''; });
+      return c;
+    }
+    extraDirty = function () { var c = cur(); return Object.keys(c).some(function (k) { return c[k] !== (saved[k] || ''); }) ? 1 : 0; };
+    qbox.querySelectorAll('input, textarea').forEach(function (x) { x.addEventListener('input', function () { refresh(); }); });
+    var SLOTS = { essay: [['main', 'ፎቶ (ካለ)']], poem: [['main', 'ፎቶ (ካለ)']], qene: [], painting: [['main', 'የሥዕሉ ፎቶ']], book: [['front', 'የፊት ሽፋን'], ['back', 'የጀርባ ሽፋን']] };
     var TEXT_LBL = { essay: ['ጽሑፉ', 'ጽሑፉን እዚህ ይጻፉ…'], poem: ['ግጥሙ — እያንዳንዱን መስመር በ Enter ይለዩ', 'ግጥሙን እዚህ ይጻፉ…'],
+                     qene: ['ቅኔው — እያንዳንዱን መስመር በ Enter ይለዩ', 'ቅኔውን እዚህ ይጻፉ…'],
                      painting: ['ስለ ሥዕሉ (ካለ)', 'ስለ ሥዕሉ የሚፈልጉትን ይጻፉ…'], book: ['ስለ መጽሐፉ (ካለ)', 'ስለ መጽሐፉ የሚፈልጉትን ይጻፉ…'] };
     function drawKind() {
       box.querySelectorAll('.kind button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.kind === piece.kind)); });
       box.querySelector('.np-year-row').hidden = !(piece.kind === 'painting' || piece.kind === 'book');
       textLbl.textContent = TEXT_LBL[piece.kind][0]; text.setAttribute('data-ph', TEXT_LBL[piece.kind][1]);
+      qbox.hidden = piece.kind !== 'qene';
+      titleLbl.textContent = piece.kind === 'qene' ? 'የቅኔው ስም (ለምሳሌ «ጉባዔ ቃና — 3ኛ ቅኔ»)' : 'ርእስ';
       photosBox.innerHTML = '';
       SLOTS[piece.kind].forEach(function (s) {
         var p = piece.photos[s[0]], src = p ? (p.data || src(p.file)) : '';
@@ -456,7 +507,7 @@
     function lines() {
       var t = norm(text.innerText);
       if (!t) return [];
-      return piece.kind === 'poem' ? t.split('\n') : t.split(/\n+/).filter(Boolean);
+      return piece.kind === 'poem' || piece.kind === 'qene' ? t.split('\n') : t.split(/\n+/).filter(Boolean);
     }
     pending.then(function () {   // continuing a piece he saved before
       var prev = (window.BK_PENDING_NEW || {})[piece.id];
@@ -465,6 +516,7 @@
         title.textContent = prev.title || '';
         text.innerHTML = (prev.text || []).map(function (l) { return '<div>' + (l ? esc(l) : '<br>') + '</div>'; }).join('');
         year.value = prev.year || '';
+        QF.forEach(function (f) { var x = qbox.querySelector('[data-q="' + f + '"]'); if (x) x.value = prev[f] || ''; });
         (prev.photos || []).forEach(function (p) { piece.photos[p.role] = { file: p.file }; });
       }
       drawKind(); saved = cur(); refresh();
@@ -476,7 +528,9 @@
       busy = true; saveBtn.textContent = 'በማስቀመጥ ላይ…'; refresh();
       var photos = Object.keys(piece.photos).filter(function (r) { return SLOTS[piece.kind].some(function (s) { return s[0] === r; }); })
         .map(function (r) { var p = piece.photos[r]; return p.data ? { role: r, data: p.data } : { role: r, file: p.file }; });
-      return call('/save', { type: 'new', page: location.pathname, id: piece.id, kind: piece.kind, title: c.title, text: lines(), year: c.year, photos: photos })
+      var body = { type: 'new', page: location.pathname, id: piece.id, kind: piece.kind, title: c.title, text: lines(), year: c.year, photos: photos };
+      if (piece.kind === 'qene') QF.forEach(function (f) { body[f] = c[f]; });
+      return call('/save', body)
         .then(function (j) {
           (j.photos || []).forEach(function (p) { piece.photos[p.role] = { file: p.file }; });
           saved = cur();

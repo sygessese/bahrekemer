@@ -9,8 +9,9 @@
 
 Each saved edit is a JSON file edits/<id>.json (see assets/edit/edit.js and editor/worker.js):
   {type: "text",  key, page, changes: [{op: edit|insert|delete|field, …}]}   — apply the changes in order
-  {type: "photo", target: "book:<slug>"|"painting:<slug>", face: front|back|main, file}
-  {type: "new",   piece_id, kind: essay|poem|painting|book, title, text: [...], year, photos: [{role, file}]}
+  {type: "photo", target: "book:<slug>"|"painting:<slug>"|"home", face: front|back|main, file}  (or remove: true)
+  {type: "new",   piece_id, kind: essay|poem|qene|painting|book, title, text: [...], year, photos: [{role, file}]}
+                  (a qene also: author, meaning, sem, werq, calc)
                   — a piece can be saved several times: only the LAST file per piece_id counts.
 """
 import glob, html, io, json, os, re, subprocess, sys

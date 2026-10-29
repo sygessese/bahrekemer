@@ -13,8 +13,8 @@ The editor files every save on the **`dad-edits`** branch as `edits/<id>.json` (
   - `insert {after, text: [...]}` — new paragraphs placed immediately after the paragraph whose Amharic is `after`.
   - `delete {from}` — he emptied a paragraph.
   - `field {target, field, from, to}` — a book or painting detail: `year`, `pages`, `publisher`, `price`, `sold_out` ("አዎ" = yes, "" = no), `medium`, `about`.
-- **`type: "photo"`** — `target` (`book:<slug>` / `painting:<slug>`), `face` (`front` / `back` / `main`), `file`.
-- **`type: "new"`** — a new essay, poem, painting or book: `kind`, `title`, `text` (paragraphs, or a poem's lines with `""` between stanzas), `year`, `photos [{role, file}]`. He can save a piece several times: **only the last file for each `piece_id` counts** (`list` marks the others `superseded`); an empty text means he's still writing — mention it, don't publish it.
+- **`type: "photo"`** — `target` (`book:<slug>` / `painting:<slug>` / `home`), `face` (`front` / `back` / `main`), `file`; or `remove: true` (only for `home`).
+- **`type: "new"`** — a new essay, poem, qene, painting or book: `kind`, `title`, `text` (paragraphs, or a poem's / qene's lines with `""` between stanzas), `year`, `photos [{role, file}]`; a qene also has `author`, `meaning`, `sem`, `werq`, `calc` (any may be empty). He can save a piece several times: **only the last file for each `piece_id` counts** (`list` marks the others `superseded`); an empty text means he's still writing — mention it, don't publish it.
 
 `sync/GLOSSARY.md` is the translation guide — **read it before translating.**
 
@@ -39,7 +39,7 @@ For each change, in order:
   - `<p lang="am">…</p>` immediately followed by `<p lang="en">…</p>`;
   - inline pairs `<span lang="am">…</span><span lang="en">…</span>` (titles, headings, labels);
   - poems: `<div class="verse" lang="am">` one line per line (`<br>`), then `<div class="verse" lang="en">` with the same number of lines;
-  - `site.json` (page titles and ledes), `content/writings.json` (writing titles), `content/books.json` / `content/paintings.json` (`title`, `sub`, `about`, `motto`, `medium`): `{"am": …, "en": …}`.
+  - `site.json` (page titles and ledes; `masthead.tag` / `masthead.by` / `masthead.what` — the lines under the name on the home page), `content/writings.json` (writing titles), `content/books.json` / `content/paintings.json` (`title`, `sub`, `about`, `motto`, `medium`): `{"am": …, "en": …}`.
   If `where` is empty or only partial (`exact: false`), search by hand for a distinctive phrase; if you still can't place it, don't guess — **Needs you**.
 - **edit**: change the Amharic to `to` **exactly** (don't correct his spelling or punctuation), keep any markup around it, then rewrite only the English partner, following GLOSSARY.md and the tone of the surrounding English. If the same text appears in two places (e.g. a book title on the shelf data and its page), change all of them.
 - **insert**: add the new block(s) right after the anchor, both languages, in the neighbours' pattern.
@@ -50,10 +50,12 @@ For each change, in order:
 `python3 sync/edits.py photo origin/dad-edits <file> <folder>/<name>` writes `assets/img/<folder>/<name>.jpg` and `-sm.jpg`.
 - `book:<slug>` front → `books/<slug>`; back → `books/<slug>-back`. Make sure the book's `faces` has `{"img": "<slug>", "label": {"am": "ፊት", "en": "Front"}}` first and, for a back, `{"img": "<slug>-back", "label": {"am": "ጀርባ", "en": "Back"}}`.
 - `painting:<slug>` → `paintings/<slug>` (replaces the old photo).
+- `home` → `home` (writes `assets/img/home.jpg`) and set `site.json → masthead.photo` to `"assets/img/home.jpg"`: it shows above the name on the home page. `remove: true` → set `masthead.photo` to `""` (leave the file).
 Look at each photo yourself (open the -sm file): if it's sideways, blank or clearly not a cover/painting, don't use it — **Needs you**.
 
 ### 5. New pieces (last version of each `piece_id` only)
 - **Essay / poem**: translate the title; slug from the English title (lowercase ASCII, hyphens, ≤ 5 words, unique). Write `content/writings/<slug>.html` — essay: `<!-- <English title> — edit the Amharic in lang="am", the English in lang="en". -->`, `<div lang="am">` one `<p>` per paragraph, then `<div lang="en">` the same translated; poem: copy the structure of `content/writings/fruit-of-peace.html`. If the last line names a source (a book and year), make it `<p class="cite"><span lang="am">…</span><span lang="en">…</span></p>`. Add `{"slug", "kind", "title": {"am", "en"}}` at the **top** of `content/writings.json` (it becomes "Latest" on the home page). A photo with an essay or poem: put it in `assets/img/writings/<slug>` and ask Selly where she wants it (**Needs you**) — don't place it yourself.
+- **Qene**: add it to `content/qene.html` as a new `<article class="qene" id="<slug>">` after the last one, in the same pattern as the existing ones: `<p class="eyebrow">` with `author` (both languages; leave it out if empty), the `<h2>` name, `<div class="verse geez">` with the lines exactly as he wrote them (Ge'ez — no English partner), then `<h3>ሲፈታ / Meaning</h3>` with `meaning` and its translation, then — if `sem`/`werq` — the `<dl class="semwerq">` block, then — if `calc` — `<h3>በባሕረ ቀመር ዘዴ ሒሣብ ሲሠራ / Worked by the Bahre Kemer Method</h3>` with his working as paragraphs (Amharic + English). Don't invent worksheets or numbers he didn't write.
 - **Painting**: slug from the English title; add to the end of `content/paintings.json`: `{"slug", "title": {"am", "en"}, "year", "alt": "<English title>"}` (+ `about` if he wrote any). Photo → `paintings/<slug>`. No photo → can't be shown: **Needs you**.
 - **Book**: slug from the English title; add **first** in `content/books.json` with `title`, `year`/`year_en`, `about`, `faces` from the photos (no photo: `"faces": []` — it gets a drawn cover).
 

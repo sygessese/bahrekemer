@@ -163,10 +163,12 @@ async function save(body, env) {
   } else if (body.type === 'photo') {
     rec.target = str(body.target, 200);
     rec.face = ['front', 'back', 'main'].includes(body.face) ? body.face : 'main';
-    rec.file = await savePhoto(body.photo && body.photo.data, rec.face);
+    if (body.remove === true) rec.remove = true;
+    else rec.file = await savePhoto(body.photo && body.photo.data, rec.face);
   } else if (body.type === 'new') {
     rec.piece_id = str(body.id, 60) || id;
-    rec.kind = ['essay', 'poem', 'painting', 'book'].includes(body.kind) ? body.kind : 'essay';
+    rec.kind = ['essay', 'poem', 'qene', 'painting', 'book'].includes(body.kind) ? body.kind : 'essay';
+    if (rec.kind === 'qene') for (const f of ['author', 'meaning', 'sem', 'werq', 'calc']) rec[f] = str(body[f]);
     rec.title = str(body.title, 500); rec.year = str(body.year, 10);
     rec.text = Array.isArray(body.text) ? body.text.slice(0, 2000).map(t => str(t)) : [];
     rec.photos = [];

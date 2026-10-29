@@ -805,3 +805,8 @@ html[data-lang="en"] .foot-contact span[lang="am"] { display: none; }
   .flip-tabs button span[lang="en"]::before { content: none !important; }
   .pt-caption .newest-sub span[lang="en"] { font-family: var(--en) !important; font-style: normal !important; }
 }
+
+/* An optional photo above the name on the home page (site.json → masthead.photo) */
+.mast-photo { margin: 0 auto 1.25rem; max-width: min(26rem, 80%); }
+.mast-photo img { width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 18px 34px -22px rgba(0,0,0,.45); }
+@media (max-width: 640px) { .page-index .mast-photo { max-width: 62%; margin: .75rem auto .5rem; } }

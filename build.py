@@ -165,19 +165,24 @@ def header(current, p, back_to=None):
   </div>
 </div>'''
     if current == "index":
+        m = SITE["masthead"]
+        name, _, rest = m["by"]["am"].partition("፡ ")
+        who_am = f'<span class="nw">{name}፡</span> <span class="nw">{rest}</span>' if rest else m["by"]["am"]
+        photo = (f'<figure class="mast-photo"><img src="{p}{m["photo"]}" alt="{esc(SITE["author"])}"{img_attrs_at(m["photo"])}></figure>'
+                 if m.get("photo") and os.path.exists(os.path.join(ROOT, m["photo"])) else "")
         return util + f'''
 <header class="masthead">
   <div class="wrap">
-    <a class="mast-title" href="{p}./">
+    {photo}<a class="mast-title" href="{p}./">
       <span class="mast-am">ባሕረ ቀመር</span>
-      <span class="mast-tag">ሥነ ጥበባት ማዕከል</span>
-      <span class="mast-by">ከይትባረክ ገሠሠ መራ፡ የቅኔ መምህር፡ ሠዓሊና ደራሲ</span>
-      <span class="mast-sub">Bahrekemer · A Centre for the Arts · Yitbarek Gessese Merra, teacher of Qene, painter and author</span>
+      <span class="mast-tag">{m["tag"]["am"]}</span>
+      <span class="mast-by">{m["by"]["am"]}</span>
+      <span class="mast-sub">Bahrekemer · {m["tag"]["en"]} · {m["by"]["en"]}</span>
     </a>
     <div class="mast-id m-only">
-      <p class="mast-tagline blk">{t("ሥነ ጥበባት ማዕከል", "A Centre for the Arts")}</p>
-      <p class="mast-who blk">{t('<span class="nw">ከይትባረክ ገሠሠ መራ፡</span> <span class="nw">የቅኔ መምህር፡ ሠዓሊና ደራሲ</span>', "By Yitbarek Gessese Merra — teacher of Qene, painter and author")}</p>
-      <p class="mast-what">{t("ታሪክ ፡ ቅኔ ፡ ሥዕል ፡ የባሕረ ቀመር ቁጥር", "History · Qene · Painting · The Bahre Kemer numbers")}</p>
+      <p class="mast-tagline blk">{t(m["tag"]["am"], m["tag"]["en"])}</p>
+      <p class="mast-who blk">{t(who_am, "By " + m["by"]["en"])}</p>
+      <p class="mast-what">{t(m["what"]["am"], m["what"]["en"])}</p>
     </div>
     <div class="navrow">
       <nav id="nav" class="nav" aria-label="Main">{nav_links(current, p)}</nav>
@@ -276,7 +281,8 @@ def home_paintings(p="", count=4):
 def phone_home(p=""):
     w = WRITINGS[0]
     rows = [(href(s), label(s)["am"], label(s)["en"]) for s in SITE["nav"]]
-    rows.insert(1, ("writings/", "ጽሑፎች", "Writings"))  # Introduction first, then Writings
+    if "writings" not in SITE["nav"]:
+        rows.insert(1, ("writings/", "ጽሑፎች", "Writings"))  # Introduction first, then Writings
     items = "".join(f'<li><a href="{p}{h}"><span class="pr-title blk">{t(am, en)}</span>'
                     f'<span class="pr-arrow" aria-hidden="true">›</span></a></li>' for h, am, en in rows)
     return f'''<section class="phone-home" aria-label="ማውጫ · Contents">
@@ -408,6 +414,11 @@ def jpeg_size(path):
                 h, w = int.from_bytes(f.read(2), "big"), int.from_bytes(f.read(2), "big")
                 return w, h
             f.read(n - 2)
+
+
+def img_attrs_at(rel):
+    size = jpeg_size(os.path.join(ROOT, rel))
+    return f' width="{size[0]}" height="{size[1]}"' if size else ""
 
 
 def img_attrs(name):
@@ -759,13 +770,20 @@ def build_editor():
     write("edit/index.html", login)
     body = '''<div class="newp wrap" id="newp">
   <div class="kind" role="group">
-    <button type="button" data-kind="essay">ድርሰት</button><button type="button" data-kind="poem">ግጥም</button><button type="button" data-kind="painting">ሥዕል</button><button type="button" data-kind="book">መጽሐፍ</button>
+    <button type="button" data-kind="essay">ድርሰት</button><button type="button" data-kind="poem">ግጥም</button><button type="button" data-kind="qene">ቅኔ</button><button type="button" data-kind="painting">ሥዕል</button><button type="button" data-kind="book">መጽሐፍ</button>
   </div>
-  <p class="lbl">ርእስ</p>
+  <p class="lbl np-title-lbl">ርእስ</p>
   <div class="np-title" data-field="title" contenteditable="true"></div>
   <div class="np-year-row"><p class="lbl">ዓመት (ዓ.ም.)</p><input class="np-year" data-field="year" inputmode="numeric" maxlength="4"></div>
   <p class="lbl np-text-lbl">ጽሑፉ</p>
   <div class="np-text" data-field="text" contenteditable="true"></div>
+  <div class="np-qene" hidden>
+    <label><span class="lbl">የቀኘው (ካስፈለገ)</span><input data-q="author" placeholder="ለምሳሌ፡ የመምህር መንክር ግጨው"></label>
+    <label><span class="lbl">ሲፈታ (ትርጉሙ)</span><textarea data-q="meaning" rows="4"></textarea></label>
+    <label><span class="lbl">ሰሙ (ካለ)</span><textarea data-q="sem" rows="3"></textarea></label>
+    <label><span class="lbl">ወርቁ (ካለ)</span><textarea data-q="werq" rows="3"></textarea></label>
+    <label><span class="lbl">በባሕረ ቀመር ሒሣብ ሲሠራ (ካለ)</span><textarea data-q="calc" rows="6"></textarea></label>
+  </div>
   <div class="np-photos"></div>
   <p class="np-back"><a href="../../">← ወደ መነሻ ገጽ</a></p>
 </div>'''

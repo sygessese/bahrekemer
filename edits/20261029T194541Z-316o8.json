@@ -1,0 +1,30 @@
+{
+ "id": "20261029T194541Z-316o8",
+ "at": "2026-10-29T19:45:41.261Z",
+ "type": "text",
+ "page": "/paintings/abuna-aregawi/",
+ "key": "painting:abuna-aregawi",
+ "changes": [
+  {
+   "op": "field",
+   "target": "painting:abuna-aregawi",
+   "field": "year",
+   "from": "",
+   "to": "2008"
+  },
+  {
+   "op": "field",
+   "target": "painting:abuna-aregawi",
+   "field": "medium",
+   "from": "",
+   "to": "የዘይት ቀለም በጨርቅ ላይ"
+  },
+  {
+   "op": "field",
+   "target": "painting:abuna-aregawi",
+   "field": "about",
+   "from": "",
+   "to": "አቡነ አረጋዊ ከተስዓቱ ቅዱሳን አንዱ ሲሆኑ ምንኩስናን ከሮም ወደ ኢትዮጵያ ያመጡ ናቸዉ፡፡ የደረሳቸዉ ተራራ ደብረ ዳሞ ሲሆን የደብረ ዳሞ ቤተ ክርስቲያን ለመጀመርያ በማርያም ሥም የሠሩት ዓፄ ገብረ መስቀል ናቸዉ፡፡ በዚሁ ጊዜ አረጋዊ ቀዳሽ መነኩሴ ነበሩ፡፡"
+  }
+ ]
+}

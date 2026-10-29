@@ -168,7 +168,7 @@
     "photo": ""
   },
   "editor": {
-    "api": "",
+    "api": "https://bahrekemer-editor.sygessese.workers.dev",
     "repo": "sygessese/bahrekemer",
     "branch": "dad-edits"
   }

@@ -130,6 +130,7 @@ html[data-lang="am"] .ls-am, html[data-lang="en"] .ls-en { color: var(--ink); bo
 /* Home masthead */
 .masthead { text-align: center; padding-top: 1.9rem; }
 .mast-title { display: inline-block; text-decoration: none; }
+.mast-lines { display: block; }
 .mast-am { display: block; font-weight: 800; font-size: clamp(3.4rem, 9vw, 7.25rem); line-height: 1.08; letter-spacing: -.015em; }
 .mast-tag { display: block; margin-top: .35rem; font-weight: 700; font-size: clamp(1.5rem, 2.6vw, 2.125rem); line-height: 1.3; }
 .mast-by { display: block; margin-top: .35rem; font-weight: 400; font-size: clamp(1rem, 1.3vw, 1.1875rem); line-height: 1.5; color: var(--ink-2); }
@@ -649,7 +650,7 @@ html[data-lang="en"] .foot-contact span[lang="am"] { display: none; }
 @media (prefers-reduced-motion: no-preference) {
   .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .9s cubic-bezier(.2,.65,.25,1), transform .9s cubic-bezier(.2,.65,.25,1); transition-delay: var(--d, 0s); }
   .js .reveal.in { opacity: 1; transform: none; }
-  .mast-title, .page-hero .wrap > * { animation: rise 1s cubic-bezier(.2,.65,.25,1) both; }
+  .mast-title, .mast-lines, .mast-photo, .page-hero .wrap > * { animation: rise 1s cubic-bezier(.2,.65,.25,1) both; }
   .page-hero .wrap > :nth-child(2) { animation-delay: .1s; }
   .page-hero .wrap > :nth-child(3) { animation-delay: .25s; }
 }
@@ -718,7 +719,7 @@ html[data-lang="en"] .foot-contact span[lang="am"] { display: none; }
 
   /* home */
   .page-index .masthead { padding: 0; border-bottom: 0; }
-  .page-index .mast-title { display: none; }
+  .page-index .mast-title, .page-index .mast-lines { display: none; }
   .pb-brand { display: inline-flex; align-items: center; flex: none; white-space: nowrap; min-height: 3rem; font-weight: 800; font-size: min(2.9rem, 13vw); line-height: 1.15; letter-spacing: -.01em; text-decoration: none; }
   .pb-lang { flex: none; }
   .page-index .phone-bar { padding: .75rem 1rem .5rem; align-items: center; border-bottom: 0; }
@@ -807,6 +808,8 @@ html[data-lang="en"] .foot-contact span[lang="am"] { display: none; }
 }
 
 /* An optional photo above the name on the home page (site.json → masthead.photo) */
-.mast-photo { margin: 0 auto 1.25rem; max-width: min(26rem, 80%); }
+/* his optional picture, snug between the name and the line under it */
+.mast-photo { margin: .1rem auto .9rem; max-width: min(26rem, 80%); }
+.page-index .mast-title { vertical-align: top; }
 .mast-photo img { width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 18px 34px -22px rgba(0,0,0,.45); }
 @media (max-width: 640px) { .page-index .mast-photo { max-width: 62%; margin: .75rem auto .5rem; } }

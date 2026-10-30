@@ -173,12 +173,12 @@ def header(current, p, back_to=None):
         return util + f'''
 <header class="masthead">
   <div class="wrap">
-    {photo}<a class="mast-title" href="{p}./">
-      <span class="mast-am">ባሕረ ቀመር</span>
+    <a class="mast-title" href="{p}./"><span class="mast-am">ባሕረ ቀመር</span></a>
+    {photo}<div class="mast-lines">
       <span class="mast-tag">{m["tag"]["am"]}</span>
       <span class="mast-by">{m["by"]["am"]}</span>
       <span class="mast-sub">Bahrekemer · {m["tag"]["en"]} · {m["by"]["en"]}</span>
-    </a>
+    </div>
     <div class="mast-id m-only">
       <p class="mast-tagline blk">{t(m["tag"]["am"], m["tag"]["en"])}</p>
       <p class="mast-who blk">{t(who_am, "By " + m["by"]["en"])}</p>

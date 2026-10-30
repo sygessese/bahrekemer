@@ -50,7 +50,7 @@ For each change, in order:
 `python3 sync/edits.py photo origin/dad-edits <file> <folder>/<name>` writes `assets/img/<folder>/<name>.jpg` and `-sm.jpg`.
 - `book:<slug>` front → `books/<slug>`; back → `books/<slug>-back`. Make sure the book's `faces` has `{"img": "<slug>", "label": {"am": "ፊት", "en": "Front"}}` first and, for a back, `{"img": "<slug>-back", "label": {"am": "ጀርባ", "en": "Back"}}`.
 - `painting:<slug>` → `paintings/<slug>` (replaces the old photo).
-- `home` → `home` (writes `assets/img/home.jpg`) and set `site.json → masthead.photo` to `"assets/img/home.jpg"`: it shows above the name on the home page. `remove: true` → set `masthead.photo` to `""` (leave the file).
+- `home` → `home` (writes `assets/img/home.jpg`) and set `site.json → masthead.photo` to `"assets/img/home.jpg"`: it shows on the home page between the big name and the line under it. `remove: true` → set `masthead.photo` to `""` (leave the file).
 Look at each photo yourself (open the -sm file): if it's sideways, blank or clearly not a cover/painting, don't use it — **Needs you**.
 
 ### 5. New pieces (last version of each `piece_id` only)

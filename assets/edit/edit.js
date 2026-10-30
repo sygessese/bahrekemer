@@ -373,7 +373,7 @@
     var add = el('button', 'ed-btn ed-btn-line', ''); add.type = 'button';
     var rm = el('button', 'ed-btn-out', 'ፎቶውን አስወግድ'); rm.type = 'button';
     slot.appendChild(add); slot.appendChild(rm);
-    (mh.querySelector('.mast-photo') || mh.querySelector('.mast-title')).before(slot);
+    (mh.querySelector('.mast-photo') || mh.querySelector('.mast-lines')).before(slot);
     function draw() { var has = !!mh.querySelector('.mast-photo:not([hidden])'); add.textContent = has ? '📷 ፎቶውን ቀይር' : '📷 እዚህ ፎቶ ጨምር (ካስፈለገ)'; rm.hidden = !has; }
     slot.fig = function () { return mh.querySelector('.mast-photo'); };
     slot.show = function (src) {

@@ -2,11 +2,19 @@
   {
     "slug": "hands-1989",
     "title": {
-      "am": "[ርእስ]",
-      "en": "[Title]"
+      "am": "ኢትዮጵያ ታበጽሕ እደዊሃ ኀበ እግዚአብሔር",
+      "en": "Ethiopia Shall Stretch Out Her Hands unto God"
     },
     "year": "1989",
-    "alt": "Painting by Yitbarek Gessese Merra"
+    "alt": "Ethiopia Shall Stretch Out Her Hands unto God",
+    "medium": {
+      "am": "በዘይት ቀለም በጨርቅ ላይ",
+      "en": "oil on canvas"
+    },
+    "about": {
+      "am": "ኢትዮጵያ ማለት ህዝቡም መልክዓ ምድሩም ነው፡፡ ስለሆነም ሥዕሉ ይህን መሠረታዊ ታሪካዊ ሓሣብን ያሟላል፡፡ የግዕዝ መጻሕፍት በሚያመለክቱት መሠረት ሰብዓቱ ሰማያትን፡ ሜዳዉን፡ ተራራውን፡ የኅብረተ ሰቡ አሠፋፈርንና የአየር ጠባዩን፡፡ በሰብዓቱ ሰማያት መሃከል እግዚአብሔር አብን፡ ዋልታ የሃገር (ጋሻ) ጥበቃን ያረጋግጣል፡፡",
+      "en": "Ethiopia means both its people and its land. The painting therefore fulfils this fundamental historical idea. As the Ge’ez books describe them, it shows the seven heavens, the plain, the mountain, the settlement of the community and the climate. In the midst of the seven heavens is God the Father, and the walta (the shield) assures the protection of the nation."
+    }
   },
   {
     "slug": "saint-michael",
@@ -58,8 +66,16 @@
       "am": "[ርእስ]",
       "en": "[Title]"
     },
-    "year": "2016",
-    "alt": "Painting by Yitbarek Gessese Merra"
+    "year": "2098",
+    "alt": "Painting by Yitbarek Gessese Merra",
+    "medium": {
+      "am": "የዘይት ቀለም በጨርቅ ላይ",
+      "en": "oil on canvas"
+    },
+    "about": {
+      "am": "በኢትዮጵያ እንደ ሚቀርበው የአገልግሎት ማኀሌት በሌላ ዓለም አለ ተብሎ አይታሠብምለለ፡፡ የተወሰኑ መሣርያዎች ይኖራሉ፡፡ ፅንሰ ሐሣቡ ፍልስፍናው የሥርዓተ ትምህርቱ መሠረት ግን የለም፡፡ የኢትዮጵያ ዜማ፡ አቋቋምና ቅኔ በሌላ ዓለም የለም፡፡ የኢትዮጵያ ጸጋዎች ብቻ ናቸዉ፡፡ ስለሆነም የሊቃውንቱ አቋቋም የጸናጽሉ አያያዝ የከበሮው የሕንፃው አቀማመጥና በአጠቃላይ የማኅሌቱን ገጽታ ያመለክታል፡፡",
+      "en": "The Mahlet of the Church’s service, as it is offered in Ethiopia, is not to be thought of as existing anywhere else in the world. Elsewhere there will be certain instruments; but the conception, the philosophy and the foundation of its learning are not there. Ethiopian zema (chant), aqwaqwam and Qene exist nowhere else in the world; they are Ethiopia’s gifts alone. The painting therefore shows the standing of the learned, the holding of the sistra, the drums, the setting of the building — in all, the whole aspect of the Mahlet."
+    }
   },
   {
     "slug": "trinity",

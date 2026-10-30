@@ -1,0 +1,30 @@
+{
+ "id": "20261030T160008Z-k186h",
+ "at": "2026-10-30T16:00:08.924Z",
+ "type": "text",
+ "page": "/paintings/procession/",
+ "key": "painting:procession",
+ "changes": [
+  {
+   "op": "field",
+   "target": "painting:procession",
+   "field": "year",
+   "from": "2016",
+   "to": "2098"
+  },
+  {
+   "op": "field",
+   "target": "painting:procession",
+   "field": "medium",
+   "from": "",
+   "to": "የዘይት ቀለም በጨርቅ ላይ"
+  },
+  {
+   "op": "field",
+   "target": "painting:procession",
+   "field": "about",
+   "from": "",
+   "to": "በኢትዮጵያ እንደ ሚቀርበው የአገልግሎት ማኀሌት በሌላ ዓለም አለ ተብሎ አይታሠብምለለ፡፡ የተወሰኑ መሣርያዎች ይኖራሉ፡፡ ፅንሰ ሐሣቡ ፍልስፍናው የሥርዓተ ትምህርቱ መሠረት ግን የለም፡፡ የኢትዮጵያ ዜማ፡ አቋቋምና ቅኔ በሌላ ዓለም የለም፡፡ የኢትዮጵያ ጸጋዎች ብቻ ናቸዉ፡፡ ስለሆነም የሊቃውንቱ አቋቋም የጸናጽሉ አያያዝ የከበሮው የሕንፃው አቀማመጥና በአጠቃላይ የማኅሌቱን ገጽታ ያመለክታል፡፡"
+  }
+ ]
+}

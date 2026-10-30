@@ -167,7 +167,7 @@ def header(current, p, back_to=None):
     if current == "index":
         m = SITE["masthead"]
         name, _, rest = m["by"]["am"].partition("፡ ")
-        who_am = f'<span class="nw">{name}፡</span> <span class="nw">{rest}</span>' if rest else m["by"]["am"]
+        who_am = f'<span class="nw">{name}፡</span> {rest}' if rest else m["by"]["am"]
         photo = (f'<figure class="mast-photo"><img src="{p}{m["photo"]}" alt="{esc(SITE["author"])}"{img_attrs_at(m["photo"])}></figure>'
                  if m.get("photo") and os.path.exists(os.path.join(ROOT, m["photo"])) else "")
         return util + f'''

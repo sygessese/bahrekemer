@@ -312,6 +312,16 @@
   });
 
   // ---------------------------------------------------------------- photos on book and painting pages
+  // A photo saves the moment it's chosen (no «አስቀምጥ» needed), so say so plainly, next to the photo and in the bar.
+  var PH_TEXT = { saving: 'ፎቶው እየተቀመጠ ነው…', saved: '✓ ፎቶው ተቀምጧል — ሰላም ካየችው በኋላ ድረ ገጹ ላይ ይወጣል።', bad: '✗ ፎቶው አልተቀመጠም — እባክዎ እንደገና ይሞክሩ።' };
+  function photoFlag(anchor, state) {
+    if (!anchor) return;
+    var f = anchor._edFlag;
+    if (!f) { f = anchor._edFlag = el('p', 'ed-flag ed-ph-flag'); anchor.before(f); }
+    f.className = 'ed-flag ed-ph-flag' + (state === 'bad' ? ' bad' : state === 'saving' ? ' wait' : '');
+    f.textContent = PH_TEXT[state];
+    if (state !== 'saving' && !changedCount()) { statusEl.className = 'edbar-status ' + (state === 'bad' ? 'bad' : 'saved'); statusEl.textContent = state === 'bad' ? 'ፎቶው አልተቀመጠም' : 'ፎቶው ተቀምጧል ✓'; }
+  }
   function photoButton() {
     var isBook = KEY.indexOf('book:') === 0, isPainting = KEY.indexOf('painting:') === 0;
     if (!isBook && !isPainting) return;
@@ -323,10 +333,10 @@
     b.onclick = function () {
       var send = function (face) {
         pickImage().then(function (data) {
-          showPhoto(face, data);
-          toast('ፎቶው እየተቀመጠ ነው…', false, 3000);
+          showPhoto(face, data); photoFlag(stage, 'saving');
           call('/save', { type: 'photo', page: location.pathname, target: KEY, face: face, photo: { data: data } })
-            .then(function () { toast('ፎቶው ተቀምጧል ✓<small>ሰላም ካየችው በኋላ ድረ ገጹ ላይ ይወጣል።</small>'); }, failed);
+            .then(function () { photoFlag(stage, 'saved'); toast('ፎቶው ተቀምጧል ✓<small>ሰላም ካየችው በኋላ ድረ ገጹ ላይ ይወጣል።</small>', false, 8000); },
+                  function (err) { photoFlag(stage, 'bad'); failed(err); });
         });
       };
       if (isPainting) return send('main');
@@ -365,24 +375,27 @@
     slot.appendChild(add); slot.appendChild(rm);
     (mh.querySelector('.mast-photo') || mh.querySelector('.mast-title')).before(slot);
     function draw() { var has = !!mh.querySelector('.mast-photo:not([hidden])'); add.textContent = has ? '📷 ፎቶውን ቀይር' : '📷 እዚህ ፎቶ ጨምር (ካስፈለገ)'; rm.hidden = !has; }
+    slot.fig = function () { return mh.querySelector('.mast-photo'); };
     slot.show = function (src) {
       var fig = mh.querySelector('.mast-photo');
       if (!fig) { fig = el('figure', 'mast-photo', '<img alt="">'); slot.after(fig); }
-      if (src) { fig.hidden = false; fig.querySelector('img').src = src; fig.querySelector('img').removeAttribute('width'); } else fig.hidden = true;
+      if (src) { fig.hidden = false; fig.querySelector('img').src = src; fig.querySelector('img').removeAttribute('width'); }
+      else { fig.hidden = true; if (fig._edFlag) { fig._edFlag.remove(); fig._edFlag = null; } }
       draw();
     };
     add.onclick = function () {
       pickImage().then(function (data) {
-        slot.show(data); toast('ፎቶው እየተቀመጠ ነው…', false, 3000);
+        slot.show(data); photoFlag(slot.fig(), 'saving');
         call('/save', { type: 'photo', page: location.pathname, target: 'home', face: 'main', photo: { data: data } })
-          .then(function () { toast('ፎቶው ተቀምጧል ✓<small>ሰላም ካየችው በኋላ ድረ ገጹ ላይ ይወጣል።</small>'); }, failed);
+          .then(function () { photoFlag(slot.fig(), 'saved'); toast('ፎቶው ተቀምጧል ✓<small>ሰላም ካየችው በኋላ ድረ ገጹ ላይ ይወጣል።</small>', false, 8000); },
+                function (err) { photoFlag(slot.fig(), 'bad'); failed(err); });
       });
     };
     rm.onclick = function () {
       modal('ፎቶውን ላስወግደው?', '', [{ label: 'አዎ፣ አስወግድ', go: function () {
         slot.show(null);
         call('/save', { type: 'photo', page: location.pathname, target: 'home', remove: true })
-          .then(function () { toast('ተቀምጧል ✓<small>ፎቶው ሰላም ካየችው በኋላ ይወገዳል።</small>'); }, failed);
+          .then(function () { toast('ተቀምጧል ✓<small>ፎቶው ሰላም ካየችው በኋላ ይወገዳል።</small>', false, 8000); }, failed);
       } }, { label: 'ተመለስ', cancel: true }]);
     };
     draw();
@@ -438,8 +451,8 @@
           });
         }
       });
-      else if (e.type === 'photo' && e.target === 'home' && home) home.show(e.remove ? null : src(e.file));
-      else if (e.type === 'photo' && e.target === KEY && e.file) showPhoto(e.face, src(e.file));
+      else if (e.type === 'photo' && e.target === 'home' && home) { home.show(e.remove ? null : src(e.file)); if (!e.remove) photoFlag(home.fig(), 'saved'); }
+      else if (e.type === 'photo' && e.target === KEY && e.file) { showPhoto(e.face, src(e.file)); photoFlag(main.querySelector('.flip-stage, .book-drawn, .pt-figure'), 'saved'); }
       else if (e.type === 'new') latestNew[e.piece_id] = e;
     });
     var lists = main.querySelectorAll('.ed-pending-list');

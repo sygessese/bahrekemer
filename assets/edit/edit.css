@@ -116,5 +116,9 @@ html.editing a .ed, html.editing .ed a { pointer-events: auto; }
 .newp .np-qene input:focus, .newp .np-qene textarea:focus { outline: none; border-style: solid; background: #fffdf0; }
 /* the home photo spot */
 .ed-mast-slot { display: flex; justify-content: center; gap: .75rem; margin: 0 0 1rem; }
+.ed-ph-flag { display: block; width: fit-content; margin: 0 auto .6rem; font-size: .95rem; padding: .3rem .9rem; }
+.ed-ph-flag.wait { color: #555; background: #f2f2ee; border-color: #ccc; }
+.ed-flag.bad { color: #9b2c2c; background: #fbeaea; border-color: rgba(155,44,44,.4); }
+.edbar-status.saved { color: var(--ed-blue); font-weight: 600; }
 .mast-photo[hidden] { display: none; }
 @media (max-width: 640px) { .edbar-hint { display: none; } .newp .kind { grid-template-columns: repeat(3, 1fr); } }

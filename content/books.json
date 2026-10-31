@@ -54,7 +54,22 @@
       "am": "አርቲስቲክ ማተሚያ ድርጅት",
       "en": "Artistic Printing Press"
     },
-    "faces": []
+    "faces": [
+      {
+        "img": "sewasewe-kemer",
+        "label": {
+          "am": "ፊት",
+          "en": "Front"
+        }
+      },
+      {
+        "img": "sewasewe-kemer-back",
+        "label": {
+          "am": "ጀርባ",
+          "en": "Back"
+        }
+      }
+    ]
   },
   {
     "slug": "bahre-kemer",
@@ -162,7 +177,22 @@
       "am": "ብርሃንና ሰላም ማተሚያ ድርጅት",
       "en": "Berhanena Selam Printing Enterprise"
     },
-    "faces": []
+    "faces": [
+      {
+        "img": "world-faith-symbols",
+        "label": {
+          "am": "ፊት",
+          "en": "Front"
+        }
+      },
+      {
+        "img": "world-faith-symbols-back",
+        "label": {
+          "am": "ጀርባ",
+          "en": "Back"
+        }
+      }
+    ]
   },
   {
     "slug": "placement-of-letters",

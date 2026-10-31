@@ -1,0 +1,23 @@
+{
+ "id": "20261031T144913Z-2xbwe",
+ "at": "2026-10-31T14:49:13.114Z",
+ "type": "text",
+ "page": "/books/world-faith-symbols/",
+ "key": "book:world-faith-symbols",
+ "changes": [
+  {
+   "op": "field",
+   "target": "book:world-faith-symbols",
+   "field": "pages",
+   "from": "",
+   "to": "56"
+  },
+  {
+   "op": "field",
+   "target": "book:world-faith-symbols",
+   "field": "sold_out",
+   "from": "",
+   "to": "አዎ"
+  }
+ ]
+}

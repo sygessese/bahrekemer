@@ -173,6 +173,7 @@
       "en": "Symbols of the World’s Faiths"
     },
     "year": "2004",
+    "pages": "56",
     "publisher": {
       "am": "ብርሃንና ሰላም ማተሚያ ድርጅት",
       "en": "Berhanena Selam Printing Enterprise"
@@ -192,7 +193,8 @@
           "en": "Back"
         }
       }
-    ]
+    ],
+    "sold_out": true
   },
   {
     "slug": "placement-of-letters",

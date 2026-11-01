@@ -810,7 +810,7 @@ html[data-lang="en"] .foot-contact span[lang="am"] { display: none; }
 /* The optional picture on the home page (site.json → masthead.photo): no frame, tucked right under the name,
    with the line under it close below — the name, picture and lines read as one block. */
 .page-index .mast-title { vertical-align: top; }
-.mast-photo { margin: -.6rem auto .1rem; max-width: min(30rem, 80%); }
+.mast-photo { margin: -1.7rem auto .1rem; max-width: min(30rem, 80%); }
 .mast-photo img { width: 100%; height: auto; display: block; }
 .mast-photo + .mast-lines .mast-tag { margin-top: 0; }
-@media (max-width: 640px) { .page-index .mast-photo { max-width: 78%; margin: .1rem auto .2rem; } }
+@media (max-width: 640px) { .page-index .mast-photo { max-width: 78%; margin: -.5rem auto .2rem; } }

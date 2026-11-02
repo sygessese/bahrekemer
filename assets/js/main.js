@@ -158,3 +158,30 @@
     });
   }
 })();
+
+// Slideshow on a painting page with several photos (a group of small works): ‹ › buttons, arrow keys, swipe.
+(function () {
+  var box = document.querySelector("[data-slides]");
+  if (!box) return;
+  var imgs = box.querySelectorAll("img"), nav = box.parentNode.querySelector(".pt-slide-nav"), i = 0;
+  if (!nav) return;
+  var count = nav.querySelector(".ps-count");
+  function go(step) {
+    imgs[i].hidden = true;
+    i = (i + step + imgs.length) % imgs.length;
+    imgs[i].hidden = false;
+    count.textContent = (i + 1) + " / " + imgs.length;
+  }
+  nav.addEventListener("click", function (e) { var b = e.target.closest("[data-step]"); if (b) go(+b.getAttribute("data-step")); });
+  document.addEventListener("keydown", function (e) {
+    if (e.target.isContentEditable || /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === "ArrowLeft") go(-1); else if (e.key === "ArrowRight") go(1);
+  });
+  var x0 = null;
+  box.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener("touchend", function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+  });
+})();

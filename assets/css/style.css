@@ -473,6 +473,12 @@ html[data-lang="en"] .pt-back span[lang="am"] { display: none; }
 .pt-figure { margin: 0; text-align: center; }
 .pt-figure img { display: block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 9rem); box-shadow: 0 22px 40px -24px rgba(0,0,0,.5); }
 .pt-figure figcaption { max-width: var(--prose); margin: 1.75rem auto 0; }
+/* several photos of one work (a group of small pieces): one at a time, with ‹ 1 / 6 › under it */
+.pt-slides img[hidden] { display: none; }
+.pt-slide-nav { display: flex; align-items: center; justify-content: center; gap: 1.25rem; margin-top: 1rem; font-family: "Instrument Sans", system-ui, sans-serif; }
+.ps-btn { width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid var(--ink); background: #fff; color: var(--ink); font-size: 1.6rem; line-height: 1; cursor: pointer; }
+.ps-btn:hover { background: var(--ink); color: #fff; }
+.ps-count { min-width: 4rem; font-size: 1rem; color: var(--ink-2); }
 .pt-title { margin: 0; font-size: 1.75rem; font-weight: 700; line-height: 1.35; }
 .pt-about { max-width: var(--prose); margin: 1.25rem auto 0; text-align: left; }
 .pt-about p { font-size: 1.0625rem; line-height: 1.8; margin: 0 0 .8rem; }

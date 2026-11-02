@@ -447,6 +447,22 @@ def gallery():
     return f'<div class="gallery">{figs}\n</div>'
 
 
+def painting_images(pt, p):
+    """The painting's photo; a painting with "slides" (several small works shown together) gets a slideshow:
+    the first photo is the group, then each work, with ‹ › buttons (assets/js/main.js)."""
+    first = f'<img src="{p}assets/img/paintings/{pt["slug"]}.jpg" alt="{esc(pt["alt"])}"{img_attrs(pt["slug"] + ".jpg")}>'
+    slides = pt.get("slides") or []
+    if not slides:
+        return first
+    n = len(slides) + 1
+    rest = "".join(f'<img src="{p}assets/img/paintings/{s}.jpg" alt="{esc(pt["alt"])} — {k + 2} / {n}"{img_attrs(s + ".jpg")} loading="lazy" hidden>'
+                   for k, s in enumerate(slides))
+    return (f'<div class="pt-slides" data-slides>{first}{rest}</div>\n'
+            f'  <div class="pt-slide-nav"><button type="button" class="ps-btn" data-step="-1" aria-label="የቀደመው · Previous">‹</button>'
+            f'<span class="ps-count" aria-live="polite">1 / {n}</span>'
+            f'<button type="button" class="ps-btn" data-step="1" aria-label="ቀጣዩ · Next">›</button></div>')
+
+
 def painting_page(i, pt):
     p = "../../"
     prev = PAINTINGS[i - 1] if i > 0 else None
@@ -463,7 +479,7 @@ def painting_page(i, pt):
     return f'''<div class="painting-page wrap">
 <p class="pt-back"><a href="../">{t("‹ ሁሉም ሥዕሎች", "‹ All paintings")}</a></p>
 <figure class="pt-figure">
-  <img src="{p}assets/img/paintings/{pt["slug"]}.jpg" alt="{esc(pt["alt"])}"{img_attrs(pt["slug"] + ".jpg")}>
+  {painting_images(pt, p)}
   <figcaption>
     <h1 class="pt-title">{t(pt["title"]["am"], pt["title"]["en"])}</h1>
     <p class="pt-meta">{painting_meta(pt)}</p>

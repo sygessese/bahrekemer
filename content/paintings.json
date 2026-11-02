@@ -94,5 +94,210 @@
     },
     "year": "1975",
     "alt": "Painting by Yitbarek Gessese Merra"
+  },
+  {
+    "slug": "coffee-pot-still-life",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "",
+    "alt": "Still life of a coffee pot, a mug and a cup and saucer"
+  },
+  {
+    "slug": "patterned-abstract",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1989",
+    "alt": "Abstract painting of patterned shapes in yellow, green and red"
+  },
+  {
+    "slug": "abstract-face",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1986",
+    "alt": "Abstract painting of a face among patterned leaves and flowers"
+  },
+  {
+    "slug": "briefcase-still-life",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "",
+    "alt": "Still life of a briefcase, a pair of shoes, a camera and a book"
+  },
+  {
+    "slug": "saint-with-lions",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "2003",
+    "alt": "A white-bearded saint standing in a forest with lions and leopards"
+  },
+  {
+    "slug": "under-the-umbrellas",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1994",
+    "alt": "Church fathers standing under ceremonial umbrellas"
+  },
+  {
+    "slug": "black-and-white",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "",
+    "alt": "Abstract figure in black and white"
+  },
+  {
+    "slug": "two-boys",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1993",
+    "alt": "Portrait of two boys"
+  },
+  {
+    "slug": "burning-village",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1976",
+    "alt": "Villagers fleeing burning houses"
+  },
+  {
+    "slug": "bell-tower",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1976",
+    "alt": "A building with a bell tower behind a wall"
+  },
+  {
+    "slug": "man-with-goblet",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "",
+    "alt": "A man raising a goblet, in bright geometric shapes"
+  },
+  {
+    "slug": "two-men-1989",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1989",
+    "alt": "Two men embracing, their rifles on the ground"
+  },
+  {
+    "slug": "standing-patriot",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1973",
+    "alt": "A man in white with a rifle, a sash and a flag"
+  },
+  {
+    "slug": "dark-wheel",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "",
+    "alt": "Abstract painting of a wheel in dark greens"
+  },
+  {
+    "slug": "red-tower",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "1989",
+    "alt": "A crowd at the foot of a tall red tower"
+  },
+  {
+    "slug": "bread-still-life",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "",
+    "alt": "Still life of bread, bananas, peppers and leaves"
+  },
+  {
+    "slug": "priest-with-bell",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "",
+    "alt": "A priest among patterned shapes, with a bell"
+  },
+  {
+    "slug": "cubist-figure",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "",
+    "alt": "Abstract figure in flat geometric colours"
+  },
+  {
+    "slug": "virgin-mary-archangels",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "The Virgin Mary and Son Christ with the Archangels Michael and Gabriel"
+    },
+    "year": "",
+    "alt": "The Virgin Mary and Christ with the Archangels Michael and Gabriel"
+  },
+  {
+    "slug": "woman-to-market",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "An Ethiopian Woman on Her Way to the Market"
+    },
+    "year": "",
+    "alt": "An Ethiopian woman carrying a child on her back, under an umbrella"
+  },
+  {
+    "slug": "flowers-2010",
+    "title": {
+      "am": "[ርእስ]",
+      "en": "[Title]"
+    },
+    "year": "2010",
+    "alt": "Flowers in a vase"
+  },
+  {
+    "slug": "minute-works-crayon",
+    "title": {
+      "am": "በደቂቃ ውስጥ፡ በክራዮን የተሠሩ የደቂቃ ሥራዎች",
+      "en": "Minute Works in Crayon"
+    },
+    "year": "1992",
+    "alt": "Five small crayon landscapes",
+    "slides": [
+      "minute-works-crayon-1",
+      "minute-works-crayon-2",
+      "minute-works-crayon-3",
+      "minute-works-crayon-4",
+      "minute-works-crayon-5"
+    ]
   }
 ]

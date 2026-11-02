@@ -14,7 +14,7 @@ The editor files every save on the **`dad-edits`** branch as `edits/<id>.json` (
   - `delete {from}` — he emptied a paragraph.
   - `field {target, field, from, to}` — a book or painting detail: `year`, `pages`, `publisher`, `price`, `sold_out` ("አዎ" = yes, "" = no), `medium`, `about`.
 - **`type: "photo"`** — `target` (`book:<slug>` / `painting:<slug>` / `home`), `face` (`front` / `back` / `main`), `file`; or `remove: true` (only for `home`).
-- **`type: "new"`** — a new essay, poem, qene, painting or book: `kind`, `title`, `text` (paragraphs, or a poem's / qene's lines with `""` between stanzas), `year`, `photos [{role, file}]`; a qene also has `author`, `meaning`, `sem`, `werq`, `calc` (any may be empty). He can save a piece several times: **only the last file for each `piece_id` counts** (`list` marks the others `superseded`); an empty text means he's still writing — mention it, don't publish it.
+- **`type: "new"`** — a new essay, poem, qene, painting or book: `kind`, `title`, `text` (paragraphs, or a poem's / qene's lines with `""` between stanzas), `year`, `photos [{role, file}]`; a qene also has `author`, `meaning`, `sem`, `werq`, `calc` (any may be empty). He can save a piece several times: **only the last file for each `piece_id` counts** (`list` marks the others `superseded`); an empty text means he's still writing — mention it, don't publish it. The new-piece page saves itself as he types, so a piece can also arrive half-finished (it stops mid-sentence, or was saved in the last hour before the run): publish what's there, but say so under **Needs you**.
 
 `sync/GLOSSARY.md` is the translation guide — **read it before translating.**
 

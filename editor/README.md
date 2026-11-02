@@ -7,6 +7,7 @@ Yitbarek edits the site's Amharic himself, on the real pages:
   Book and painting pages also get a photo button and a "details" box (year, pages, printer, price, sold out, medium).
   The home page, Writings, Poetry, Books and Paintings get «＋ አዲስ …» buttons for a new essay, poem, book or painting.
 - What he saved but isn't live yet shows in **blue**, so he can see it's kept.
+- On the new-piece page (/edit/new/) his work also **saves itself** a few seconds after he stops typing (and when he switches away), and a copy is kept in his browser on every keystroke, so a reload or a closed tab loses nothing. A piece he saved before can't be typed into until it has loaded.
 
 Nothing he does reaches the live site by itself. The pieces:
 

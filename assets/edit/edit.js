@@ -186,7 +186,8 @@
     if (b) b.classList.toggle('changed', b.dataset.isNew ? !!textOf(b) : textOf(b) !== b.dataset.orig);
     var n = changedCount();
     statusEl.className = 'edbar-status' + (n ? ' dirty' : '');
-    statusEl.textContent = n ? (n === 1 ? '1 ለውጥ — ገና አልተቀመጠም' : n + ' ለውጦች — ገና አልተቀመጡም') : 'ምንም ለውጥ የለም';
+    if (n) delete statusEl.dataset.auto;
+    statusEl.textContent = n ? (n === 1 ? '1 ለውጥ — ገና አልተቀመጠም' : n + ' ለውጦች — ገና አልተቀመጡም') : (statusEl.dataset.auto ? 'በራሱ ተቀምጧል ✓' : 'ምንም ለውጥ የለም');
     saveBtn.classList.toggle('off', !n || busy);
   }
 
@@ -511,7 +512,7 @@
       });
       refresh();
     }
-    box.querySelectorAll('.kind button').forEach(function (b) { b.onclick = function () { piece.kind = b.dataset.kind; drawKind(); }; });
+    box.querySelectorAll('.kind button').forEach(function (b) { b.onclick = function () { piece.kind = b.dataset.kind; drawKind(); if (typeof changed === 'function') changed(); }; });
     [title, text].forEach(function (x) { x.addEventListener('input', function () { refresh(); }); });
     year.addEventListener('input', function () { refresh(); });
     title.addEventListener('keydown', function (e) { if (e.key === 'Enter') e.preventDefault(); });
@@ -522,22 +523,67 @@
       if (!t) return [];
       return piece.kind === 'poem' || piece.kind === 'qene' ? t.split('\n') : t.split(/\n+/).filter(Boolean);
     }
-    pending.then(function () {   // continuing a piece he saved before
-      var prev = (window.BK_PENDING_NEW || {})[piece.id];
-      if (prev) {
-        piece.kind = prev.kind;
-        title.textContent = prev.title || '';
-        text.innerHTML = (prev.text || []).map(function (l) { return '<div>' + (l ? esc(l) : '<br>') + '</div>'; }).join('');
-        year.value = prev.year || '';
-        QF.forEach(function (f) { var x = qbox.querySelector('[data-q="' + f + '"]'); if (x) x.value = prev[f] || ''; });
-        (prev.photos || []).forEach(function (p) { piece.photos[p.role] = { file: p.file }; });
-      }
-      drawKind(); saved = cur(); refresh();
+    // ---- keeping his work safe: a copy in this browser on every keystroke, and an automatic save a few seconds after he stops
+    var DRAFT_KEY = 'bk-ed-draft-' + piece.id, touched = false, loaded = false, autoTimer = null;
+    function fill(v) {
+      piece.kind = v.kind || piece.kind;
+      title.textContent = v.title || '';
+      text.innerHTML = (v.text || []).map(function (l) { return '<div>' + (l ? esc(l) : '<br>') + '</div>'; }).join('');
+      year.value = v.year || '';
+      QF.forEach(function (f) { var x = qbox.querySelector('[data-q="' + f + '"]'); if (x) x.value = v[f] || ''; });
+      (v.photos || []).forEach(function (p) { piece.photos[p.role] = { file: p.file }; });
+    }
+    function asSaved(v) {   // what cur() would read once v is on the page
+      var c = { title: norm(v.title || ''), text: norm((v.text || []).join('\n')), year: norm(v.year || ''), photos: '' };
+      QF.forEach(function (f) { c[f] = v.kind === 'qene' ? norm(v[f] || '') : ''; });
+      return c;
+    }
+    function keepDraft() {
+      if (!q.get('id')) { q.set('id', piece.id); q.delete('kind'); history.replaceState(null, '', '?' + q.toString()); }
+      var d = { at: new Date().toISOString(), kind: piece.kind, title: cur().title, text: lines(), year: cur().year };
+      QF.forEach(function (f) { d[f] = qval(f); });
+      try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); } catch (e) {}
+    }
+    function dropDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} }
+    function changed() {
+      touched = true; keepDraft();
+      clearTimeout(autoTimer);
+      autoTimer = setTimeout(autoSave, 8000);
+    }
+    function autoSave() { if (loaded && !busy && extraDirty() && cur().title) newSave(true); }
+    [title, text, year].forEach(function (x) { x.addEventListener('input', changed); });
+    qbox.querySelectorAll('input, textarea').forEach(function (x) { x.addEventListener('input', changed); });
+    document.addEventListener('visibilitychange', function () {   // he switches away or closes the tab: save now
+      if (document.visibilityState === 'hidden') { clearTimeout(autoTimer); autoSave(); }
     });
-    drawKind(); saved = cur(); refresh();
-    newSave = function () {
+    var fieldsAll = [year].concat([].slice.call(qbox.querySelectorAll('input, textarea')));
+    function lock(on) {   // continuing a saved piece: nothing can be typed until it has loaded, so nothing he types is overwritten
+      [title, text].forEach(function (x) { x.contentEditable = on ? 'false' : 'true'; x.classList.toggle('np-loading', on); });
+      fieldsAll.forEach(function (x) { x.disabled = on; });
+      if (on) { title.setAttribute('data-ph', 'በመጫን ላይ…'); text.setAttribute('data-ph', 'በመጫን ላይ…'); }
+      else { title.setAttribute('data-ph', 'ርእሱን እዚህ ይጻፉ…'); }
+    }
+    if (q.get('id')) lock(true);
+    pending.then(function () {   // continuing a piece he saved before
+      lock(false);
+      var prev = (window.BK_PENDING_NEW || {})[piece.id], draft = null;
+      try { draft = JSON.parse(localStorage.getItem(DRAFT_KEY)); } catch (e) {}
+      if (draft && prev && prev.at && draft.at <= prev.at) { dropDraft(); draft = null; }
+      if (!touched && prev) fill(prev);
+      drawKind();
+      // only the server's copy counts as saved; anything typed before the page finished loading stays, unsaved
+      saved = touched || !prev ? (prev ? asSaved(prev) : { photos: '{}' }) : cur();
+      if (prev) saved.photos = JSON.stringify((prev.photos || []).reduce(function (o, p) { o[p.role] = { file: p.file }; return o; }, {}));
+      if (!touched && draft) { fill(draft); drawKind(); }   // newer than what reached the server: put it back, and it will be saved
+      loaded = true; refresh();
+      if (extraDirty() && cur().title) changed();
+    });
+    drawKind(); saved = { photos: '{}' }; refresh();
+    newSave = function (quiet) {
       var c = cur();
       if (!c.title) { toast('እባክዎ ርእስ ይጻፉ።', true); title.focus(); return Promise.resolve(); }
+      if (!loaded) return pending.then(function () { return newSave(quiet); });
+      clearTimeout(autoTimer);
       busy = true; saveBtn.textContent = 'በማስቀመጥ ላይ…'; refresh();
       var photos = Object.keys(piece.photos).filter(function (r) { return SLOTS[piece.kind].some(function (s) { return s[0] === r; }); })
         .map(function (r) { var p = piece.photos[r]; return p.data ? { role: r, data: p.data } : { role: r, file: p.file }; });
@@ -546,13 +592,15 @@
       return call('/save', body)
         .then(function (j) {
           (j.photos || []).forEach(function (p) { piece.photos[p.role] = { file: p.file }; });
-          saved = cur();
+          c.photos = JSON.stringify(piece.photos); saved = c;   // what was sent — typing during the save stays unsaved
           if (!q.get('id')) { q.set('id', piece.id); q.delete('kind'); history.replaceState(null, '', '?' + q.toString()); }
-          toast('ተቀምጧል ✓<small>ሰላም ካየችው በኋላ ድረ ገጹ ላይ ይወጣል። መጻፍ መቀጠል ይችላሉ።</small>');
+          if (extraDirty()) changed(); else dropDraft();
+          if (!quiet) toast('ተቀምጧል ✓<small>ሰላም ካየችው በኋላ ድረ ገጹ ላይ ይወጣል። መጻፍ መቀጠል ይችላሉ።</small>');
+          else { statusEl.dataset.auto = '1'; }
         }, failed)
         .then(function () { busy = false; saveBtn.textContent = 'አስቀምጥ'; refresh(); });
     };
-    bar.querySelector('.edbar-hint').textContent = 'ዓይነቱን ይምረጡ፤ ርእሱንና ጽሑፉን ይጻፉ። ሲጨርሱ «አስቀምጥ»ን ይጫኑ።';
+    bar.querySelector('.edbar-hint').textContent = 'ዓይነቱን ይምረጡ፤ ርእሱንና ጽሑፉን ይጻፉ። በሚጽፉበት ጊዜ በራሱ ይቀመጣል፤ ሲጨርሱ «አስቀምጥ»ን ይጫኑ።';
   }
 
   refresh();

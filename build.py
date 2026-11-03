@@ -702,6 +702,17 @@ def editor_loader(p):
             '<script src="' + p + 'assets/edit/config.js"><\\/script><script src="' + p + 'assets/edit/edit.js" defer><\\/script>\')}catch(e){}</script>')
 
 
+def stats_loader():
+    """Counts visits with GoatCounter (no cookies) once site.json → stats.goatcounter is set. His own visits
+    from the editor computer aren't counted."""
+    code = (SITE.get("stats") or {}).get("goatcounter", "").strip()
+    if not code:
+        return ""
+    return ('<script>try{if(!localStorage.getItem("bk-ed")){var g=document.createElement("script");g.async=1;'
+            'g.src="https://gc.zgo.at/count.js";g.dataset.goatcounter="https://' + code + '.goatcounter.com/count";'
+            'document.head.appendChild(g)}}catch(e){}</script>\n')
+
+
 def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False, back_to=None, image=None, ld=None,
            ed=None, noindex=False, fields=None):
     pg = SITE["pages"].get(slug, SITE["pages"]["index"])
@@ -739,7 +750,7 @@ def render(slug, body, p="", title=None, desc=None, url_path=None, reader=False,
 <meta name="google-site-verification" content="2qinzVbJGqyWP3mJ21NA8HnJ_RhQJbTOh6HNQHyRnwM">
 <script>{BOOT}</script>
 {editor_loader(p)}
-<title>{esc(ta)}</title>
+{stats_loader()}<title>{esc(ta)}</title>
 <meta name="description" content="{esc(desc)}">
 {seo}<meta property="og:type" content="{"article" if is_article else "website"}">
 <meta property="og:site_name" content="ባሕረ ቀመር · Bahrekemer">
@@ -779,9 +790,11 @@ def ed_fields_painting(pt):
 def build_editor():
     ed = SITE.get("editor", {})
     repo, branch = ed.get("repo", "sygessese/bahrekemer"), ed.get("branch", "dad-edits")
+    gc = (SITE.get("stats") or {}).get("goatcounter", "").strip()
     write("assets/edit/config.js",
           f'window.BK_EDITOR_API = {json.dumps(ed.get("api", ""))};\n'
-          f'window.BK_RAW = {json.dumps(f"https://raw.githubusercontent.com/{repo}/{branch}/")};\n')
+          f'window.BK_RAW = {json.dumps(f"https://raw.githubusercontent.com/{repo}/{branch}/")};\n'
+          f'window.BK_STATS = {json.dumps(("https://" + gc + ".goatcounter.com") if gc else "")};\n')
     login = open(os.path.join(ROOT, "editor", "login.html"), encoding="utf-8").read()
     write("edit/index.html", login)
     body = '''<div class="newp wrap" id="newp">

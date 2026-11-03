@@ -603,6 +603,27 @@
     bar.querySelector('.edbar-hint').textContent = 'ዓይነቱን ይምረጡ፤ ርእሱንና ጽሑፉን ይጻፉ። በሚጽፉበት ጊዜ በራሱ ይቀመጣል፤ ሲጨርሱ «አስቀምጥ»ን ይጫኑ።';
   }
 
+  // ---------------------------------------------------------------- how many people read each page (GoatCounter)
+  var STATS = window.BK_STATS || '';
+  function reads(path) {
+    return fetch(STATS + '/counter/' + encodeURIComponent(path) + '.json')
+      .then(function (r) { return r.status === 404 ? { count: '0' } : r.ok ? r.json() : null; })
+      .then(function (j) { return j && j.count != null ? String(j.count) : null; }, function () { return null; });
+  }
+  function readsText(n) { return n === '0' ? 'ገና ያነበበው የለም' : n + ' ሰዎች አንብበውታል'; }
+  if (STATS && KEY !== 'edit-new') {
+    reads(location.pathname).then(function (n) {
+      if (n == null) return;
+      var chip = el('span', 'ed-reads', '👁 ' + esc(readsText(n)));
+      chip.title = 'ይህን ገጽ ያነበቡ ሰዎች ብዛት';
+      statusEl.parentNode.insertBefore(chip, statusEl);
+    });
+    main.querySelectorAll('.writings-list a[href], .wlist a[href]').forEach(function (a) {
+      var path = new URL(a.href, location.href).pathname;
+      reads(path).then(function (n) { if (n != null) a.appendChild(el('small', 'ed-reads-sm', '👁 ' + esc(readsText(n)))); });
+    });
+  }
+
   refresh();
   if (DEMO) bar.querySelector('.edbar-hint').textContent = 'ልምምድ ብቻ — የሚቀመጠው በዚህ ኮምፒውተር ብቻ ነው፤ ወደ ድረ ገጹ አይላክም።';
   if (!API) { statusEl.className = 'edbar-status bad'; statusEl.textContent = 'ማስተካከያው ገና አልተገናኘም'; }

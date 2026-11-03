@@ -167,6 +167,9 @@
     },
     "photo": "assets/img/home.jpg"
   },
+  "stats": {
+    "goatcounter": ""
+  },
   "editor": {
     "api": "https://bahrekemer-editor.sygessese.workers.dev",
     "repo": "sygessese/bahrekemer",

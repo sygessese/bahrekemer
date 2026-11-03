@@ -52,6 +52,13 @@ Put the worker address in `site.json → editor.api`, run `python3 build.py`, pu
 ### 4. His computer
 Open bahrekemer.com/edit/, type the password, let the browser save it, bookmark the page. Done.
 
+### 5. Reader counts (optional)
+In edit mode every page shows how many people have read it (a green 👁 badge in the bar), and the Writings lists show it under each title. The counting is done by GoatCounter (free, no cookies); his own visits from the editor computer aren't counted.
+1. Sign up at goatcounter.com and pick a code, e.g. `bahrekemer` (the dashboard is then `https://bahrekemer.goatcounter.com`).
+2. In GoatCounter → **Settings**, tick **"Allow adding visitor counts on your website"** and save.
+3. Put the code in `site.json → stats.goatcounter`, run `python3 build.py`, publish.
+Counting starts from that day; earlier numbers (e.g. from GoDaddy) don't carry over.
+
 ## Changing things later
 - **New password**: change the `EDIT_PASSWORD` secret. Computers already signed in stay signed in.
 - **Sign every computer out**: change `SESSION_SECRET`.

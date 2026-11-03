@@ -603,6 +603,118 @@
     bar.querySelector('.edbar-hint').textContent = 'ዓይነቱን ይምረጡ፤ ርእሱንና ጽሑፉን ይጻፉ። በሚጽፉበት ጊዜ በራሱ ይቀመጣል፤ ሲጨርሱ «አስቀምጥ»ን ይጫኑ።';
   }
 
+  // ---------------------------------------------------------------- typing Amharic with the ordinary keyboard
+  // He types the sound in Latin letters and the page writes the fidel: l → ል, le → ለ, lu → ሉ, li → ሊ, la → ላ,
+  // lie (or lE) → ሌ, lo → ሎ, lwa → ሏ. Doubling a letter gives its other form (s ሰ → ss ሠ, h ሀ → hh ሐ → hhh ኀ).
+  // The «ፊ» button in the bar turns it on and off (remembered on this computer).
+  var FIDEL = (function () {
+    var C = { h: 0x1200, hh: 0x1210, H: 0x1210, hhh: 0x1280, l: 0x1208, m: 0x1218, r: 0x1228, s: 0x1230, ss: 0x1220,
+      sh: 0x1238, x: 0x1238, q: 0x1240, b: 0x1260, v: 0x1268, t: 0x1270, c: 0x1278, ch: 0x1278, n: 0x1290, ny: 0x1298, N: 0x1298,
+      k: 0x12A8, K: 0x12B8, w: 0x12C8, z: 0x12D8, zh: 0x12E0, Z: 0x12E0, y: 0x12E8, d: 0x12F0, j: 0x1300, g: 0x1308,
+      T: 0x1320, C: 0x1328, P: 0x1330, S: 0x1338, ts: 0x1338, SS: 0x1340, tss: 0x1340, f: 0x1348, p: 0x1350 };
+    var V = { e: 0, u: 1, i: 2, a: 3, ie: 4, E: 4, '': 5, o: 6 };
+    var WA = { 0x1208: 1, 0x1210: 1, 0x1218: 1, 0x1220: 1, 0x1228: 1, 0x1230: 1, 0x1238: 1, 0x1260: 1, 0x1268: 1, 0x1270: 1,
+      0x1278: 1, 0x1290: 1, 0x1298: 1, 0x12D8: 1, 0x12E0: 1, 0x12F0: 1, 0x1300: 1, 0x1320: 1, 0x1328: 1, 0x1330: 1, 0x1338: 1,
+      0x1348: 1, 0x1350: 1 };
+    var LAB = { 0x1240: 0x1248, 0x12A8: 0x12B0, 0x1308: 0x1310, 0x1280: 0x1288, 0x12B8: 0x12C0 };   // ቈ ኰ ጐ ኈ ዀ
+    var LV = { we: 0, wi: 2, wa: 3, wie: 4, wE: 4, w: 5 };
+    var ALONE = { a: 0x12A0, e: 0x12A5, u: 0x12A1, i: 0x12A2, ie: 0x12A4, E: 0x12A4, o: 0x12A6,
+      aa: 0x12D3, aaa: 0x12D0, ee: 0x12D5, uu: 0x12D1, ii: 0x12D2, EE: 0x12D4, oo: 0x12D6 };
+    var PUNCT = { ':': '፡', ',': '፣', ';': '፤' };
+    var ch = String.fromCharCode;
+    // a whole token → its fidel, or null; partial = a token that is still being typed (e.g. "lw" on the way to "lwa")
+    function render(tok, asHead) {
+      if (asHead && tok.length > 1 && /w$/.test(tok)) return null;   // a half-typed "…w" never ends a sound
+      if (ALONE[tok]) return ch(ALONE[tok]);
+      for (var n = Math.min(3, tok.length); n >= 1; n--) {
+        var c = tok.slice(0, n), base = C[c], v = tok.slice(n);
+        if (base == null) continue;
+        if (v in V) return ch(base + V[v]);
+        if (LAB[base] && v in LV) return ch(LAB[base] + LV[v]);
+        if (v === 'wa' && WA[base]) return ch(base + 7);
+        if (v === 'w' || v === 'wi') return ch(base + 5) + (v === 'w' ? ch(0x12CD) : ch(0x12CA));   // on the way to "wa"
+      }
+      return null;
+    }
+    return { render: render, punct: PUNCT };
+  })();
+  var amOn = true;
+  try { amOn = localStorage.getItem('bk-ed-am') !== 'off'; } catch (e) {}
+  var amBtn = el('button', 'ed-am', 'ፊ'); amBtn.type = 'button';
+  var amHelp = el('button', 'ed-am-help', '?'); amHelp.type = 'button';
+  function drawAm() {
+    amBtn.classList.toggle('on', amOn);
+    amBtn.textContent = amOn ? 'ፊ' : 'A';
+    amBtn.title = amOn ? 'አማርኛ እየጻፉ ነው — ለእንግሊዝኛ ይጫኑ' : 'እንግሊዝኛ እየጻፉ ነው — ለአማርኛ ይጫኑ';
+  }
+  amBtn.onclick = function () { amOn = !amOn; tbuf = ''; tout = ''; drawAm(); try { localStorage.setItem('bk-ed-am', amOn ? 'on' : 'off'); } catch (e) {} };
+  amHelp.onclick = function () {
+    var rows = [['ሀ', 'h'], ['ለ', 'l'], ['ሐ', 'hh / H'], ['መ', 'm'], ['ሠ', 'ss'], ['ረ', 'r'], ['ሰ', 's'], ['ሸ', 'sh / x'], ['ቀ', 'q'],
+      ['በ', 'b'], ['ቨ', 'v'], ['ተ', 't'], ['ቸ', 'ch / c'], ['ኀ', 'hhh'], ['ነ', 'n'], ['ኘ', 'ny / N'], ['አ', 'a'], ['ከ', 'k'], ['ኸ', 'K'],
+      ['ወ', 'w'], ['ዐ', 'aa'], ['ዘ', 'z'], ['ዠ', 'zh / Z'], ['የ', 'y'], ['ደ', 'd'], ['ጀ', 'j'], ['ገ', 'g'], ['ጠ', 'T'], ['ጨ', 'C'],
+      ['ጰ', 'P'], ['ጸ', 'S / ts'], ['ፀ', 'SS / tss'], ['ፈ', 'f'], ['ፐ', 'p']];
+    var bg = modal('አማርኛ በኮምፒውተሩ ፊደሎች', '', [{ label: 'ገባኝ' }]);
+    var m = bg.querySelector('.ed-modal'), btns = m.querySelector('.ed-modal-btns');
+    var ex = el('div', 'ed-am-table',
+      '<p>ድምፁን በእንግሊዝኛ ፊደል ይጻፉ፤ ገጹ ወደ ግዕዝ ፊደል ይቀይረዋል። <b>ፊ</b> (ሰማያዊ) ሲሆን አማርኛ፣ <b>A</b> ሲሆን እንግሊዝኛ።</p>' +
+      '<p class="ed-am-ex"><b>le</b> ለ · <b>lu</b> ሉ · <b>li</b> ሊ · <b>la</b> ላ · <b>lie</b> ሌ · <b>l</b> ል · <b>lo</b> ሎ · <b>lwa</b> ሏ</p>' +
+      '<p class="ed-am-ex"><b>selam</b> ሰላም · <b>qwiTr</b> ቊጥር · <b>aamet</b> ዓመት · <b>g\'eez</b> ግዕዝ · <b>:</b> ፡ · <b>,</b> ፣ · <b>;</b> ፤</p>' +
+      '<div class="ed-am-grid">' + rows.map(function (r) { return '<span><b>' + r[0] + '</b> ' + esc(r[1]) + '</span>'; }).join('') + '</div>');
+    m.insertBefore(ex, btns);
+  };
+  var hint = bar.querySelector('.edbar-hint');
+  hint.parentNode.insertBefore(amBtn, hint.nextSibling); amBtn.after(amHelp);
+  drawAm();
+
+  var tbuf = '', tout = '', tnode = null;
+  function typable(t) {
+    if (!t || !t.closest || t.closest('.edbar, .ed-modal')) return false;
+    if (t.isContentEditable) return true;
+    if (t.matches('textarea')) return true;
+    return t.matches('input[type="text"], input:not([type])') && t.inputMode !== 'numeric';
+  }
+  function before(t, n) {   // the n characters just before the caret
+    if (t.isContentEditable) {
+      var s = window.getSelection(); if (!s.rangeCount || !s.isCollapsed) return null;
+      var r = s.getRangeAt(0).cloneRange(), pre = document.createRange();
+      pre.selectNodeContents(t); pre.setEnd(r.endContainer, r.endOffset);
+      var all = pre.toString(); return all.slice(Math.max(0, all.length - n));
+    }
+    if (t.selectionStart !== t.selectionEnd) return null;
+    return t.value.slice(Math.max(0, t.selectionStart - n), t.selectionStart);
+  }
+  function put(t, remove, text) {   // replace the last `remove` characters before the caret with `text`
+    if (t.isContentEditable) {
+      var s = window.getSelection();
+      for (var i = 0; i < remove; i++) s.modify('extend', 'backward', 'character');
+      document.execCommand('insertText', false, text);
+    } else {
+      var at = t.selectionStart;
+      t.setRangeText(text, at - remove, at, 'end');
+      t.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }
+  document.addEventListener('keydown', function (e) {
+    var t = e.target;
+    if (!amOn || e.ctrlKey || e.metaKey || e.altKey || e.isComposing || !typable(t)) return;
+    var k = e.key;
+    if (k.length !== 1) { if (k !== 'Shift') { tbuf = ''; tout = ''; } return; }
+    if (t !== tnode || (tout && before(t, tout.length) !== tout)) { tbuf = ''; tout = ''; tnode = t; }
+    if (k === "'") { e.preventDefault(); tbuf = ''; tout = ''; return; }   // ' ends a sound: g'eez → ግዕዝ
+    if (FIDEL.punct[k]) { e.preventDefault(); put(t, 0, FIDEL.punct[k]); tbuf = ''; tout = ''; return; }
+    if (!/[a-zA-Z]/.test(k)) { tbuf = ''; tout = ''; return; }
+    e.preventDefault();
+    var nb = tbuf + k, r = FIDEL.render(nb);
+    if (r != null) { put(t, tout.length, r); tbuf = nb; tout = r; return; }
+    // the new letter starts a new sound: keep the longest ending that still reads, finish what comes before it
+    for (var i = nb.length - 1; i >= 1; i--) {
+      var head = FIDEL.render(nb.slice(0, i), true), tail = FIDEL.render(nb.slice(i));
+      if (head != null && tail != null) { put(t, tout.length, head + tail); tbuf = nb.slice(i); tout = tail; return; }
+    }
+    put(t, 0, k); tbuf = ''; tout = '';   // a letter that means nothing here: type it as it is
+  }, true);
+  document.addEventListener('mousedown', function () { tbuf = ''; tout = ''; }, true);
+
   // ---------------------------------------------------------------- how many people read each page (GoatCounter)
   var STATS = window.BK_STATS || '';
   function reads(path) {

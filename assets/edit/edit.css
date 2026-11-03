@@ -127,3 +127,12 @@ html.editing a .ed, html.editing .ed a { pointer-events: auto; }
 .ed-reads { font-size: 1rem; font-weight: 600; color: #1f5f3a; background: #e8f3ec; border-radius: 999px; padding: .35rem .8rem; white-space: nowrap; }
 .ed-reads-sm { display: block; font-family: var(--sans); font-size: .9rem; font-weight: 600; color: #1f5f3a; margin-top: .3rem; }
 @media (max-width: 640px) { .ed-reads { font-size: .9rem; padding: .3rem .6rem; } }
+
+/* typing Amharic (the ፊ button) */
+.ed-am { font-family: var(--sans); font-size: 1.35rem; font-weight: 700; min-width: 3rem; height: 3rem; border-radius: 8px; border: 2px solid #1d4f91; background: #fff; color: #1d4f91; cursor: pointer; }
+.ed-am.on { background: #1d4f91; color: #fff; }
+.ed-am-help { font-family: var(--sans); font-size: 1.1rem; font-weight: 700; width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 2px solid #1d4f91; background: #fff; color: #1d4f91; cursor: pointer; margin-left: -.6rem; }
+.ed-am-table p { font-size: 1.05rem; line-height: 1.6; margin: 0 0 .8rem; }
+.ed-am-ex b, .ed-am-grid b { color: #1d4f91; }
+.ed-am-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: .3rem .8rem; font-size: 1.05rem; margin: 0 0 1rem; max-height: 40vh; overflow: auto; }
+.ed-am-grid b { font-size: 1.3rem; margin-right: .3rem; color: #222; }

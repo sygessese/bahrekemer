@@ -608,7 +608,8 @@
   // u i a y e o for the others (lu ሉ, li ሊ, la ላ, ly ሌ, le ል, lo ሎ), W for ሏ (qW ቋ, qWo ቈ, qWi ቊ). Capitals and
   // x X Y are other letters (H ሐ, S ሸ, T ጠ, x አ, X ዐ, Y የ); Caps Lock gives h ኀ, H ኸ, s ሠ, t ጸ, T ፀ (also J L K F V).
   // Like Power Ge'ez, a vowel changes the letter just before the cursor. Keys follow SIL's "Ethiopic Power-G" (Keyman),
-  // except punctuation, which follows his own texts: ":" is ፡ every time (his full stop is ፡፡), "." stays a dot, "," ፣.
+  // punctuation matches what his Power Ge'ez has always produced (700+ ፡፡, no ።, plain dots in "ዓ. ዓ."): ":" is ፡ every time,
+  // so "::" is his ፡፡; "." stays a dot; "," ፣ ; ":-" ፦ .
   // The «ፊ» button in the bar turns it on and off (remembered on this computer).
   var PG = (function () {
     var ch = String.fromCharCode, cp = function (s) { return s ? s.charCodeAt(0) : 0; };
@@ -632,6 +633,8 @@
       y: [0x1382, 0x122F, 0x124C, 0x125C, 0x1386, 0x128C, 0x12B4, 0x12C4, 0x1314, 0x2D95, 0x138A, 0x138E],
       o: [0x1380, 0x122F, 0x1248, 0x1258, 0x1384, 0x1288, 0x12B0, 0x12C0, 0x1310, 0x2D93, 0x1388, 0x138C],
       I: [0x1359, 0x1358, 0x124B, 0x125B, 0x1267, 0x128B, 0x12B3, 0x12C3, 0x1313, 0x131F, 0x135A, 0x1357] };
+    var EIGHTH = { 0x1200: 0x1207, 0x1240: 0x1247, 0x1280: 0x1287, 0x12A8: 0x12AF, 0x12C8: 0x12CF, 0x12E8: 0x12EF,
+      0x1308: 0x130F, 0x1348: 0x1347 };
     function diph(c) { return c in DIPH ? DIPH[c] : c + 7; }
     var GEEZNUM = '፩፪፫፬፭፮፯፰፱', TENS = '፲፳፴፵፶፷፸፹፺';
     // one key → { remove: how many characters before the cursor it replaces, text } ; null = type the key as it is
@@ -645,10 +648,13 @@
       if (dg >= 0 && k === 'a') return r(1, p);                           // qWa: still ቋ
       if (FIRST[p] && ORDER[k] != null) return r(1, p + ORDER[k]);        // le ል, lu ሉ
       if (FIRST[p] && k === 'W') return r(1, diph(p) || p);              // lW ሏ
+      if (FIRST[p] && k === 'O') return r(1, EIGHTH[p] || p);            // hO ሇ, qO ቇ, kO ኯ
       if (k === 'a' && prev && p === diph(p - 7) && FIRST[p - 7]) return r(1, p);   // lWa: still ሏ
       if (ALONE[k]) return r(0, ALONE[k]);                                // a ኣ, e እ, A ዓ, E ዕ
       if (k === 'y' || k === 'B' || k === 'M' || k === 'R') return r(0, '');   // no letter of their own
       if (k === ':') return r(0, '፡');
+      if (k === '-' && prev === '፡') return r(1, '፦');
+      if (k === '.' && prev === '፡') return r(1, '፧');
       if (k === ',') return r(prev === '፣' ? 1 : 0, '፣');
       if (k === ';') return r(0, '፤');
       if (k === '<' && prev === '<') return r(1, '«');

@@ -1,5 +1,17 @@
 [
   {
+    "slug": "bible-correction",
+    "title": {
+      "am": "የመጽሐፍ ቅዱስ እርማት",
+      "en": "A Correction to the Holy Bible"
+    },
+    "about": {
+      "am": "ሐለየ፡ አሠበ አስታወሰ ገለጠ ነው፡፡……..ንባቡ ይላላል;;\nኀለየ፡ ዘመረ አመሰገነ ጸለየ ተቀኘ……..ንባቡ ይጠብቃል;;\nከኢሳይያስ 5, 1\nያለው ምሥጢር በስሕተት የተተረጐመ ነው፡፡ ሐለየ በሚለው አንቀጽ መፈታት ይገባል;;",
+      "en": "ሐለየ (with ሐ): to think, to recall, to reveal. …….. It is read soft.\nኀለየ (with ኀ): to sing, to praise, to pray, to compose Qene. …….. It is read hard.\nIn Isaiah 5:1\nthe meaning there has been translated in error. It ought to be interpreted by the verb ሐለየ."
+    },
+    "faces": []
+  },
+  {
     "slug": "kine-tibebat",
     "newest": true,
     "title": {

@@ -1,9 +1,17 @@
 [
   {
+    "slug": "wax-and-gold-godana",
+    "kind": "essay",
+    "title": {
+      "am": "የቀጠለ፡ ሰምና ወርቅና ጎዳና",
+      "en": "Continued: Wax and Gold, and <i>Godana</i>"
+    }
+  },
+  {
     "slug": "geez-amharic-1000-bc",
     "kind": "essay",
     "title": {
-      "am": "ግዕዝና አማርኛ ከልደት በፊት 1000 ዓ. ዓ. ነበር;;",
+      "am": "ግዕዝና አማርኛ ከልደት በፊት 1000 ዓ. ነበር;",
       "en": "Ge’ez and Amharic Existed in 1000 B.C."
     }
   },

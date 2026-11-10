@@ -16,6 +16,8 @@ The editor files every save on the **`dad-edits`** branch as `edits/<id>.json` (
 - **`type: "photo"`** — `target` (`book:<slug>` / `painting:<slug>` / `home`), `face` (`front` / `back` / `main`), `file`; or `remove: true` (only for `home`).
 - **`type: "new"`** — a new essay, poem, qene, painting or book: `kind`, `title`, `text` (paragraphs, or a poem's / qene's lines with `""` between stanzas), `year`, `photos [{role, file}]`; a qene also has `author`, `meaning`, `sem`, `werq`, `calc` (any may be empty). He can save a piece several times: **only the last file for each `piece_id` counts** (`list` marks the others `superseded`); an empty text means he's still writing — mention it, don't publish it. The new-piece page saves itself as he types, so a piece can also arrive half-finished (it stops mid-sentence, or was saved in the last hour before the run): publish what's there, but say so under **Needs you**.
 
+**Held drafts:** `sync/HOLD` lists the `piece_id`s Selly asked to keep as drafts (one per line, `#` comments). Don't publish those pieces, even if he saves them again with text; if he saved a newer version since the last run, say so in one line under **Needs you** ("Dad worked on the held draft …"). Selly releases one by asking you to publish it: then remove its line from `HOLD` and publish it as in step 5.
+
 `sync/GLOSSARY.md` is the translation guide — **read it before translating.**
 
 ## Every night (2am Addis Ababa)

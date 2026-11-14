@@ -1,0 +1,16 @@
+{
+ "id": "20261114T174351Z-ysndt",
+ "at": "2026-11-14T17:43:51.026Z",
+ "type": "text",
+ "page": "/books/melkea-melekot/",
+ "key": "book:melkea-melekot",
+ "changes": [
+  {
+   "op": "field",
+   "target": "book:melkea-melekot",
+   "field": "sold_out",
+   "from": "",
+   "to": "አዎ"
+  }
+ ]
+}
